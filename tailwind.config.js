@@ -6,24 +6,30 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        // Custom color palette
+        primary: '#00d9ff',
+        secondary: '#0066ff',
+        accent: '#00ffaa',
+        dark: {
+          bg: '#0a0e27',
+          card: '#1a1f3a',
+          border: '#2a3454',
+        }
+      },
       animation: {
-        'gradient': 'gradient 8s linear infinite',
-        'fade-in': 'fadeIn 0.5s ease-in',
+        'fade-in': 'fadeIn 0.8s ease-out forwards',
       },
       keyframes: {
-        gradient: {
-          '0%, 100%': {
-            'background-size': '200% 200%',
-            'background-position': 'left center'
-          },
-          '50%': {
-            'background-size': '200% 200%',
-            'background-position': 'right center'
-          },
-        },
         fadeIn: {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+          '0%': { 
+            opacity: '0', 
+            transform: 'translateY(20px)' 
+          },
+          '100%': { 
+            opacity: '1', 
+            transform: 'translateY(0)' 
+          },
         },
       },
     },

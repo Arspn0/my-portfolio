@@ -4,7 +4,7 @@ import Hero from './components/Hero'
 
 function App() {
   return (
-    <div className="bg-slate-950 min-h-screen">
+    <div className="bg-dark-bg min-h-screen">
       <Navbar />
       <Hero />
     </div>

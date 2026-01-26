@@ -86,22 +86,6 @@ function Hero() {
             </div>
         </div>
 
-        {/* Social Links */}
-        <div className="flex gap-6 justify-center mt-12 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-          {socialLinks.map((social, index) => (
-            <a
-              key={index}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-primary transition-all duration-300 hover:scale-110 transform"
-              aria-label={social.label}
-            >
-              <social.icon size={28} />
-            </a>
-          ))}
-        </div>
-
         {/* Scroll Indicator */}
         <button
           onClick={() => scrollToSection('about')}

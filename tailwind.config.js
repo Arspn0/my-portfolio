@@ -4,10 +4,11 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class', // Enable dark mode dengan class strategy
   theme: {
     extend: {
       colors: {
-        // Custom color palette
+        // Dark theme colors
         primary: '#00d9ff',
         secondary: '#0066ff',
         accent: '#00ffaa',
@@ -15,6 +16,14 @@ export default {
           bg: '#0a0e27',
           card: '#1a1f3a',
           border: '#2a3454',
+        },
+        // Light theme colors
+        light: {
+          bg: '#f8fafc',
+          card: '#ffffff',
+          border: '#e2e8f0',
+          text: '#1e293b',
+          textSecondary: '#475569',
         }
       },
       animation: {

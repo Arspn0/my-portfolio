@@ -6,16 +6,20 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
+import { ThemeProvider } from './context/ThemeContext';
+
 function App() {
   return (
-    <div className="bg-dark-bg min-h-screen">
-      <Navbar />
-      <Hero />
-      <About />
-      <Projects />
-      <Contact />
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <div className="bg-light-bg dark:bg-dark-bg min-h-screen transition-colors duration-300">
+        <Navbar />
+        <Hero />
+        <About />
+        <Projects />
+        <Contact />
+        <Footer />
+      </div>
+    </ThemeProvider>
   )
 }
 

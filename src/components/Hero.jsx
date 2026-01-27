@@ -9,24 +9,6 @@ function Hero() {
     }
   }
 
-  const socialLinks = [
-    { 
-      icon: Github, 
-      href: 'https://github.com/yourusername',
-      label: 'GitHub'
-    },
-    { 
-      icon: Linkedin, 
-      href: 'https://linkedin.com/in/yourusername',
-      label: 'LinkedIn'
-    },
-    { 
-      icon: Mail, 
-      href: 'mailto:your.email@example.com',
-      label: 'Email'
-    }
-  ]
-
   return (
     <section 
       id="home" 
@@ -35,7 +17,7 @@ function Hero() {
       
         {/* Animated Background Circles - Solid Color */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse"></div>
+            <div className="absolute w-96 h-96 bg-primary/10 dark:bg-primary/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse"></div>
             <div className="absolute w-96 h-96 bg-secondary/10 rounded-full blur-3xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute w-96 h-96 bg-accent/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse" style={{ animationDelay: '2s' }}></div>
         </div>
@@ -55,14 +37,14 @@ function Hero() {
                 <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-4 text-primary">
                 Your Name
                 </h1>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-300 mb-6">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-light-text dark:text-slate-300 mb-6">
                 Full Stack Developer
                 </h2>
             </div>
 
             {/* Description */}
             <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-lg sm:text-xl text-light-textSecondary dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
                 Saya membuat aplikasi web yang inovatif dan user-friendly dengan teknologi modern. 
                 Passionate dalam crafting beautiful digital experiences.
                 </p>
@@ -72,7 +54,7 @@ function Hero() {
             <div className="flex gap-4 justify-center flex-wrap animate-fade-in" style={{ animationDelay: '0.6s' }}>
                 <button
                 onClick={() => scrollToSection('projects')}
-                className="px-8 py-3 bg-primary text-dark-bg rounded-lg font-semibold hover:bg-accent hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95"
+                className="px-8 py-3 bg-primary text-white dark:text-dark-bg rounded-lg font-semibold hover:bg-accent hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95"
                 >
                 View My Work
                 </button>

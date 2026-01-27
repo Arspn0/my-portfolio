@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ExternalLink, Github, Code } from 'lucide-react'
+import { ExternalLink, Github } from 'lucide-react'
 
 function Projects() {
   const [hoveredProject, setHoveredProject] = useState(null)
@@ -75,17 +75,17 @@ function Projects() {
     : projects.filter(p => p.tech.includes(selectedFilter))
 
   return (
-    <section id="projects" className="py-20 px-4 relative overflow-hidden">
+    <section className="min-h-screen py-20 px-4 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-40 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
       
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10 pt-16">
         {/* Section Title */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
             Featured Projects
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-light-textSecondary dark:text-slate-400 text-lg max-w-2xl mx-auto">
             Beberapa project yang telah saya kerjakan dengan berbagai teknologi modern
           </p>
         </div>
@@ -96,8 +96,8 @@ function Projects() {
             onClick={() => setSelectedFilter('All')}
             className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
               selectedFilter === 'All'
-                ? 'bg-primary text-dark-bg shadow-lg shadow-primary/30'
-                : 'bg-dark-card border border-dark-border text-slate-400 hover:border-primary/30 hover:text-primary'
+                ? 'bg-primary text-white dark:text-dark-bg shadow-lg shadow-primary/30'
+                : 'bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border text-light-textSecondary dark:text-slate-400 hover:border-primary/30 hover:text-primary'
             }`}
           >
             All Projects
@@ -108,8 +108,8 @@ function Projects() {
               onClick={() => setSelectedFilter(tech)}
               className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
                 selectedFilter === tech
-                  ? 'bg-primary text-dark-bg shadow-lg shadow-primary/30'
-                  : 'bg-dark-card border border-dark-border text-slate-400 hover:border-primary/30 hover:text-primary'
+                  ? 'bg-primary text-white dark:text-dark-bg shadow-lg shadow-primary/30'
+                  : 'bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border text-light-textSecondary dark:text-slate-400 hover:border-primary/30 hover:text-primary'
               }`}
             >
               {tech}
@@ -124,7 +124,7 @@ function Projects() {
               key={project.id}
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
-              className="group bg-dark-card border border-dark-border rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/10"
+              className="group bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/10"
             >
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden">
@@ -133,7 +133,7 @@ function Projects() {
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-t from-light-bg dark:from-dark-bg via-light-bg/50 dark:via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                 
                 {/* Hover Links */}
                 <div className={`absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300`}>
@@ -141,7 +141,7 @@ function Projects() {
                     href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-primary text-dark-bg rounded-full hover:bg-accent transition-colors duration-300 hover:scale-110"
+                    className="p-3 bg-primary text-white dark:text-dark-bg rounded-full hover:bg-accent transition-colors duration-300 hover:scale-110"
                   >
                     <ExternalLink size={20} />
                   </a>
@@ -149,7 +149,7 @@ function Projects() {
                     href={project.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-dark-card border border-primary text-primary rounded-full hover:bg-primary hover:text-dark-bg transition-all duration-300 hover:scale-110"
+                    className="p-3 bg-light-card dark:bg-dark-card border border-primary text-primary rounded-full hover:bg-primary hover:text-white dark:hover:text-dark-bg transition-all duration-300 hover:scale-110"
                   >
                     <Github size={20} />
                   </a>
@@ -158,10 +158,10 @@ function Projects() {
 
               {/* Project Info */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-slate-200 mb-2 group-hover:text-primary transition-colors duration-300">
+                <h3 className="text-xl font-bold text-light-text dark:text-slate-200 mb-2 group-hover:text-primary transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="text-slate-400 text-sm mb-4 line-clamp-3">
+                <p className="text-light-textSecondary dark:text-slate-400 text-sm mb-4 line-clamp-3">
                   {project.description}
                 </p>
 
@@ -170,7 +170,7 @@ function Projects() {
                   {project.tech.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-dark-bg border border-dark-border rounded-full text-xs text-slate-400 hover:border-primary/50 hover:text-primary transition-all duration-300"
+                      className="px-3 py-1 bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border rounded-full text-xs text-light-textSecondary dark:text-slate-400 hover:border-primary/50 hover:text-primary transition-all duration-300"
                     >
                       {tech}
                     </span>
@@ -187,7 +187,7 @@ function Projects() {
             href="https://github.com/yourusername"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-dark-card border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-dark-bg transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-light-card dark:bg-dark-card border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white dark:hover:text-dark-bg transition-all duration-300 hover:scale-105"
           >
             <Github size={20} />
             View More on GitHub

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Github, Linkedin, Mail, ChevronDown, Section } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
-function Hero() {
+function Home() {
   const scrollToSection = (id) => {
     const element = document.getElementById(id)
     if (element) {
@@ -80,4 +81,4 @@ function Hero() {
   )
 }
 
-export default Hero
+export default Home

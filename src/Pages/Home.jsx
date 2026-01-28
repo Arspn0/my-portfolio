@@ -1,5 +1,5 @@
 import React from 'react'
-import { Github, Linkedin, Mail, ChevronDown, Section } from 'lucide-react'
+import { Mail, ChevronDown } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function Home() {

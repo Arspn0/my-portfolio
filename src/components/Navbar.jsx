@@ -35,9 +35,9 @@ function Navbar() {
           : 'pt-0'
       }`}
     >
-      <div className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500 ${
+      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-500 ${
         scrolled 
-          ? 'bg-light-card/80 dark:bg-dark-card/80 backdrop-blur-md rounded-2xl shadow-lg shadow-primary/10 border border-light-border dark:border-dark-border' 
+          ? 'bg-light-card/80 dark:bg-dark-card/80 backdrop-blur-md rounded-2xl shadow-lg shadow-primary/10 border border-light-border dark:border-dark-border max-w-5xl' 
           : 'bg-transparent'
       }`}>
         <div className="flex items-center justify-between h-16">
@@ -48,7 +48,7 @@ function Navbar() {
               to="/"
               className="text-2xl font-bold text-primary hover:text-accent transition-colors duration-300"
             >
-              YourName
+              Aris Sopian
             </Link>
           </div>
           

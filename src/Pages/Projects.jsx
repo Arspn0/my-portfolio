@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { ExternalLink, Github } from 'lucide-react'
+import TargetCursor from '../components/TargetCursor'
 
 function Projects() {
   const [hoveredProject, setHoveredProject] = useState(null)
@@ -76,6 +77,14 @@ function Projects() {
 
   return (
     <section className="min-h-screen py-20 px-4 relative overflow-hidden">
+      {/* TargetCursor*/}
+      <TargetCursor 
+        spinDuration={3}
+        hideDefaultCursor={false}
+        parallaxOn={true}
+        hoverDuration={0.2}
+      />
+
       {/* Background decoration */}
       <div className="absolute top-40 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
       
@@ -94,7 +103,7 @@ function Projects() {
         <div className="flex flex-wrap gap-3 justify-center mb-12">
           <button
             onClick={() => setSelectedFilter('All')}
-            className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+            className={`cursor-target px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
               selectedFilter === 'All'
                 ? 'bg-primary text-white dark:text-dark-bg shadow-lg shadow-primary/30'
                 : 'bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border text-light-textSecondary dark:text-slate-400 hover:border-primary/30 hover:text-primary'
@@ -106,7 +115,7 @@ function Projects() {
             <button
               key={tech}
               onClick={() => setSelectedFilter(tech)}
-              className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+              className={`cursor-target px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
                 selectedFilter === tech
                   ? 'bg-primary text-white dark:text-dark-bg shadow-lg shadow-primary/30'
                   : 'bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border text-light-textSecondary dark:text-slate-400 hover:border-primary/30 hover:text-primary'

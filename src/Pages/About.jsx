@@ -72,7 +72,7 @@ function About() {
                 <div className="relative mb-6 group">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                   <img 
-                    src='../assets/profile/killua-profile.jpg'
+                    src="https://i.pinimg.com/1200x/40/42/2f/40422f207beffab521842104974ad15b.jpg"
                     alt="Profile - Killua"
                     className="relative w-full aspect-square object-cover rounded-2xl border-4 border-light-border dark:border-dark-border group-hover:border-primary/50 transition-all duration-300"
                   />
@@ -81,7 +81,7 @@ function About() {
                 {/* Quick Info */}
                 <div className="space-y-3">
                   <h3 className="text-2xl font-bold text-light-text dark:text-slate-200">
-                    Your Name
+                    Aris Sopian
                   </h3>
                   <p className="text-primary font-medium">
                     Full Stack Developer

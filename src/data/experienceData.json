@@ -1,0 +1,31 @@
+{
+  "experiences": [
+    {
+      "id": 1,
+      "company": "Tech Startup Indonesia",
+      "position": "Senior Full Stack Developer",
+      "year": "2023 - Present",
+      "duration": "1 year",
+      "description": "Leading development team in building scalable web applications. Implemented microservices architecture and CI/CD pipelines.",
+      "technologies": ["React", "Node.js", "Docker", "AWS"]
+    },
+    {
+      "id": 2,
+      "company": "Digital Agency Jakarta",
+      "position": "Full Stack Developer",
+      "year": "2021 - 2023",
+      "duration": "2 years",
+      "description": "Developed multiple client projects including e-commerce platforms and corporate websites. Collaborated with designers and product managers.",
+      "technologies": ["Next.js", "TypeScript", "MongoDB", "Tailwind"]
+    },
+    {
+      "id": 3,
+      "company": "Freelance Developer",
+      "position": "Web Developer",
+      "year": "2020 - 2021",
+      "duration": "1 year",
+      "description": "Built custom websites for small businesses and startups. Focused on responsive design and performance optimization.",
+      "technologies": ["React", "Firebase", "HTML/CSS", "JavaScript"]
+    }
+  ]
+}

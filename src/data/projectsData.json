@@ -1,0 +1,76 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "E-Commerce Platform",
+      "description": "Full-stack e-commerce platform dengan payment gateway integration, admin dashboard, dan real-time inventory management system.",
+      "shortDescription": "Modern e-commerce solution with seamless payment integration",
+      "image": "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&q=80",
+      "tech": ["React", "Node.js", "MongoDB", "Stripe"],
+      "liveLink": "https://example.com",
+      "githubLink": "https://github.com/yourusername/project1",
+      "featured": true,
+      "date": "2024-01"
+    },
+    {
+      "id": 2,
+      "title": "AI Task Manager",
+      "description": "Aplikasi task management dengan AI-powered suggestions untuk prioritas dan scheduling otomatis menggunakan machine learning.",
+      "shortDescription": "Smart task management powered by AI",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80",
+      "tech": ["Next.js", "TypeScript", "OpenAI", "Prisma"],
+      "liveLink": "https://example.com",
+      "githubLink": "https://github.com/yourusername/project2",
+      "featured": true,
+      "date": "2024-02"
+    },
+    {
+      "id": 3,
+      "title": "Real-time Analytics Dashboard",
+      "description": "Dashboard analytics real-time dengan data visualization interaktif, customizable widgets, dan export functionality.",
+      "shortDescription": "Interactive analytics with real-time data visualization",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+      "tech": ["React", "D3.js", "WebSocket", "Redis"],
+      "liveLink": "https://example.com",
+      "githubLink": "https://github.com/yourusername/project3",
+      "featured": true,
+      "date": "2024-03"
+    },
+    {
+      "id": 4,
+      "title": "Social Media App",
+      "description": "Platform social media dengan real-time messaging, story features, dan recommendation algorithm berbasis user behavior.",
+      "shortDescription": "Next-gen social platform with real-time features",
+      "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
+      "tech": ["React Native", "Firebase", "Node.js", "Socket.io"],
+      "liveLink": "https://example.com",
+      "githubLink": "https://github.com/yourusername/project4",
+      "featured": true,
+      "date": "2024-04"
+    },
+    {
+      "id": 5,
+      "title": "Learning Management System",
+      "description": "LMS platform untuk online courses dengan video streaming, quiz system, progress tracking, dan certificate generation.",
+      "shortDescription": "Comprehensive online learning platform",
+      "image": "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80",
+      "tech": ["Next.js", "PostgreSQL", "AWS S3", "Stripe"],
+      "liveLink": "https://example.com",
+      "githubLink": "https://github.com/yourusername/project5",
+      "featured": false,
+      "date": "2023-12"
+    },
+    {
+      "id": 6,
+      "title": "Portfolio Generator",
+      "description": "Tool untuk generate portfolio website dengan drag-and-drop interface, customizable themes, dan one-click deployment.",
+      "shortDescription": "Create stunning portfolios in minutes",
+      "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
+      "tech": ["React", "TailwindCSS", "Vercel API", "MongoDB"],
+      "liveLink": "https://example.com",
+      "githubLink": "https://github.com/yourusername/project6",
+      "featured": false,
+      "date": "2023-11"
+    }
+  ]
+}

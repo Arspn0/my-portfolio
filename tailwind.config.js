@@ -4,41 +4,54 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class', // Enable dark mode dengan class strategy
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        // Dark theme colors
-        primary: '#00d9ff',
-        secondary: '#0066ff',
-        accent: '#00ffaa',
-        dark: {
-          bg: '#0a0e27',
-          card: '#1a1f3a',
-          border: '#2a3454',
+        // Neo Brutalism Colors - Dark Theme
+        'neo-dark': {
+          bg: '#0a0a0a',
+          card: '#1a1a1a',
+          border: '#000000',
+          text: '#ffffff',
+          accent: '#00ff00',
         },
-        // Light theme colors
-        light: {
-          bg: '#f8fafc',
+        // Neo Brutalism Colors - Light Theme
+        'neo-light': {
+          bg: '#f5f5f5',
           card: '#ffffff',
-          border: '#e2e8f0',
-          text: '#1e293b',
-          textSecondary: '#475569',
-        }
+          border: '#000000',
+          text: '#000000',
+          accent: '#ff3366',
+        },
+        // Accent colors
+        'neo-yellow': '#ffff00',
+        'neo-cyan': '#00ffff',
+        'neo-pink': '#ff00ff',
+        'neo-green': '#00ff00',
+        'neo-orange': '#ff6600',
+      },
+      fontFamily: {
+        'neo': ['Space Grotesk', 'Inter', 'sans-serif'],
+      },
+      boxShadow: {
+        'neo': '8px 8px 0px 0px #000000',
+        'neo-hover': '0px 0px 0px 0px #000000',
+        'neo-sm': '4px 4px 0px 0px #000000',
+        'neo-sm-hover': '0px 0px 0px 0px #000000',
       },
       animation: {
-        'fade-in': 'fadeIn 0.8s ease-out forwards',
+        'marquee': 'marquee 30s linear infinite',
+        'marquee-reverse': 'marquee-reverse 30s linear infinite',
       },
       keyframes: {
-        fadeIn: {
-          '0%': { 
-            opacity: '0', 
-            transform: 'translateY(20px)' 
-          },
-          '100%': { 
-            opacity: '1', 
-            transform: 'translateY(0)' 
-          },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        'marquee-reverse': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0%)' },
         },
       },
     },

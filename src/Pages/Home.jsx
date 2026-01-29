@@ -98,7 +98,7 @@ function Home() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-4 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:-translate-x-1 hover:-translate-y-1 transition-all duration-200`}
+                className={`p-4 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all duration-200`}
                 aria-label={social.label}
               >
                 <social.icon size={28} className="text-neo-light-border dark:text-neo-dark-bg" />
@@ -109,7 +109,7 @@ function Home() {
           {/* CTA Button */}
           <Link
             to="/about"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-neo-light-text dark:bg-neo-dark-text text-neo-light-bg dark:text-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200 font-black text-xl uppercase"
+            className="rounded-full inline-flex items-center gap-3 px-8 py-4 bg-neo-light-text dark:bg-neo-dark-text text-neo-light-bg dark:text-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all duration-200 font-black text-xl uppercase"
           >
             About Me
             <ArrowRight size={24} />
@@ -171,14 +171,14 @@ function Home() {
             {featuredProjects.map((project) => (
               <div
                 key={project.id}
-                className="bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200 overflow-hidden group"
+                className="bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 overflow-hidden group"
               >
                 {/* Image */}
                 <div className="relative h-64 overflow-hidden border-b-4 border-neo-light-border dark:border-neo-dark-border">
                   <img 
                     src={project.image} 
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 right-4">
                     <a
@@ -221,7 +221,7 @@ function Home() {
           <div className="text-center">
             <Link
               to="/projects"
-              className="inline-flex items-center gap-3 px-10 py-5 bg-neo-light-text dark:bg-neo-dark-text text-neo-light-bg dark:text-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200 font-black text-xl uppercase"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-neo-light-text dark:bg-neo-dark-text text-neo-light-bg dark:text-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 font-black text-xl uppercase"
             >
               View All Projects
               <ArrowRight size={24} />
@@ -250,10 +250,10 @@ function Home() {
                 <button
                   key={spec.id}
                   onClick={() => setActiveSpeciality(spec.id)}
-                  className={`w-full text-left p-6 border-4 border-neo-light-border dark:border-neo-dark-border font-neo transition-all duration-200 ${
+                  className={`w-full text-left p-6 border-4 border-neo-light-border dark:border-neo-dark-border font-neo shadow-neo hover:shadow-neo-hover hover:translate-x-1 hover:translate-y-1 transition-all duration-200 ${
                     activeSpeciality === spec.id
-                      ? 'bg-neo-yellow dark:bg-neo-green shadow-neo-hover -translate-x-2 -translate-y-2'
-                      : 'bg-neo-light-card dark:bg-neo-dark-card shadow-neo hover:shadow-neo-hover hover:-translate-x-1 hover:-translate-y-1'
+                      ? 'bg-neo-yellow dark:bg-neo-green shadow-neo-hover translate-x-1 translate-y-1'
+                      : 'bg-neo-light-card dark:bg-neo-dark-card shadow-neo hover:shadow-neo-hover hover:translate-x-1 hover:translate-y-1'
                   }`}
                 >
                   <h3 className="text-2xl sm:text-3xl font-black text-neo-light-text dark:text-neo-dark-text mb-2 uppercase">
@@ -285,7 +285,7 @@ function Home() {
           </div>
 
           {/* Tech Stack Marquee */}
-          <div className="overflow-hidden bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border py-8 shadow-neo">
+          <div className="overflow-hidden bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border py-8">
             <div className="flex animate-marquee-reverse whitespace-nowrap">
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="flex items-center">

@@ -29,7 +29,7 @@ function Footer() {
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className="absolute -top-8 left-1/2 transform -translate-x-1/2 p-4 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg shadow-neo hover:shadow-neo-hover hover:-translate-x-2 hover:-translate-y-2 transition-all duration-200"
+        className="absolute -top-8 left-1/2 transform -translate-x-1/2 p-4 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg transition-all duration-200"
         aria-label="Scroll to top"
       >
         <ArrowUp size={24} strokeWidth={3} />
@@ -61,7 +61,7 @@ function Footer() {
                   href={social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-3 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm hover:shadow-neo hover:-translate-x-1 hover:-translate-y-1 transition-all duration-200`}
+                  className={`p-3 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm hover:shadow-neo-sm-hover hover:translate-x-1 hover:translate-y-1 active:translate-x-2 active:translate-y-2 transition-all duration-200`}
                   aria-label={social.label}
                 >
                   <social.icon size={20} strokeWidth={3} className="text-neo-light-border dark:text-neo-dark-bg" />
@@ -95,7 +95,7 @@ function Footer() {
               Get in Touch
             </h4>
             <div className="space-y-4">
-              <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-4 shadow-neo-sm">
+              <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-4">
                 <p className="text-xs font-bold text-neo-light-text dark:text-neo-dark-text opacity-60 mb-1 font-neo uppercase">
                   Email
                 </p>
@@ -106,7 +106,7 @@ function Footer() {
                   your.email@example.com
                 </a>
               </div>
-              <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-4 shadow-neo-sm">
+              <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-4">
                 <p className="text-xs font-bold text-neo-light-text dark:text-neo-dark-text opacity-60 mb-1 font-neo uppercase">
                   Phone
                 </p>
@@ -117,7 +117,7 @@ function Footer() {
                   +62 812-3456-7890
                 </a>
               </div>
-              <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-4 shadow-neo-sm">
+              <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-4">
                 <p className="text-xs font-bold text-neo-light-text dark:text-neo-dark-text opacity-60 mb-1 font-neo uppercase">
                   Location
                 </p>
@@ -134,7 +134,7 @@ function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             
             {/* Copyright */}
-            <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-3 shadow-neo-sm">
+            <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-3">
               <p className="text-neo-light-text dark:text-neo-dark-text text-sm font-bold font-neo uppercase">
                 © {currentYear} ARIS. ALL RIGHTS RESERVED.
               </p>
@@ -142,7 +142,7 @@ function Footer() {
 
             {/* Made With */}
             <div className="flex items-center gap-2">
-              <div className="bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-3 shadow-neo-sm">
+              <div className="bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-3">
                 <p className="text-neo-light-bg dark:text-neo-dark-bg text-sm font-bold font-neo uppercase flex items-center gap-2">
                   Made with 
                   React & Tailwind

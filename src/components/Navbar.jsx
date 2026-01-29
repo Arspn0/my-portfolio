@@ -31,7 +31,7 @@ function Navbar() {
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-300 pt-4`}
     >
-      <div className={`transition-all duration-300 ${
+      <div className={`transition-all duration-300 rounded-full ${
         scrolled 
           ? 'bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border max-w-4xl mx-auto px-4 sm:px-6 lg:px-8' 
           : 'bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'
@@ -72,7 +72,7 @@ function Navbar() {
             {/* Theme Switcher */}
             <button
               onClick={toggleTheme}
-              className="p-3 bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg shadow-neo-sm hover:shadow-neo hover:-translate-x-1 hover:-translate-y-1 transition-all duration-200"
+              className="rounded-full p-3 bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg shadow-neo-sm hover:shadow-neo-sm-hover hover:translate-x-1 hover:translate-y-1 active:translate-x-2 active:translate-y-2 transition-all duration-200"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun size={20} strokeWidth={3} /> : <Moon size={20} strokeWidth={3} />}
@@ -82,7 +82,7 @@ function Navbar() {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-3 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg shadow-neo-sm hover:shadow-neo hover:-translate-x-1 hover:-translate-y-1 transition-all duration-200"
+                className="rounded-full p-3 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg shadow-neo-sm hover:shadow-neo-sm-hover hover:translate-x-1 hover:translate-y-1 active:translate-x-2 active:translate-y-2 transition-all duration-200"
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? <X size={20} strokeWidth={3} /> : <Menu size={20} strokeWidth={3} />}

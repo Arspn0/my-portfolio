@@ -61,7 +61,7 @@ function Home() {
     .slice(0, 4)
 
   return (
-    <div className="bg-neo-light-bg dark:bg-neo-dark-bg transition-colors duration-300 relative w-full flex-col justify-center">
+    <div className="bg-neo-light-bg dark:bg-neo-dark-bg transition-colors duration-300 relative w-full flex-col justify-center py-20 px-4">
       
       {/* SECTION 1: HERO */}
       <section className="min-h-screen flex items-center px-16 pt-32 max-screen">

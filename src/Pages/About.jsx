@@ -1,6 +1,7 @@
 import React from 'react'
 import { Download, FileText, Lightbulb, Code, Rocket, CheckCircle, PenBox } from 'lucide-react'
 import experienceData from '../data/experienceData.json'
+import ProfilePicture from '../assets/profile/killua-profile.jpg'
 
 function About() {
 
@@ -67,44 +68,41 @@ function About() {
     <div className="bg-neo-light-bg dark:bg-neo-dark-bg min-h-screen py-20 px-4 transition-colors duration-300">
       
       {/* SECTION 1: PROFILE + INTRO */}
-      <section className="min-h-screen flex items-center px-4 sm:px-8 lg:px-16 pt-24 pb-16">
+      <section className="flex flex-col items-center px-16 pt-20 pb-20">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             
             {/* Left: Photo with Unique Frame */}
-            <div className="relative">
-              <div className="relative inline-block">
-                {/* Main Photo */}
-                <div className="relative z-10 border-8 border-neo-light-border dark:border-neo-dark-border shadow-neo bg-neo-light-card dark:bg-neo-dark-card p-4">
+            <div className="relative flex justify-center lg:justify-center">
+              <div className="relative inline-block w-48 sm:w-64 md:w-80 lg:w-[30rem] aspect-square">
+                
+                {/* Main frame */}
+                <div className="absolute inset-0 z-10 border-4 sm:border-6  border-neo-light-border dark:border-neo-dark-border  shadow-neo bg-neo-light-card dark:bg-neo-dark-card p-3 sm:p-4">
+                  {/* Image follows frame */}
                   <img 
-                    src="https://i.pinimg.com/1200x/40/42/2f/40422f207beffab521842104974ad15b.jpg"
-                    alt="Profile - Killua"
-                    className="w-full aspect-square object-cover border-4 border-neo-light-border dark:border-neo-dark-border"
+                    src={ProfilePicture}
+                    alt="Profile - Aris"
+                    className="w-full h-full object-cover border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"
                   />
                 </div>
-                
-                {/* Decorative Corner Elements */}
-                <div className="absolute -top-6 -left-6 w-24 h-24 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border"></div>
-                <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border"></div>
-                
-                {/* Decorative Lines */}
-                <div className="absolute top-1/4 -right-12 w-20 h-2 bg-neo-pink dark:bg-neo-yellow"></div>
-                <div className="absolute bottom-1/3 -left-12 w-16 h-2 bg-neo-green dark:bg-neo-cyan"></div>
+
+                {/* Corner Decor */}
+                <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-12 h-12 sm:w-16 sm:h-16 bg-neo-yellow dark:bg-neo-green border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"></div>
+                <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-14 h-14 sm:w-20 sm:h-20 bg-neo-cyan dark:bg-neo-pink border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"></div>
+
+                {/* Side Lines */}
+                <div className="absolute top-1/4 -right-6 sm:-right-8 w-10 sm:w-14 h-1 sm:h-1.5 bg-neo-pink dark:bg-neo-yellow"></div>
+                <div className="absolute bottom-1/3 -left-6 sm:-left-8 w-8 sm:w-12 h-1 sm:h-1.5 bg-neo-green dark:bg-neo-cyan"></div>
               </div>
             </div>
 
+
             {/* Right: Text Content */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Title */}
               <div>
-                <div className="inline-block bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-2 shadow-neo-sm mb-6">
-                  <h2 className="text-2xl font-black text-neo-light-border dark:text-neo-dark-bg font-neo uppercase">
-                    Who Am I?
-                  </h2>
-                </div>
-                
                 <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-4">
-                  I'M ARIS
+                  I'M ARIS SOPIAN
                 </h1>
                 
                 <div className="w-32 h-2 bg-neo-yellow dark:bg-neo-green mb-6"></div>
@@ -128,7 +126,7 @@ function About() {
                 <a
                   href="/resume.pdf"
                   download
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 active:translate-x-3 active:translate-y-3 transition-all duration-200 font-black text-lg uppercase"
+                  className="rounded-s-full inline-flex items-center gap-3 px-8 py-4 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 active:translate-x-3 active:translate-y-3 transition-all duration-200 font-black text-lg uppercase"
                 >
                   <Download size={24} strokeWidth={3} />
                   Download CV
@@ -137,7 +135,7 @@ function About() {
                   href="/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-text dark:text-neo-dark-text shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 active:translate-x-3 active:translate-y-3 transition-all duration-200 font-black text-lg uppercase"
+                  className="rounded-e-full inline-flex items-center gap-3 px-8 py-4 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-text dark:text-neo-dark-text shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 active:translate-x-3 active:translate-y-3 transition-all duration-200 font-black text-lg uppercase"
                 >
                   <FileText size={24} strokeWidth={3} />
                   View Resume
@@ -223,7 +221,7 @@ function About() {
 
             {/* Experience Items */}
             <div className="space-y-12">
-              {experienceData.experiences.map((exp, index) => (
+              {experienceData.experiences.slice().reverse().map((exp, index) => (
                 <div key={exp.id} className="relative pl-24">
                   {/* Timeline Dot */}
                   <div className="absolute left-0 top-6 w-16 h-16 bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo flex items-center justify-center">
@@ -259,7 +257,7 @@ function About() {
                       {exp.technologies.map((tech, i) => (
                         <span
                           key={i}
-                          className="px-3 py-1 bg-neo-light-bg dark:bg-neo-dark-bg border-2 border-neo-light-border dark:border-neo-dark-border text-sm font-bold uppercase font-neo"
+                          className="px-3 py-1 bg-neo-light-bg dark:bg-neo-dark-bg border-2 border-neo-light-border dark:border-neo-dark-border text-neo-light-text dark:text-neo-dark-text text-sm mt-2 font-neo font-bold uppercase"
                         >
                           {tech}
                         </span>

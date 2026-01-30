@@ -1,209 +1,167 @@
 import React, { useState } from 'react'
-import { ExternalLink, Github } from 'lucide-react'
-import TargetCursor from '../components/TargetCursor'
+import { useNavigate } from 'react-router-dom'
+import projectsData from '../data/projectsData.json'
 
 function Projects() {
-  const [hoveredProject, setHoveredProject] = useState(null)
-
-  const projects = [
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce platform dengan payment gateway integration, admin dashboard, dan real-time inventory management system.",
-      image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&q=80",
-      tech: ["React", "Node.js", "MongoDB", "Stripe"],
-      liveLink: "#",
-      githubLink: "#",
-      color: "primary"
-    },
-    {
-      id: 2,
-      title: "AI Task Manager",
-      description: "Aplikasi task management dengan AI-powered suggestions untuk prioritas dan scheduling otomatis menggunakan machine learning.",
-      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80",
-      tech: ["Next.js", "TypeScript", "OpenAI", "Prisma"],
-      liveLink: "#",
-      githubLink: "#",
-      color: "secondary"
-    },
-    {
-      id: 3,
-      title: "Real-time Analytics Dashboard",
-      description: "Dashboard analytics real-time dengan data visualization interaktif, customizable widgets, dan export functionality.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-      tech: ["React", "D3.js", "WebSocket", "Redis"],
-      liveLink: "#",
-      githubLink: "#",
-      color: "accent"
-    },
-    {
-      id: 4,
-      title: "Social Media App",
-      description: "Platform social media dengan real-time messaging, story features, dan recommendation algorithm berbasis user behavior.",
-      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
-      tech: ["React Native", "Firebase", "Node.js", "Socket.io"],
-      liveLink: "#",
-      githubLink: "#",
-      color: "primary"
-    },
-    {
-      id: 5,
-      title: "Learning Management System",
-      description: "LMS platform untuk online courses dengan video streaming, quiz system, progress tracking, dan certificate generation.",
-      image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80",
-      tech: ["Next.js", "PostgreSQL", "AWS S3", "Stripe"],
-      liveLink: "#",
-      githubLink: "#",
-      color: "secondary"
-    },
-    {
-      id: 6,
-      title: "Portfolio Generator",
-      description: "Tool untuk generate portfolio website dengan drag-and-drop interface, customizable themes, dan one-click deployment.",
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
-      tech: ["React", "TailwindCSS", "Vercel API", "MongoDB"],
-      liveLink: "#",
-      githubLink: "#",
-      color: "accent"
-    }
-  ]
-
-  const allTechs = [...new Set(projects.flatMap(p => p.tech))]
   const [selectedFilter, setSelectedFilter] = useState('All')
+  const navigate = useNavigate()
 
+  const filters = ['All', 'Website', 'Mobile', 'Design']
+
+  // Filter projects based on selected filter
   const filteredProjects = selectedFilter === 'All' 
-    ? projects 
-    : projects.filter(p => p.tech.includes(selectedFilter))
+    ? projectsData.projects 
+    : projectsData.projects.filter(p => p.type === selectedFilter)
+
+  // Staggered animation delay
+  const getAnimationDelay = (index) => {
+    return `${index * 0.1}s`
+  }
+
+  const handleProjectClick = (slug) => {
+    navigate(`/projects/${slug}`, { state: { filter: selectedFilter } })
+  }
 
   return (
-    <section className="min-h-screen py-20 px-4 relative overflow-hidden">
-      {/* TargetCursor*/}
-      <TargetCursor 
-        spinDuration={3}
-        hideDefaultCursor={false}
-        parallaxOn={true}
-        hoverDuration={0.2}
-      />
-
-      {/* Background decoration */}
-      <div className="absolute top-40 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+    <div className="bg-neo-light-bg dark:bg-neo-dark-bg min-h-screen transition-colors duration-300">
       
-      <div className="max-w-7xl mx-auto relative z-10 pt-16">
-        {/* Section Title */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-light-textSecondary dark:text-slate-400 text-lg max-w-2xl mx-auto">
-            Beberapa project yang telah saya kerjakan dengan berbagai teknologi modern
-          </p>
-        </div>
+      {/* SECTION 1: TITLE & DESCRIPTION */}
+      <section className="pt-32 pb-16 px-4 sm:px-8 lg:px-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-3xl">
+            {/* Title */}
+            <div className="mb-8">
+              
+              <h1 className="text-6xl sm:text-7xl md:text-8xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-6">
+                MY WORK
+              </h1>
+              
+              <div className="w-32 h-2 bg-neo-yellow dark:bg-neo-green mb-8"></div>
+            </div>
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap gap-3 justify-center mb-12">
-          <button
-            onClick={() => setSelectedFilter('All')}
-            className={`cursor-target px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
-              selectedFilter === 'All'
-                ? 'bg-primary text-white dark:text-dark-bg shadow-lg shadow-primary/30'
-                : 'bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border text-light-textSecondary dark:text-slate-400 hover:border-primary/30 hover:text-primary'
-            }`}
-          >
-            All Projects
-          </button>
-          {allTechs.slice(0, 5).map((tech) => (
-            <button
-              key={tech}
-              onClick={() => setSelectedFilter(tech)}
-              className={`cursor-target px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
-                selectedFilter === tech
-                  ? 'bg-primary text-white dark:text-dark-bg shadow-lg shadow-primary/30'
-                  : 'bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border text-light-textSecondary dark:text-slate-400 hover:border-primary/30 hover:text-primary'
-              }`}
-            >
-              {tech}
-            </button>
-          ))}
+            {/* Description */}
+            <p className="text-xl text-neo-light-text dark:text-neo-dark-text font-neo leading-relaxed">
+              A collection of projects showcasing my expertise in web development, mobile applications, 
+              and creative design. Each project represents a unique challenge solved with innovative 
+              solutions and cutting-edge technologies.
+            </p>
+          </div>
         </div>
+      </section>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
-              className="group bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/10"
-            >
-              {/* Project Image */}
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t from-light-bg dark:from-dark-bg via-light-bg/50 dark:via-dark-bg/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                
-                {/* Hover Links */}
-                <div className={`absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300`}>
-                  <a
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-primary text-white dark:text-dark-bg rounded-full hover:bg-accent transition-colors duration-300 hover:scale-110"
-                  >
-                    <ExternalLink size={20} />
-                  </a>
-                  <a
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-light-card dark:bg-dark-card border border-primary text-primary rounded-full hover:bg-primary hover:text-white dark:hover:text-dark-bg transition-all duration-300 hover:scale-110"
-                  >
-                    <Github size={20} />
-                  </a>
+      {/* SECTION 2: FILTER & PROJECTS GRID */}
+      <section className="pb-20 px-4 sm:px-8 lg:px-16">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Filter Buttons - Right Aligned */}
+          <div className="flex justify-end mb-12">
+            <div className="inline-flex gap-3 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-2 shadow-neo">
+              {filters.map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setSelectedFilter(filter)}
+                  className={`px-6 py-3 font-black text-sm font-neo uppercase transition-all duration-200 border-2 ${
+                    selectedFilter === filter
+                      ? 'bg-neo-yellow dark:bg-neo-green text-neo-light-border dark:text-neo-dark-bg border-neo-light-border dark:border-neo-dark-border shadow-neo-sm'
+                      : 'bg-transparent text-neo-light-text dark:text-neo-dark-text border-transparent hover:border-neo-light-border dark:hover:border-neo-dark-border'
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Projects Grid - Staggered 2 Columns */}
+          <div className="grid md:grid-cols-2 gap-8 relative">
+            {filteredProjects.map((project, index) => (
+              <div
+                key={project.id}
+                onClick={() => handleProjectClick(project.slug)}
+                className={`
+                  group cursor-pointer
+                  bg-neo-light-card dark:bg-neo-dark-card 
+                  border-4 border-neo-light-border dark:border-neo-dark-border 
+                  shadow-neo hover:shadow-neo-hover 
+                  hover:translate-x-2 hover:translate-y-2
+                  transition-all duration-300
+                  overflow-hidden
+                  animate-fade-in
+                  ${index % 2 === 1 ? 'md:mt-16' : ''}
+                  hover:z-10
+                `}
+                style={{ 
+                  animationDelay: getAnimationDelay(index),
+                  animationFillMode: 'both'
+                }}
+              >
+                {/* Project Image */}
+                <div className="relative h-64 overflow-hidden border-b-4 border-neo-light-border dark:border-neo-dark-border">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  
+                  {/* Type Badge */}
+                  <div className="absolute top-4 right-4">
+                    <div className={`px-4 py-2 border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm font-black text-sm uppercase font-neo
+                      ${project.type === 'Website' ? 'bg-neo-cyan text-neo-light-border dark:text-neo-dark-bg' : ''}
+                      ${project.type === 'Mobile' ? 'bg-neo-pink text-neo-light-border dark:text-neo-dark-bg' : ''}
+                      ${project.type === 'Design' ? 'bg-neo-yellow text-neo-light-border dark:text-neo-dark-bg' : ''}
+                    `}>
+                      {project.type}
+                    </div>
+                  </div>
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-neo-light-bg/0 dark:bg-neo-dark-bg/0 group-hover:bg-neo-light-bg/30 dark:group-hover:bg-neo-dark-bg/30 transition-all duration-300"></div>
+                </div>
+
+                {/* Project Info */}
+                <div className="p-6">
+                  {/* Title */}
+                  <h3 className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-3 group-hover:text-neo-cyan dark:group-hover:text-neo-pink transition-colors duration-300">
+                    {project.title}
+                  </h3>
+
+                  {/* Date */}
+                  <p className="text-neo-light-text dark:text-neo-dark-text opacity-70 font-neo font-bold mb-4">
+                    {project.month} {project.year}
+                  </p>
+
+                  {/* Short Description */}
+                  <p className="text-neo-light-text dark:text-neo-dark-text font-neo leading-relaxed">
+                    {project.shortDescription}
+                  </p>
                 </div>
               </div>
+            ))}
+          </div>
 
-              {/* Project Info */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-light-text dark:text-slate-200 mb-2 group-hover:text-primary transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-light-textSecondary dark:text-slate-400 text-sm mb-4 line-clamp-3">
-                  {project.description}
+          {/* Empty State */}
+          {filteredProjects.length === 0 && (
+            <div className="text-center py-20">
+              <div className="inline-block bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-12 shadow-neo">
+                <p className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
+                  No Projects Found
                 </p>
-
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border rounded-full text-xs text-light-textSecondary dark:text-slate-400 hover:border-primary/50 hover:text-primary transition-all duration-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
               </div>
             </div>
-          ))}
+          )}
         </div>
+      </section>
 
-        {/* View More Button */}
-        <div className="text-center mt-12">
-          <a
-            href="https://github.com/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-light-card dark:bg-dark-card border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white dark:hover:text-dark-bg transition-all duration-300 hover:scale-105"
-          >
-            <Github size={20} />
-            View More on GitHub
-          </a>
-        </div>
-      </div>
-    </section>
+      {/* Dimming Overlay untuk Hover Effect */}
+      <style jsx>{`
+        .group:hover ~ .group {
+          opacity: 0.5;
+        }
+        .group:hover {
+          opacity: 1 !important;
+        }
+      `}</style>
+    </div>
   )
 }
 

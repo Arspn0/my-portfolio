@@ -3,74 +3,182 @@
     {
       "id": 1,
       "title": "E-Commerce Platform",
-      "description": "Full-stack e-commerce platform dengan payment gateway integration, admin dashboard, dan real-time inventory management system.",
+      "slug": "ecommerce-platform",
+      "type": "Website",
+      "month": "January",
+      "year": "2024",
       "shortDescription": "Modern e-commerce solution with seamless payment integration",
+      "fullDescription": "A comprehensive e-commerce platform built for a fashion retail brand. Features include real-time inventory management, secure payment processing, order tracking, and an intuitive admin dashboard. The platform handles thousands of daily transactions and provides detailed analytics for business insights.",
       "image": "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&q=80",
-      "tech": ["React", "Node.js", "MongoDB", "Stripe"],
-      "liveLink": "https://example.com",
-      "githubLink": "https://github.com/yourusername/project1",
-      "featured": true,
-      "date": "2024-01"
+      "tech": ["React", "Node.js", "MongoDB", "Stripe", "Redux", "Express"],
+      "liveLink": "https://example.com/ecommerce",
+      "githubLink": "https://github.com/yourusername/ecommerce",
+      "features": [
+        "Real-time inventory management system",
+        "Secure payment gateway integration with Stripe",
+        "Advanced product filtering and search",
+        "Customer review and rating system",
+        "Admin dashboard with analytics",
+        "Responsive design for all devices",
+        "Email notifications for orders",
+        "Wishlist and cart functionality"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=1200&q=80",
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80"
+      ],
+      "featured": true
     },
     {
       "id": 2,
-      "title": "AI Task Manager",
-      "description": "Aplikasi task management dengan AI-powered suggestions untuk prioritas dan scheduling otomatis menggunakan machine learning.",
-      "shortDescription": "Smart task management powered by AI",
-      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80",
-      "tech": ["Next.js", "TypeScript", "OpenAI", "Prisma"],
-      "liveLink": "https://example.com",
-      "githubLink": "https://github.com/yourusername/project2",
-      "featured": true,
-      "date": "2024-02"
+      "title": "Fitness Tracking App",
+      "slug": "fitness-tracking-app",
+      "type": "Mobile",
+      "month": "February",
+      "year": "2024",
+      "shortDescription": "Track workouts and monitor fitness progress on the go",
+      "fullDescription": "A cross-platform mobile application designed to help users track their fitness journey. Built with React Native, it offers workout logging, progress visualization, nutrition tracking, and social features to connect with other fitness enthusiasts.",
+      "image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80",
+      "tech": ["React Native", "Firebase", "Redux", "Chart.js"],
+      "liveLink": "https://example.com/fitness",
+      "githubLink": "https://github.com/yourusername/fitness",
+      "features": [
+        "Workout logging and tracking",
+        "Progress visualization with charts",
+        "Custom workout plan creation",
+        "Nutrition and calorie tracking",
+        "Social feed and community",
+        "Goal setting and reminders",
+        "Offline mode support",
+        "Integration with wearable devices"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1200&q=80",
+        "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80",
+        "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=1200&q=80"
+      ],
+      "featured": true
     },
     {
       "id": 3,
-      "title": "Real-time Analytics Dashboard",
-      "description": "Dashboard analytics real-time dengan data visualization interaktif, customizable widgets, dan export functionality.",
-      "shortDescription": "Interactive analytics with real-time data visualization",
-      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-      "tech": ["React", "D3.js", "WebSocket", "Redis"],
-      "liveLink": "https://example.com",
-      "githubLink": "https://github.com/yourusername/project3",
-      "featured": true,
-      "date": "2024-03"
+      "title": "Brand Identity Design",
+      "slug": "brand-identity-design",
+      "type": "Design",
+      "month": "March",
+      "year": "2024",
+      "shortDescription": "Complete brand identity package for a tech startup",
+      "fullDescription": "Comprehensive brand identity design project for a technology startup. Includes logo design, color palette, typography system, brand guidelines, marketing materials, and digital assets. Created a modern and professional visual language that resonates with the target audience.",
+      "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+      "tech": ["Figma", "Adobe Illustrator", "Adobe Photoshop", "Blender"],
+      "liveLink": "https://example.com/brand",
+      "githubLink": "#",
+      "features": [
+        "Logo design and variations",
+        "Color palette and guidelines",
+        "Typography system",
+        "Business card design",
+        "Letterhead and stationery",
+        "Social media templates",
+        "Brand style guide",
+        "Marketing collateral designs"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=80",
+        "https://images.unsplash.com/photo-1558655146-d09347e92766?w=1200&q=80",
+        "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&q=80"
+      ],
+      "featured": true
     },
     {
       "id": 4,
-      "title": "Social Media App",
-      "description": "Platform social media dengan real-time messaging, story features, dan recommendation algorithm berbasis user behavior.",
-      "shortDescription": "Next-gen social platform with real-time features",
+      "title": "Real-time Chat Application",
+      "slug": "realtime-chat-app",
+      "type": "Website",
+      "month": "April",
+      "year": "2024",
+      "shortDescription": "WebSocket-based chat with file sharing and video calls",
+      "fullDescription": "A modern real-time chat application with advanced features including group chats, file sharing, video calls, and end-to-end encryption. Built with scalability in mind, supporting thousands of concurrent users with minimal latency.",
       "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
-      "tech": ["React Native", "Firebase", "Node.js", "Socket.io"],
-      "liveLink": "https://example.com",
-      "githubLink": "https://github.com/yourusername/project4",
-      "featured": true,
-      "date": "2024-04"
+      "tech": ["React", "Socket.io", "Node.js", "WebRTC", "Redis"],
+      "liveLink": "https://example.com/chat",
+      "githubLink": "https://github.com/yourusername/chat",
+      "features": [
+        "Real-time messaging with WebSocket",
+        "Group chat functionality",
+        "File and image sharing",
+        "Video and voice calls",
+        "Message reactions and replies",
+        "Online status indicators",
+        "Message search and history",
+        "Push notifications"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&q=80",
+        "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=1200&q=80",
+        "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=1200&q=80"
+      ],
+      "featured": true
     },
     {
       "id": 5,
-      "title": "Learning Management System",
-      "description": "LMS platform untuk online courses dengan video streaming, quiz system, progress tracking, dan certificate generation.",
-      "shortDescription": "Comprehensive online learning platform",
-      "image": "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80",
-      "tech": ["Next.js", "PostgreSQL", "AWS S3", "Stripe"],
-      "liveLink": "https://example.com",
-      "githubLink": "https://github.com/yourusername/project5",
-      "featured": false,
-      "date": "2023-12"
+      "title": "Recipe Finder Mobile App",
+      "slug": "recipe-finder-app",
+      "type": "Mobile",
+      "month": "May",
+      "year": "2024",
+      "shortDescription": "Discover and save your favorite recipes",
+      "fullDescription": "A beautiful and intuitive mobile app for discovering recipes, saving favorites, and planning meals. Features include ingredient-based search, step-by-step cooking instructions, nutritional information, and a shopping list generator.",
+      "image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80",
+      "tech": ["Flutter", "Dart", "Firebase", "REST API"],
+      "liveLink": "https://example.com/recipe",
+      "githubLink": "https://github.com/yourusername/recipe",
+      "features": [
+        "Recipe search by ingredients",
+        "Step-by-step cooking guide",
+        "Nutritional information display",
+        "Favorite recipes collection",
+        "Shopping list generator",
+        "Meal planning calendar",
+        "Recipe rating and reviews",
+        "Offline recipe access"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&q=80",
+        "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=1200&q=80",
+        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80"
+      ],
+      "featured": false
     },
     {
       "id": 6,
-      "title": "Portfolio Generator",
-      "description": "Tool untuk generate portfolio website dengan drag-and-drop interface, customizable themes, dan one-click deployment.",
-      "shortDescription": "Create stunning portfolios in minutes",
-      "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
-      "tech": ["React", "TailwindCSS", "Vercel API", "MongoDB"],
-      "liveLink": "https://example.com",
-      "githubLink": "https://github.com/yourusername/project6",
-      "featured": false,
-      "date": "2023-11"
+      "title": "3D Product Visualization",
+      "slug": "3d-product-visualization",
+      "type": "Design",
+      "month": "June",
+      "year": "2024",
+      "shortDescription": "Interactive 3D models for e-commerce products",
+      "fullDescription": "Created interactive 3D product visualizations for an online furniture store. Customers can rotate, zoom, and view products from any angle. Includes AR features for visualizing products in their own space using their smartphone camera.",
+      "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80",
+      "tech": ["Three.js", "Blender", "React", "WebGL"],
+      "liveLink": "https://example.com/3d-viz",
+      "githubLink": "https://github.com/yourusername/3d-viz",
+      "features": [
+        "360-degree product rotation",
+        "High-quality 3D rendering",
+        "AR product placement",
+        "Material and color customization",
+        "Zoom and pan controls",
+        "Mobile-optimized performance",
+        "Product configurator",
+        "Export high-res images"
+      ],
+      "screenshots": [
+        "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&q=80",
+        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
+        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80"
+      ],
+      "featured": false
     }
   ]
 }

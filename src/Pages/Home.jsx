@@ -69,51 +69,47 @@ function Home() {
 
           {/* Greeting */}
           <div className="mb-8">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl font-black text-neo-light-text dark:text-neo-dark-text mb-4 font-neo uppercase tracking-tight">
-              HAI, IT'S ME
+            <h1 className="text-6xl sm:text-7xl md:text-8xl font-black text-neo-light-text dark:text-neo-dark-text mb-4 font-neo uppercase tracking-tight border-neo-light-border">
+              HAI, IT'S ME ARIS
             </h1>
-            <div className="relative inline-block">
-              <h2 className="text-6xl sm:text-7xl md:text-8xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase tracking-tight relative z-10">
-                ARIS
-              </h2>
-              <div className="absolute -bottom-2 -right-2 w-full h-full bg-neo-yellow dark:bg-neo-green -z-10"></div>
-            </div>
           </div>
 
           {/* Description */}
-          <div className="mb-8 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-6 shadow-neo">
+          <div className="rounded-3xl mb-8 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-6">
             <p className="text-xl sm:text-2xl font-bold text-neo-light-text dark:text-neo-dark-text font-neo">
               FULL STACK DEVELOPER
             </p>
-            <p className="text-lg text-neo-light-text dark:text-neo-dark-text opacity-80 mt-2 font-neo">
-              Building digital experiences that matter
+            <p className="text-2xl text-neo-light-text dark:text-neo-dark-text opacity-80 mt-2 font-neo">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa quas iure minus harum ratione, nobis excepturi, nihil perspiciatis voluptatibus eligendi asperiores aperiam tempora! Debitis commodi fuga a dolor dolore qui? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea veniam soluta animi quo suscipit modi ut corrupti. Voluptatum mollitia ea itaque quidem nostrum culpa ipsum consequatur error vero, ullam suscipit.
             </p>
           </div>
 
-          {/* Social Links */}
-          <div className="flex gap-4 justify-start mb-8">
-            {socialLinks.map((social, index) => (
-              <a
-                key={index}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`p-4 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all duration-200`}
-                aria-label={social.label}
-              >
-                <social.icon size={28} className="text-neo-light-border dark:text-neo-dark-bg" />
-              </a>
-            ))}
-          </div>
+          <div className="flex items-center justify-between mb-8">
+            {/* Social Links */}
+            <div className="flex gap-4">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`rounded-2xl p-4 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all duration-200`}
+                  aria-label={social.label}
+                >
+                  <social.icon size={28} className="text-neo-light-border dark:text-neo-dark-bg" />
+                </a>
+              ))}
+            </div>
 
-          {/* CTA Button */}
-          <Link
-            to="/about"
-            className="rounded-full inline-flex items-center gap-3 px-8 py-4 bg-neo-light-text dark:bg-neo-dark-text text-neo-light-bg dark:text-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all duration-200 font-black text-xl uppercase"
-          >
-            About Me
-            <ArrowRight size={24} />
-          </Link>
+            {/* CTA Button */}
+            <Link
+              to="/about"
+              className="rounded-full inline-flex items-center gap-3 px-8 py-4 bg-neo-light-text dark:bg-neo-dark-text text-neo-light-bg dark:text-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all duration-200 font-black text-xl uppercase"
+            >
+              About Me
+              <ArrowRight size={24} />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -143,11 +139,11 @@ function Home() {
 
         {/* Short About */}
         <div className="max-w-5xl mx-auto px-4 sm:px-8">
-          <div className="bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-8 sm:p-12 shadow-neo">
-            <h3 className="text-3xl sm:text-4xl font-black text-neo-light-text dark:text-neo-dark-text mb-6 font-neo uppercase">
+          <div className="rounded-3xl bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-8 sm:p-12 ">
+            <h3 className="text-center text-3xl sm:text-4xl font-black text-neo-light-text dark:text-neo-dark-text mb-6 font-neo uppercase">
               About Me
             </h3>
-            <p className="text-lg text-neo-light-text dark:text-neo-dark-text leading-relaxed font-neo">
+            <p className="text-center text-2xl text-neo-light-text dark:text-neo-dark-text leading-relaxed font-neo">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             </p>
           </div>
@@ -159,8 +155,8 @@ function Home() {
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="mb-12">
-            <div className="inline-block bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-4 shadow-neo mb-8">
-              <h2 className="text-4xl sm:text-5xl font-black text-neo-light-border dark:text-neo-dark-bg font-neo uppercase">
+            <div className="rounded-3xl inline-block px-8 py-4 shadow-neo mb-8">
+              <h2 className="text-4xl sm:text-5xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
                 My Work
               </h2>
             </div>
@@ -171,7 +167,7 @@ function Home() {
             {featuredProjects.map((project) => (
               <div
                 key={project.id}
-                className="bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 overflow-hidden group"
+                className="rounded-3xl bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 overflow-hidden group"
               >
                 {/* Image */}
                 <div className="relative h-64 overflow-hidden border-b-4 border-neo-light-border dark:border-neo-dark-border">
@@ -180,16 +176,6 @@ function Home() {
                     alt={project.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-4 right-4">
-                    <a
-                      href={project.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm hover:shadow-neo hover:-translate-x-1 hover:-translate-y-1 transition-all duration-200"
-                    >
-                      <ExternalLink size={20} className="text-neo-light-border dark:text-neo-dark-bg" />
-                    </a>
-                  </div>
                 </div>
 
                 {/* Content */}
@@ -206,7 +192,7 @@ function Home() {
                     {project.tech.slice(0, 3).map((tech, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1 bg-neo-light-bg dark:bg-neo-dark-bg border-2 border-neo-light-border dark:border-neo-dark-border text-sm font-bold uppercase"
+                        className="rounded-2xl px-3 py-1 bg-neo-light-bg dark:bg-neo-dark-bg border-2 border-neo-light-border dark:border-neo-dark-border text-neo-light-text dark:text-neo-dark-text mt-2 font-neo font-bold uppercase"
                       >
                         {tech}
                       </span>
@@ -221,7 +207,7 @@ function Home() {
           <div className="text-center">
             <Link
               to="/projects"
-              className="inline-flex items-center gap-3 px-10 py-5 bg-neo-light-text dark:bg-neo-dark-text text-neo-light-bg dark:text-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 font-black text-xl uppercase"
+              className="rounded-full inline-flex items-center gap-3 px-10 py-5 bg-neo-light-text dark:bg-neo-dark-text text-neo-light-bg dark:text-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 font-black text-xl uppercase"
             >
               View All Projects
               <ArrowRight size={24} />
@@ -235,8 +221,8 @@ function Home() {
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="mb-12">
-            <div className="inline-block bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-4 shadow-neo">
-              <h2 className="text-4xl sm:text-5xl font-black text-neo-light-bg dark:text-neo-dark-bg font-neo uppercase">
+            <div className="rounded-3xl inline-block px-8 py-4 shadow-neo">
+              <h2 className="text-4xl sm:text-5xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
                 Speciality
               </h2>
             </div>
@@ -250,7 +236,7 @@ function Home() {
                 <button
                   key={spec.id}
                   onClick={() => setActiveSpeciality(spec.id)}
-                  className={`w-full text-left p-6 border-4 border-neo-light-border dark:border-neo-dark-border font-neo shadow-neo hover:shadow-neo-hover hover:translate-x-1 hover:translate-y-1 transition-all duration-200 ${
+                  className={`rounded-3xl w-full text-left p-6 border-4 border-neo-light-border dark:border-neo-dark-border font-neo shadow-neo hover:shadow-neo-hover hover:translate-x-1 hover:translate-y-1 transition-all duration-200 ${
                     activeSpeciality === spec.id
                       ? 'bg-neo-yellow dark:bg-neo-green shadow-neo-hover translate-x-1 translate-y-1'
                       : 'bg-neo-light-card dark:bg-neo-dark-card shadow-neo hover:shadow-neo-hover hover:translate-x-1 hover:translate-y-1'
@@ -273,7 +259,7 @@ function Home() {
             {/* Right: Image */}
             <div className="relative">
               <div className="sticky top-24">
-                <div className="border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo overflow-hidden">
+                <div className="rounded-3xl border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo overflow-hidden">
                   <img 
                     src={specialities.find(s => s.id === activeSpeciality)?.image}
                     alt={specialities.find(s => s.id === activeSpeciality)?.title}

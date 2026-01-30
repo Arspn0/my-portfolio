@@ -6,6 +6,8 @@ import Projects from './Pages/Projects'
 import Contact from './Pages/Contact'
 import Footer from './components/Footer'
 import PageTitle from './components/PageTitle'
+import ProjectDetail from './Pages/ProjectsDetail'
+import ScrollToTop from './components/ScrollTop'
 
 import { ThemeProvider } from './context/ThemeContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -17,10 +19,12 @@ function App() {
         <div className="bg-light-bg dark:bg-dark-bg min-h-screen transition-colors duration-300">
           <Navbar />
           <PageTitle />
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:slug" element={<ProjectDetail />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
           <Footer />

@@ -35,9 +35,9 @@ export default {
         'neo': ['Space Grotesk', 'Inter', 'sans-serif'],
       },
       boxShadow: {
-        'neo': '8px 8px 0px 0px #000000',
+        'neo': '4px 4px 0px 0px #000000',
         'neo-hover': '0px 0px 0px 0px #000000',
-        'neo-sm': '4px 4px 0px 0px #000000',
+        'neo-sm': '2px 2px 0px 0px #000000',
         'neo-sm-hover': '0px 0px 0px 0px #000000',
       },
       animation: {

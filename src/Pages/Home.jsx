@@ -64,7 +64,7 @@ function Home() {
     <div className="bg-neo-light-bg dark:bg-neo-dark-bg transition-colors duration-300 relative w-full flex-col justify-center py-20 px-4">
       
       {/* SECTION 1: HERO */}
-      <section className="min-h-screen flex items-center px-16 pt-30 max-screen pb-30">
+      <section className="flex flex-col items-center px-16 pt-20 pb-20">
         <div className="max-w-9xl">
 
           {/* Greeting */}

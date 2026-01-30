@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Github, Linkedin, Mail, ArrowRight, ExternalLink } from 'lucide-react'
+import { Github, Linkedin, Instagram, ArrowRight, ExternalLink } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import projectsData from '../data/projectsData.json'
 

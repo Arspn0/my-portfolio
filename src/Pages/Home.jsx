@@ -9,20 +9,20 @@ function Home() {
   const socialLinks = [
     { 
       icon: Github, 
-      href: 'https://github.com/yourusername',
+      href: 'https://github.com/Arspn0',
       label: 'GitHub',
       color: 'neo-cyan'
     },
     { 
       icon: Linkedin, 
-      href: 'https://linkedin.com/in/yourusername',
+      href: 'https://www.linkedin.com/in/aris-sopian-9520a2246',
       label: 'LinkedIn',
       color: 'neo-pink'
     },
     { 
-      icon: Mail, 
-      href: 'mailto:your.email@example.com',
-      label: 'Email',
+      icon: Instagram, 
+      href: 'https://www.instagram.com/aaariss_9/',
+      label: 'Instagram',
       color: 'neo-yellow'
     }
   ]

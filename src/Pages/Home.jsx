@@ -7,27 +7,6 @@ import { socialMediaLinks } from '../data/SocialMediaData'
 function Home() {
   const [activeSpeciality, setActiveSpeciality] = useState('mobile')
 
-  const socialLinks = [
-    { 
-      icon: Github, 
-      href: 'https://github.com/Arspn0',
-      label: 'GitHub',
-      color: 'neo-cyan'
-    },
-    { 
-      icon: Linkedin, 
-      href: 'https://www.linkedin.com/in/aris-sopian-9520a2246',
-      label: 'LinkedIn',
-      color: 'neo-pink'
-    },
-    { 
-      icon: Instagram, 
-      href: 'https://www.instagram.com/aaariss_9/',
-      label: 'Instagram',
-      color: 'neo-yellow'
-    }
-  ]
-
   const specialities = [
     {
       id: 'mobile',
@@ -88,7 +67,7 @@ function Home() {
           <div className="flex items-center justify-between mb-8">
             {/* Social Links */}
             <div className="flex gap-4">
-              {socialLinks.map((social, index) => (
+              {socialMediaLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.href}

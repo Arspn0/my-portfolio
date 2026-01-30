@@ -29,7 +29,7 @@ function Footer() {
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className="absolute -top-8 left-1/2 transform -translate-x-1/2 p-4 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg transition-all duration-200"
+        className="rounded-full absolute -top-8 left-1/2 transform -translate-x-1/2 p-4 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg transition-all duration-200"
         aria-label="Scroll to top"
       >
         <ArrowUp size={24} strokeWidth={3} />

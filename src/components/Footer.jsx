@@ -1,6 +1,7 @@
 import React from 'react'
-import { Github, Linkedin, Mail, Twitter, ArrowUp, Heart } from 'lucide-react'
+import { ArrowUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { socialMediaLinks } from '../data/SocialMediaData'
 
 function Footer() {
   const scrollToTop = () => {
@@ -14,13 +15,6 @@ function Footer() {
     { name: 'CONTACT', path: '/contact' }
   ]
 
-  const socialLinks = [
-    { icon: Github, link: 'https://github.com/yourusername', label: 'GitHub', color: 'neo-cyan' },
-    { icon: Linkedin, link: 'https://linkedin.com/in/yourusername', label: 'LinkedIn', color: 'neo-pink' },
-    { icon: Twitter, link: 'https://twitter.com/yourusername', label: 'Twitter', color: 'neo-yellow' },
-    { icon: Mail, link: 'mailto:your.email@example.com', label: 'Email', color: 'neo-green' }
-  ]
-
   const currentYear = new Date().getFullYear()
 
   return (
@@ -29,7 +23,7 @@ function Footer() {
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className="rounded-full absolute -top-8 left-1/2 transform -translate-x-1/2 p-4 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg transition-all duration-200"
+        className="rounded-2xl absolute -top-8 left-1/2 transform -translate-x-1/2 p-4 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg transition-all duration-200"
         aria-label="Scroll to top"
       >
         <ArrowUp size={24} strokeWidth={3} />
@@ -55,13 +49,13 @@ function Footer() {
             
             {/* Social Links */}
             <div className="flex gap-3">
-              {socialLinks.map((social, index) => (
+              {socialMediaLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`rounded-full p-3 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm hover:shadow-neo-sm-hover hover:translate-x-1 hover:translate-y-1 active:translate-x-2 active:translate-y-2 transition-all duration-200`}
+                  className={`rounded-xl p-3 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm hover:shadow-neo-sm-hover hover:translate-x-1 hover:translate-y-1 active:translate-x-2 active:translate-y-2 transition-all duration-200 cursor-pointer`}
                   aria-label={social.label}
                 >
                   <social.icon size={20} strokeWidth={3} className="text-neo-light-border dark:text-neo-dark-bg" />

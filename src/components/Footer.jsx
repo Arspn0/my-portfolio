@@ -77,7 +77,7 @@ function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             
             {/* Copyright */}
-            <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-3">
+            <div className="px-6 py-3">
               <p className="text-neo-light-text dark:text-neo-dark-text text-sm font-bold font-neo uppercase">
                 © {currentYear} ARIS. ALL RIGHTS RESERVED.
               </p>
@@ -85,8 +85,8 @@ function Footer() {
 
             {/* Made With */}
             <div className="flex items-center gap-2">
-              <div className="bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-3">
-                <p className="text-neo-light-bg dark:text-neo-dark-bg text-sm font-bold font-neo uppercase flex items-center gap-2">
+              <div className="px-6 py-3">
+                <p className="text-neo-light-text dark:text-neo-dark-text text-sm font-bold font-neo uppercase flex items-center gap-2">
                   Made with 
                   React & Tailwind
                 </p>

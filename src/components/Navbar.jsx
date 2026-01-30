@@ -55,7 +55,7 @@ function Navbar() {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`px-5 py-2 font-black text-sm font-neo uppercase transition-all duration-200 border-2 ${
+                  className={`rounded-full px-5 py-2 font-black text-sm font-neo uppercase transition-all duration-200 border-2 ${
                     isActive(item.path)
                       ? 'bg-neo-yellow dark:bg-neo-green text-neo-light-border dark:text-neo-dark-bg border-neo-light-border dark:border-neo-dark-border shadow-neo-sm'
                       : 'bg-transparent text-neo-light-text dark:text-neo-dark-text border-transparent hover:border-neo-light-border dark:hover:border-neo-dark-border hover:bg-neo-light-card dark:hover:bg-neo-dark-card'

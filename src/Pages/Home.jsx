@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Github, Linkedin, Instagram, ArrowRight, ExternalLink } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import projectsData from '../data/projectsData.json'
+import { socialMediaLinks } from '../data/SocialMediaData'
 
 function Home() {
   const [activeSpeciality, setActiveSpeciality] = useState('mobile')

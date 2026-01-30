@@ -61,7 +61,7 @@ function Footer() {
                   href={social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-3 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm hover:shadow-neo-sm-hover hover:translate-x-1 hover:translate-y-1 active:translate-x-2 active:translate-y-2 transition-all duration-200`}
+                  className={`rounded-full p-3 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm hover:shadow-neo-sm-hover hover:translate-x-1 hover:translate-y-1 active:translate-x-2 active:translate-y-2 transition-all duration-200`}
                   aria-label={social.label}
                 >
                   <social.icon size={20} strokeWidth={3} className="text-neo-light-border dark:text-neo-dark-bg" />

@@ -70,63 +70,6 @@ function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="md:col-span-1">
-            <h4 className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-6">
-              Navigation
-            </h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    to={link.path}
-                    className="inline-block text-neo-light-text dark:text-neo-dark-text font-neo font-bold hover:text-neo-yellow dark:hover:text-neo-green transition-colors duration-200 hover:translate-x-2 transform"
-                  >
-                    → {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div className="md:col-span-1">
-            <h4 className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-6">
-              Get in Touch
-            </h4>
-            <div className="space-y-4">
-              <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-4">
-                <p className="text-xs font-bold text-neo-light-text dark:text-neo-dark-text opacity-60 mb-1 font-neo uppercase">
-                  Email
-                </p>
-                <a 
-                  href="mailto:your.email@example.com"
-                  className="text-neo-light-text dark:text-neo-dark-text font-neo font-bold hover:text-neo-cyan dark:hover:text-neo-pink transition-colors duration-200"
-                >
-                  your.email@example.com
-                </a>
-              </div>
-              <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-4">
-                <p className="text-xs font-bold text-neo-light-text dark:text-neo-dark-text opacity-60 mb-1 font-neo uppercase">
-                  Phone
-                </p>
-                <a 
-                  href="tel:+6281234567890"
-                  className="text-neo-light-text dark:text-neo-dark-text font-neo font-bold hover:text-neo-cyan dark:hover:text-neo-pink transition-colors duration-200"
-                >
-                  +62 812-3456-7890
-                </a>
-              </div>
-              <div className="bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-4">
-                <p className="text-xs font-bold text-neo-light-text dark:text-neo-dark-text opacity-60 mb-1 font-neo uppercase">
-                  Location
-                </p>
-                <p className="text-neo-light-text dark:text-neo-dark-text font-neo font-bold">
-                  Bandung, Indonesia
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Bottom Bar */}

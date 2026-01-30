@@ -193,7 +193,7 @@ function Home() {
                     {project.tech.slice(0, 3).map((tech, index) => (
                       <span
                         key={index}
-                        className="rounded-2xl px-3 py-1 bg-neo-light-bg dark:bg-neo-dark-bg border-2 border-neo-light-border dark:border-neo-dark-border text-neo-light-text dark:text-neo-dark-text mt-2 font-neo font-bold uppercase"
+                        className="rounded-xl px-3 py-1 bg-neo-light-bg dark:bg-neo-dark-bg border-2 border-neo-light-border dark:border-neo-dark-border text-neo-light-text dark:text-neo-dark-text mt-2 font-neo font-bold uppercase"
                       >
                         {tech}
                       </span>

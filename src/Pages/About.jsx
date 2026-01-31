@@ -77,18 +77,18 @@ function About() {
               <div className="relative inline-block w-48 sm:w-64 md:w-80 lg:w-[30rem] aspect-square">
                 
                 {/* Main frame */}
-                <div className="absolute inset-0 z-10 border-4 sm:border-6  border-neo-light-border dark:border-neo-dark-border  shadow-neo bg-neo-light-card dark:bg-neo-dark-card p-3 sm:p-4">
+                <div className=" rounded-3xl absolute inset-0 z-10 border-4 sm:border-6  border-neo-light-border dark:border-neo-dark-border bg-neo-light-card dark:bg-neo-dark-card p-3 sm:p-4">
                   {/* Image follows frame */}
                   <img 
                     src={ProfilePicture}
                     alt="Profile - Aris"
-                    className="w-full h-full object-cover border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"
+                    className="rounded-2xl w-full h-full object-cover border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"
                   />
                 </div>
 
                 {/* Corner Decor */}
-                <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-12 h-12 sm:w-16 sm:h-16 bg-neo-yellow dark:bg-neo-green border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"></div>
-                <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-14 h-14 sm:w-20 sm:h-20 bg-neo-cyan dark:bg-neo-pink border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"></div>
+                <div className="rounded-ss-3xl absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-12 h-12 sm:w-16 sm:h-16 bg-neo-yellow dark:bg-neo-green border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"></div>
+                <div className="rounded-ee-3xl absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-14 h-14 sm:w-20 sm:h-20 bg-neo-cyan dark:bg-neo-pink border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"></div>
 
                 {/* Side Lines */}
                 <div className="absolute top-1/4 -right-6 sm:-right-8 w-10 sm:w-14 h-1 sm:h-1.5 bg-neo-pink dark:bg-neo-yellow"></div>
@@ -149,7 +149,7 @@ function About() {
       {/* SECTION 2: TECH STACK MARQUEE */}
       <section className="py-16 border-t-4 border-b-4 border-neo-light-border dark:border-neo-dark-border bg-neo-light-card dark:bg-neo-dark-card">
         <div className="mb-8 text-center">
-          <div className="inline-block bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-3 shadow-neo">
+          <div className="rounded-3xl inline-block bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-3 shadow-neo">
             <h2 className="text-3xl sm:text-4xl font-black text-neo-light-bg dark:text-neo-dark-bg font-neo uppercase">
               Tech Stack
             </h2>
@@ -164,7 +164,7 @@ function About() {
                 {techStack.slice(0, 8).map((tech, index) => (
                   <div
                     key={index}
-                    className="mx-4 bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-4 flex items-center gap-4"
+                    className="rounded-full mx-4 bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-4 flex items-center gap-4"
                   >
                     <span className="text-4xl">{tech.icon}</span>
                     <span className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
@@ -185,7 +185,7 @@ function About() {
                 {techStack.slice(8).map((tech, index) => (
                   <div
                     key={index}
-                    className="mx-4 bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-4 flex items-center gap-4"
+                    className="rounded-full mx-4 bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-4 flex items-center gap-4"
                   >
                     <span className="text-4xl">{tech.icon}</span>
                     <span className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
@@ -204,9 +204,9 @@ function About() {
         <div className="max-w-5xl mx-auto">
           {/* Section Header */}
           <div className="mb-16">
-            <div className="inline-block bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-3 shadow-neo mb-6">
+            <div className="rounded-3xl inline-block bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-3 shadow-neo mb-6">
               <h2 className="text-4xl sm:text-5xl font-black text-neo-light-border dark:text-neo-dark-bg font-neo uppercase">
-                My Work Experience
+                My Experience
               </h2>
             </div>
             <p className="text-xl text-neo-light-text dark:text-neo-dark-text font-neo font-bold max-w-2xl">
@@ -224,16 +224,16 @@ function About() {
               {experienceData.experiences.slice().reverse().map((exp, index) => (
                 <div key={exp.id} className="relative pl-24">
                   {/* Timeline Dot */}
-                  <div className="absolute left-0 top-6 w-16 h-16 bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo flex items-center justify-center">
+                  <div className="rounded-2xl absolute left-0 top-6 w-16 h-16 bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border flex items-center justify-center">
                     <span className="text-2xl font-black text-neo-light-border dark:text-neo-dark-bg font-neo">
                       {index + 1}
                     </span>
                   </div>
 
                   {/* Content Card */}
-                  <div className="bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-6 sm:p-8 shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200">
+                  <div className="rounded-3xl bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-6 sm:p-8 shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200">
                     {/* Year Badge */}
-                    <div className="inline-block bg-neo-yellow dark:bg-neo-green border-2 border-neo-light-border dark:border-neo-dark-border px-4 py-1 mb-4">
+                    <div className="rounded-xl inline-block bg-neo-yellow dark:bg-neo-green border-2 border-neo-light-border dark:border-neo-dark-border px-4 py-1 mb-4">
                       <span className="text-sm font-black text-neo-light-border dark:text-neo-dark-bg font-neo uppercase">
                         {exp.year}
                       </span>
@@ -257,7 +257,7 @@ function About() {
                       {exp.technologies.map((tech, i) => (
                         <span
                           key={i}
-                          className="px-3 py-1 bg-neo-light-bg dark:bg-neo-dark-bg border-2 border-neo-light-border dark:border-neo-dark-border text-neo-light-text dark:text-neo-dark-text text-sm mt-2 font-neo font-bold uppercase"
+                          className="rounded-xl px-3 py-1 bg-neo-light-bg dark:bg-neo-dark-bg border-2 border-neo-light-border dark:border-neo-dark-border text-neo-light-text dark:text-neo-dark-text text-sm mt-2 font-neo font-bold uppercase"
                         >
                           {tech}
                         </span>
@@ -276,7 +276,7 @@ function About() {
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="mb-16 text-center">
-            <div className="inline-block bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-3 shadow-neo mb-6">
+            <div className="rounded-3xl inline-block bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-8 py-3 shadow-neo mb-6">
               <h2 className="text-4xl sm:text-5xl font-black text-neo-light-bg dark:text-neo-dark-bg font-neo uppercase">
                 How I Work
               </h2>
@@ -294,14 +294,14 @@ function About() {
                 {workProcess.map((process, index) => (
                   <div
                     key={process.id}
-                    className="flex-shrink-0 w-80 bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-6 shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 group"
+                    className="rounded-3xl flex-shrink-0 w-80 bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-6 shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 group"
                   >
                     {/* Number Badge & Icon */}
                     <div className="flex items-start justify-between mb-6">
-                      <div className={`p-4 bg-${process.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm group-hover:shadow-neo-sm-hover group-hover:translate-x-1 group-hover:translate-y-1 transition-all duration-200`}>
+                      <div className={`rounded-2xl p-4 bg-${process.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm group-hover:shadow-neo-sm-hover group-hover:translate-x-1 group-hover:translate-y-1 transition-all duration-200`}>
                         <process.icon size={32} strokeWidth={3} className="text-neo-light-border dark:text-neo-dark-bg" />
                       </div>
-                      <div className="w-12 h-12 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border flex items-center justify-center shadow-neo-sm">
+                      <div className="rounded-xl w-12 h-12 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border flex items-center justify-center">
                         <span className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo">
                           {index + 1}
                         </span>
@@ -322,23 +322,6 @@ function About() {
                     <div className={`mt-6 h-2 bg-${process.color} w-20`}></div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Scroll Indicator */}
-            <div className="text-center mt-8">
-              <div className="inline-flex items-center gap-2 bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-3 shadow-neo-sm">
-                <div className="flex gap-2">
-                  {workProcess.map((_, index) => (
-                    <div
-                      key={index}
-                      className="w-3 h-3 bg-neo-light-text dark:bg-neo-dark-text border-2 border-neo-light-border dark:border-neo-dark-border"
-                    ></div>
-                  ))}
-                </div>
-                <span className="text-sm font-bold text-neo-light-text dark:text-neo-dark-text font-neo uppercase ml-2">
-                  Scroll to see all →
-                </span>
               </div>
             </div>
           </div>

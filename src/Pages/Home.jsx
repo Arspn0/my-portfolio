@@ -84,7 +84,7 @@ function Home() {
             {/* CTA Button */}
             <Link
               to="/about"
-              className="rounded-full inline-flex items-center gap-3 px-8 py-4 bg-neo-light-text dark:bg-neo-dark-text text-neo-light-bg dark:text-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all duration-200 font-black text-xl uppercase"
+              className="rounded-full inline-flex items-center gap-3 px-8 py-4 bg-neo-dark-text text-neo-dark-bg border-4 border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all duration-200 font-black text-xl uppercase"
             >
               About Me
               <ArrowRight size={24} />
@@ -135,7 +135,7 @@ function Home() {
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="mb-12">
-            <div className="rounded-3xl inline-block px-8 py-4 shadow-neo mb-8">
+            <div className="rounded-3xl inline-block px-8 py-4 shadow-neo mb-8 bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border">
               <h2 className="text-4xl sm:text-5xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
                 My Work
               </h2>
@@ -187,7 +187,7 @@ function Home() {
           <div className="text-center">
             <Link
               to="/projects"
-              className="rounded-full inline-flex items-center gap-3 px-10 py-5 bg-neo-light-text dark:bg-neo-dark-text text-neo-light-bg dark:text-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 font-black text-xl uppercase"
+              className="rounded-full inline-flex items-center gap-3 px-10 py-5 bg-neo-dark-text text-neo-dark-bg border-4 border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 font-black text-xl uppercase"
             >
               View All Projects
               <ArrowRight size={24} />
@@ -201,8 +201,8 @@ function Home() {
         <div className="max-w-7xl mx-auto">
           {/* Section Title */}
           <div className="mb-12">
-            <div className="rounded-3xl inline-block px-8 py-4 shadow-neo">
-              <h2 className="text-4xl sm:text-5xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
+            <div className="rounded-3xl inline-block px-8 py-4 shadow-neo bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border">
+              <h2 className="text-4xl sm:text-5xl font-black text-neo-light-bg dark:text-neo-dark-bg font-neo uppercase">
                 Speciality
               </h2>
             </div>

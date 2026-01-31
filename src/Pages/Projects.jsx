@@ -23,7 +23,7 @@ function Projects() {
   }
 
   return (
-    <div className="bg-neo-light-bg dark:bg-neo-dark-bg min-h-screen transition-colors duration-300">
+    <div className="bg-neo-light-bg dark:bg-neo-dark-bg min-h-screen transition-colors duration-300 py-4">
       
       {/* SECTION 1: TITLE & DESCRIPTION */}
       <section className="pt-32 pb-16 px-4 sm:px-8 lg:px-16">
@@ -55,15 +55,15 @@ function Projects() {
           
           {/* Filter Buttons - Right Aligned */}
           <div className="flex justify-end mb-12">
-            <div className="inline-flex gap-3 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-2 shadow-neo">
+            <div className="inline-flex gap-3 p-2">
               {filters.map((filter) => (
                 <button
                   key={filter}
                   onClick={() => setSelectedFilter(filter)}
                   className={`px-6 py-3 font-black text-sm font-neo uppercase transition-all duration-200 border-2 ${
                     selectedFilter === filter
-                      ? 'bg-neo-yellow dark:bg-neo-green text-neo-light-border dark:text-neo-dark-bg border-neo-light-border dark:border-neo-dark-border shadow-neo-sm'
-                      : 'bg-transparent text-neo-light-text dark:text-neo-dark-text border-transparent hover:border-neo-light-border dark:hover:border-neo-dark-border'
+                      ? 'rounded-2xl bg-neo-yellow dark:bg-neo-green text-neo-light-border dark:text-neo-dark-bg border-neo-light-border dark:border-neo-dark-border shadow-neo-sm'
+                      : 'rounded-2xl bg-transparent text-neo-light-text dark:text-neo-dark-text border-transparent hover:border-neo-light-border dark:hover:border-neo-dark-border'
                   }`}
                 >
                   {filter}
@@ -79,7 +79,7 @@ function Projects() {
                 key={project.id}
                 onClick={() => handleProjectClick(project.slug)}
                 className={`
-                  group cursor-pointer
+                  rounded-3xl group cursor-pointer
                   bg-neo-light-card dark:bg-neo-dark-card 
                   border-4 border-neo-light-border dark:border-neo-dark-border 
                   shadow-neo hover:shadow-neo-hover 
@@ -105,7 +105,7 @@ function Projects() {
                   
                   {/* Type Badge */}
                   <div className="absolute top-4 right-4">
-                    <div className={`px-4 py-2 border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm font-black text-sm uppercase font-neo
+                    <div className={`rounded-xl px-4 py-2 border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm font-black text-sm uppercase font-neo
                       ${project.type === 'Website' ? 'bg-neo-cyan text-neo-light-border dark:text-neo-dark-bg' : ''}
                       ${project.type === 'Mobile' ? 'bg-neo-pink text-neo-light-border dark:text-neo-dark-bg' : ''}
                       ${project.type === 'Design' ? 'bg-neo-yellow text-neo-light-border dark:text-neo-dark-bg' : ''}

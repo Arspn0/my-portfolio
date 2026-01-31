@@ -29,9 +29,9 @@ function Home() {
   ]
 
   const techStack = [
-    'React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 
+    'React', 'Dart', 'TypeScript', 'Node.js', 'Python', 
     'MongoDB', 'PostgreSQL', 'Tailwind CSS', 'React Native', 
-    'Flutter', 'Three.js', 'Blender', 'Figma', 'Git'
+    'Flutter', 'C++', 'Blender', 'Figma', 'Git'
   ]
 
   // Get 4 most recent featured projects

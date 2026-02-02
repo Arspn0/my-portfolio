@@ -1,7 +1,7 @@
 import React from 'react'
 import { Download, FileText, Lightbulb, Code, Rocket, CheckCircle, PenBox } from 'lucide-react'
 import experienceData from '../data/experienceData.json'
-import ProfilePicture from '../assets/profile/killua-profile.jpg'
+import ProfilePicture from '../assets/profile/profile-picture.png'
 
 function About() {
 

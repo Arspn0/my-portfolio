@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Mail, Github, Linkedin, Twitter, Send, Check } from 'lucide-react'
-import ProfilePicture from '../assets/profile/killua-profile.jpg'
+import ProfilePicture from '../assets/profile/profile-picture.png'
 import { socialMediaLinks } from '../data/SocialMediaData'
 
 function Contact() {

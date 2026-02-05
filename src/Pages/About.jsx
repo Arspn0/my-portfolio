@@ -111,13 +111,13 @@ function About() {
               {/* Description */}
               <div className="space-y-4">
                 <p className="text-xl font-bold text-neo-light-text dark:text-neo-dark-text font-neo">
-                  Full Stack Developer & Creative Problem Solver
+                  Aspiring Full Stack Developer & Creative Problem Solver
                 </p>
                 <p className="text-lg text-neo-light-text dark:text-neo-dark-text opacity-80 font-neo leading-relaxed">
-                  I build digital products that combine beautiful design with powerful functionality. With expertise in web development, mobile apps, and 3D design, I transform ideas into reality through code and creativity.
+                  I’m a passionate learner who enjoys turning ideas into interactive, user-focused digital products. I’m currently developing my skills in web development, mobile app development, and 3D design — combining creativity with logical problem-solving.
                 </p>
                 <p className="text-lg text-neo-light-text dark:text-neo-dark-text opacity-80 font-neo leading-relaxed">
-                  Passionate about creating user-centric solutions that make a difference. Always learning, always building, always pushing boundaries.
+                  Even though I’m still early in my journey, I love experimenting, building, and improving with every project. My goal is to create meaningful solutions that are functional, visually appealing, and impactful.
                 </p>
               </div>
 

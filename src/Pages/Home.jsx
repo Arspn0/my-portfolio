@@ -56,11 +56,11 @@ function Home() {
 
           {/* Description */}
           <div className="rounded-3xl mb-8 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-6">
-            <p className="text-xl sm:text-2xl font-bold text-neo-light-text dark:text-neo-dark-text font-neo">
-              FULL STACK DEVELOPER
+            <p className="text-3xl sm:text-4xl font-bold text-neo-light-text dark:text-neo-dark-text font-neo">
+              Crafting thoughtful digital experiences, one step at a time.
             </p>
-            <p className="text-2xl text-neo-light-text dark:text-neo-dark-text opacity-80 mt-2 font-neo">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa quas iure minus harum ratione, nobis excepturi, nihil perspiciatis voluptatibus eligendi asperiores aperiam tempora! Debitis commodi fuga a dolor dolore qui? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea veniam soluta animi quo suscipit modi ut corrupti. Voluptatum mollitia ea itaque quidem nostrum culpa ipsum consequatur error vero, ullam suscipit.
+            <p className="text-3xl text-neo-light-text dark:text-neo-dark-text opacity-80 mt-2 font-neo">
+              I’m exploring the world of design & development — building websites, mobile apps, and 3D concepts while continuing to learn, grow, and find opportunities to contribute.
             </p>
           </div>
 
@@ -120,11 +120,12 @@ function Home() {
         {/* Short About */}
         <div className="max-w-5xl mx-auto px-4 sm:px-8">
           <div className="rounded-3xl bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-8 sm:p-12 ">
-            <h3 className="text-center text-3xl sm:text-4xl font-black text-neo-light-text dark:text-neo-dark-text mb-6 font-neo uppercase">
+            <h3 className="text-center text-4xl sm:text-4xl font-black text-neo-light-text dark:text-neo-dark-text mb-6 font-neo uppercase">
               About Me
             </h3>
-            <p className="text-center text-2xl text-neo-light-text dark:text-neo-dark-text leading-relaxed font-neo">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            <p className="text-center text-3xl text-neo-light-text dark:text-neo-dark-text leading-relaxed font-neo">
+              I’m currently growing my skills in web development, mobile apps, and 3D design. Although I don’t have professional experience yet, I’m actively building projects, improving my craft, and looking for opportunities to apply what I’ve learned.
+              I’m also open to roles in IT support, administration, customer service, or other fields where I can contribute while continuing my journey in tech.
             </p>
           </div>
         </div>

@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from './components/Navbar'
-import Home from './Pages/Home'
-import About from './Pages/About'
-import Projects from './Pages/Projects'
-import Contact from './Pages/Contact'
+import Home from './pages/Home'
+import About from './pages/About'
+import Projects from './pages/Projects'
+import Contact from './pages/Contact'
 import Footer from './components/Footer'
 import PageTitle from './components/PageTitle'
-import ProjectDetail from './Pages/ProjectsDetail'
+import ProjectDetail from './pages/ProjectsDetail'
 import ScrollToTop from './components/ScrollTop'
 
 import { ThemeProvider } from './context/ThemeContext';

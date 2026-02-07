@@ -205,7 +205,7 @@ This project is [MIT](LICENSE) licensed.
 
 ## Author
 
-**Your Name**
+**Aris Sopian**
 
 - Website: [My Portfolio](https://yourwebsite.com)
 - GitHub: [@Arspn0](https://github.com/Arspn0)

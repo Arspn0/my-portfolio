@@ -44,29 +44,36 @@ function Home() {
     <div className="bg-neo-light-bg dark:bg-neo-dark-bg transition-colors duration-300 relative w-full flex-col justify-center py-20 px-4">
       
       {/* SECTION 1: HERO */}
-      <section className="flex flex-col items-center px-16 pt-20 pb-20">
-        <div className="max-w-9xl">
+      <section className="flex flex-col items-start px-6 sm:px-10 md:px-16 pt-20 pb-20">
+        <div className="w-full max-w-7xl">
 
-          {/* Greeting */}
+          {/* Greeting (tetap rata kiri) */}
           <div className="mb-8">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl font-black text-neo-light-text dark:text-neo-dark-text mb-4 font-neo uppercase tracking-tight border-neo-light-border">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-neo-light-text dark:text-neo-dark-text mb-4 font-neo uppercase tracking-tight">
               HAI, IT'S ME ARIS
             </h1>
           </div>
 
-          {/* Description */}
-          <div className="rounded-3xl mb-8 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-6">
-            <p className="text-3xl sm:text-4xl font-bold text-neo-light-text dark:text-neo-dark-text font-neo">
-              Crafting thoughtful digital experiences, one step at a time.
-            </p>
-            <p className="text-3xl text-neo-light-text dark:text-neo-dark-text opacity-80 mt-2 font-neo">
-              I’m exploring the world of design & development — building websites, mobile apps, and 3D concepts while continuing to learn, grow, and find opportunities to contribute.
-            </p>
+          {/* Description dengan scaling, tetap rata kiri */}
+          <div className="origin-top-left transform scale-100 md:scale-100 sm:scale-95 xs:scale-85 transition-transform duration-300">
+            <div className="
+              rounded-3xl mb-8 bg-neo-light-card dark:bg-neo-dark-card 
+              border-4 border-neo-light-border dark:border-neo-dark-border p-6
+            ">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-neo-light-text dark:text-neo-dark-text font-neo">
+                Crafting thoughtful digital experiences, one step at a time.
+              </p>
+              <p className="text-xl sm:text-2xl text-neo-light-text dark:text-neo-dark-text opacity-80 mt-2 font-neo">
+                I’m exploring the world of design & development — building websites, mobile apps, and 3D concepts while continuing to learn, grow, and find opportunities to contribute.
+              </p>
+            </div>
           </div>
 
-          <div className="flex items-center justify-between mb-8">
+          {/* Social + CTA */}
+          <div className="flex items-center justify-between mb-8 w-full">
+
             {/* Social Links */}
-            <div className="flex gap-4">
+            <div className="hidden sm:flex gap-4">
               {socialMediaLinks.map((social, index) => (
                 <a
                   key={index}
@@ -81,14 +88,23 @@ function Home() {
               ))}
             </div>
 
-            {/* CTA Button */}
-            <Link
-              to="/about"
-              className="rounded-full inline-flex items-center gap-3 px-8 py-4 bg-neo-dark-text text-neo-dark-bg border-4 border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 transition-all duration-200 font-black text-xl uppercase"
-            >
-              About Me
-              <ArrowRight size={24} />
-            </Link>
+            {/* Tombol About: tetap ukuran sama, geser kiri jika social hilang */}
+            <div className="w-full sm:w-auto flex sm:block justify-start">
+              <Link
+                to="/about"
+                className="
+                  rounded-full inline-flex items-center gap-3 
+                  px-8 py-4 bg-neo-dark-text text-neo-dark-bg 
+                  border-4 border-neo-dark-border shadow-neo 
+                  hover:shadow-neo-hover hover:translate-y-1 hover:translate-x-1 
+                  transition-all duration-200 font-black text-xl uppercase
+                "
+              >
+                About Me
+                <ArrowRight size={24} />
+              </Link>
+            </div>
+
           </div>
         </div>
       </section>
@@ -118,15 +134,21 @@ function Home() {
         </div>
 
         {/* Short About */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-8">
-          <div className="rounded-3xl bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-8 sm:p-12 ">
-            <h3 className="text-center text-4xl sm:text-4xl font-black text-neo-light-text dark:text-neo-dark-text mb-6 font-neo uppercase">
-              About Me
-            </h3>
-            <p className="text-center text-3xl text-neo-light-text dark:text-neo-dark-text leading-relaxed font-neo">
-              I’m currently growing my skills in web development, mobile apps, and 3D design. Although I don’t have professional experience yet, I’m actively building projects, improving my craft, and looking for opportunities to apply what I’ve learned.
-              I’m also open to roles in IT support, administration, customer service, or other fields where I can contribute while continuing my journey in tech.
-            </p>
+        <div className="flex justify-center px-4 sm:px-8">
+
+          {/* Scale Wrapper */}
+          <div className="origin-top transform scale-100 lg:scale-100 md:scale-95 sm:scale-90 xs:scale-85 transition-duration-300 max-w-5xl w-full">
+            <div className="rounded-3xl bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-8 sm:p-12">
+              <h3 className="text-center text-4xl font-black text-neo-light-text dark:text-neo-dark-text mb-6 font-neo uppercase">
+                About Me
+              </h3>
+
+              <p className="text-center text-3xl text-neo-light-text dark:text-neo-dark-text leading-relaxed font-neo">
+                I’m currently growing my skills in web development, mobile apps, and 3D design. Although I don’t have professional experience yet, I’m actively building projects, improving my craft, and looking for opportunities to apply what I’ve learned.
+                I’m also open to roles in IT support, administration, customer service, or other fields where I can contribute while continuing my journey in tech.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>

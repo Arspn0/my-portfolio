@@ -56,14 +56,15 @@ my-portfolio/
 │   ├── pages/
 │   │   ├── About.jsx
 │   │   ├── Contact.jsx
-│   │   ├── Home.jsx sections
+│   │   ├── Home.jsx
 │   │   ├── Projects.jsx
-│   │   └── ProjectDetail.jsx
+│   │   └── ProjectsDetail.jsx
 │   ├── assets/
 │   │   ├── profile/
-│   │   │   └── killua-profile.jpg
+│   │   │   ├── killua-profile-placeholder.jpg
+│   │   │   └── profile-picture.png
 │   │   ├── full-ss-website.png
-│   │   └── profile-title.png
+│   │   └── profile-title (1).png
 │   ├── components/
 │   │   ├── Footer.jsx
 │   │   ├── Navbar.jsx
@@ -83,6 +84,7 @@ my-portfolio/
 ├── README.md
 ├── eslint.config.js
 ├── index.html
+├── package-lock.json
 ├── package.json
 ├── postcss.config.js
 ├── tailwind.config.js

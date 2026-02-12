@@ -94,7 +94,7 @@ function Navbar() {
           {/* Logo - Top Left */}
           <Link 
             to="/"
-            className="bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border rounded-full px-6 py-3 shadow-neo"
+            className="bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border rounded-full px-6 py-3"
           >
             <span className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase tracking-tight">
               AS

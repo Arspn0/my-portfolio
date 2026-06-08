@@ -23,24 +23,22 @@ function Projects() {
   }
 
   return (
-    <div className="bg-neo-light-bg dark:bg-neo-dark-bg min-h-screen transition-colors duration-300 py-4">
+    <div className="bg-neo-light-bg dark:bg-neo-dark-bg min-h-screen transition-colors duration-300 py-4 overflow-x-hidden">
       
       {/* SECTION 1: TITLE & DESCRIPTION */}
-      <section className="pt-32 pb-16 px-4 sm:px-8 lg:px-16">
+      <section className="pt-20 sm:pt-32 pb-8 sm:pb-16 px-4 sm:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl">
             {/* Title */}
-            <div className="mb-8">
-              
-              <h1 className="text-6xl sm:text-7xl md:text-8xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-6">
+            <div className="mb-6 sm:mb-8">
+              <h1 className="text-4xl sm:text-7xl md:text-8xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-4 sm:mb-6 leading-tight">
                 MY WORK
               </h1>
-              
-              <div className="w-32 h-2 bg-neo-yellow dark:bg-neo-green mb-8"></div>
+              <div className="w-20 sm:w-32 h-2 bg-neo-yellow dark:bg-neo-green mb-6 sm:mb-8"></div>
             </div>
 
             {/* Description */}
-            <p className="text-xl text-neo-light-text dark:text-neo-dark-text font-neo leading-relaxed">
+            <p className="text-base sm:text-xl text-neo-light-text dark:text-neo-dark-text font-neo leading-relaxed opacity-90">
               A collection of projects showcasing my expertise in web development, mobile applications, 
               and creative design. Each project represents a unique challenge solved with innovative 
               solutions and cutting-edge technologies.
@@ -53,17 +51,17 @@ function Projects() {
       <section className="pb-20 px-4 sm:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto">
           
-          {/* Filter Buttons - Right Aligned */}
-          <div className="flex justify-end mb-12">
-            <div className="inline-flex gap-3 p-2">
+          {/* Filter Buttons - Scrollable on Mobile */}
+          <div className="flex justify-start sm:justify-end mb-8 sm:mb-12 overflow-x-auto pb-4 sm:pb-0 scrollbar-hide">
+            <div className="inline-flex gap-2 sm:gap-3 p-1">
               {filters.map((filter) => (
                 <button
                   key={filter}
                   onClick={() => setSelectedFilter(filter)}
-                  className={`px-6 py-3 font-black text-sm font-neo uppercase transition-all duration-200 border-2 ${
+                  className={`whitespace-nowrap px-4 py-2 sm:px-6 sm:py-3 font-black text-xs sm:text-sm font-neo uppercase transition-all duration-200 border-2 sm:border-2 ${
                     selectedFilter === filter
-                      ? 'rounded-2xl bg-neo-yellow dark:bg-neo-green text-neo-light-border dark:text-neo-dark-bg border-neo-light-border dark:border-neo-dark-border shadow-neo-sm'
-                      : 'rounded-2xl bg-transparent text-neo-light-text dark:text-neo-dark-text border-transparent hover:border-neo-light-border dark:hover:border-neo-dark-border'
+                      ? 'rounded-xl sm:rounded-2xl bg-neo-yellow dark:bg-neo-green text-neo-light-border dark:text-neo-dark-bg border-neo-light-border dark:border-neo-dark-border shadow-neo-sm'
+                      : 'rounded-xl sm:rounded-2xl bg-transparent text-neo-light-text dark:text-neo-dark-text border-transparent hover:border-neo-light-border dark:hover:border-neo-dark-border'
                   }`}
                 >
                   {filter}
@@ -72,31 +70,24 @@ function Projects() {
             </div>
           </div>
 
-          {/* Projects Grid - Staggered 2 Columns */}
-          <div className="grid md:grid-cols-2 gap-8 relative">
+          {/* Projects Grid */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-8 relative">
             {filteredProjects.map((project, index) => (
               <div
                 key={project.id}
                 onClick={() => handleProjectClick(project.slug)}
-                className={`
-                  rounded-3xl group cursor-pointer
-                  bg-neo-light-card dark:bg-neo-dark-card 
-                  border-4 border-neo-light-border dark:border-neo-dark-border 
-                  shadow-neo hover:shadow-neo-hover 
-                  hover:translate-x-2 hover:translate-y-2
-                  transition-all duration-300
-                  overflow-hidden
-                  animate-fade-in
-                  ${index % 2 === 1 ? 'md:mt-16' : ''}
-                  hover:z-10
+                className={`rounded-2xl sm:rounded-3xl group cursor-pointer bg-neo-light-card dark:bg-neo-dark-card border-2 sm:border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-1 hover:translate-y-1 sm:hover:translate-x-2 sm:hover:translate-y-2 transition-all duration-300 overflow-hidden animate-fade-in
+                  ${index % 2 === 1 ? 'mt-8 sm:mt-16' : ''}
+                  hover:z-10 relative flex flex-col h-full
                 `}
                 style={{ 
                   animationDelay: getAnimationDelay(index),
                   animationFillMode: 'both'
                 }}
               >
+
                 {/* Project Image */}
-                <div className="relative h-64 overflow-hidden border-b-4 border-neo-light-border dark:border-neo-dark-border">
+                <div className="relative h-32 sm:h-64 overflow-hidden border-b-2 sm:border-b-4 border-neo-light-border dark:border-neo-dark-border flex-shrink-0">
                   <img 
                     src={project.image} 
                     alt={project.title}
@@ -104,8 +95,8 @@ function Projects() {
                   />
                   
                   {/* Type Badge */}
-                  <div className="absolute top-4 right-4">
-                    <div className={`rounded-xl px-4 py-2 border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm font-black text-sm uppercase font-neo
+                  <div className="absolute top-2 right-2 sm:top-4 sm:right-4">
+                    <div className={`rounded-lg sm:rounded-xl px-2 py-1 sm:px-4 sm:py-2 border-2 sm:border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm font-black text-[8px] sm:text-sm uppercase font-neo
                       ${project.type === 'Website' ? 'bg-neo-cyan text-neo-light-border dark:text-neo-dark-bg' : ''}
                       ${project.type === 'Mobile' ? 'bg-neo-pink text-neo-light-border dark:text-neo-dark-bg' : ''}
                       ${project.type === 'Design' ? 'bg-neo-yellow text-neo-light-border dark:text-neo-dark-bg' : ''}
@@ -119,19 +110,19 @@ function Projects() {
                 </div>
 
                 {/* Project Info */}
-                <div className="p-6">
+                <div className="p-3 sm:p-6 flex flex-col flex-grow">
                   {/* Title */}
-                  <h3 className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-3 group-hover:text-neo-cyan dark:group-hover:text-neo-pink transition-colors duration-300">
+                  <h3 className="text-sm sm:text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-1 sm:mb-3 group-hover:text-neo-cyan dark:group-hover:text-neo-pink transition-colors duration-300 leading-tight">
                     {project.title}
                   </h3>
 
                   {/* Date */}
-                  <p className="text-neo-light-text dark:text-neo-dark-text opacity-70 font-neo font-bold mb-4">
+                  <p className="text-[10px] sm:text-base text-neo-light-text dark:text-neo-dark-text opacity-70 font-neo font-bold mb-2 sm:mb-4">
                     {project.month} {project.year}
                   </p>
 
                   {/* Short Description */}
-                  <p className="text-neo-light-text dark:text-neo-dark-text font-neo leading-relaxed">
+                  <p className="text-[10px] sm:text-base text-neo-light-text dark:text-neo-dark-text font-neo leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none opacity-90">
                     {project.shortDescription}
                   </p>
                 </div>
@@ -142,8 +133,8 @@ function Projects() {
           {/* Empty State */}
           {filteredProjects.length === 0 && (
             <div className="text-center py-20">
-              <div className="inline-block bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-12 shadow-neo">
-                <p className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
+              <div className="inline-block bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-8 sm:p-12 shadow-neo mx-4">
+                <p className="text-lg sm:text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
                   No Projects Found
                 </p>
               </div>
@@ -152,13 +143,16 @@ function Projects() {
         </div>
       </section>
 
-      {/* Dimming Overlay untuk Hover Effect */}
+      {/* Dimming Overlay CSS */}
       <style jsx>{`
-        .group:hover ~ .group {
-          opacity: 0.5;
-        }
-        .group:hover {
-          opacity: 1 !important;
+        /* Efek opacity hanya aktif di layar besar (hover support) agar tidak aneh di touchscreen */
+        @media (hover: hover) {
+          .group:hover ~ .group {
+            opacity: 0.5;
+          }
+          .group:hover {
+            opacity: 1 !important;
+          }
         }
       `}</style>
     </div>

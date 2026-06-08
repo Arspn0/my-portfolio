@@ -8,37 +8,39 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Neo Brutalism Colors - Dark Theme
+        // Neo Brutalism Colors - Dark Theme (soft deep slate, not pitch black)
         'neo-dark': {
-          bg: '#0a0a0a',
-          card: '#1a1a1a',
-          border: '#000000',
-          text: '#ffffff',
-          accent: '#00ff00',
+          bg: '#1e1e2e',
+          card: '#2a2a3e',
+          border: '#3d3d5c',
+          text: '#e8e8f0',
+          accent: '#a78bfa',
         },
-        // Neo Brutalism Colors - Light Theme
+        // Neo Brutalism Colors - Light Theme (pastel cream)
         'neo-light': {
-          bg: '#f5f5f5',
-          card: '#ffffff',
-          border: '#000000',
-          text: '#000000',
-          accent: '#ff3366',
+          bg: '#fdf6ec',
+          card: '#fff8f0',
+          border: '#3d2e1e',
+          text: '#2d1f0e',
+          accent: '#e05c8a',
         },
-        // Accent colors
-        'neo-yellow': '#ffff00',
-        'neo-cyan': '#00ffff',
-        'neo-pink': '#ff00ff',
-        'neo-green': '#00ff00',
-        'neo-orange': '#ff6600',
+        // Accent colors - pastel/muted variants
+        'neo-yellow': '#f9e04b',
+        'neo-cyan': '#67e8d4',
+        'neo-pink': '#f0a0c8',
+        'neo-green': '#7dd9a0',
+        'neo-orange': '#f4956a',
+        'neo-purple': '#c4a8f5',
+        'neo-lavender': '#b8c5f5',
       },
       fontFamily: {
         'neo': ['Space Grotesk', 'Inter', 'sans-serif'],
       },
       boxShadow: {
-        'neo': '4px 4px 0px 0px #000000',
-        'neo-hover': '0px 0px 0px 0px #000000',
-        'neo-sm': '2px 2px 0px 0px #000000',
-        'neo-sm-hover': '0px 0px 0px 0px #000000',
+        'neo': '4px 4px 0px 0px #3d2e1e',
+        'neo-hover': '0px 0px 0px 0px #3d2e1e',
+        'neo-sm': '2px 2px 0px 0px #3d2e1e',
+        'neo-sm-hover': '0px 0px 0px 0px #3d2e1e',
       },
       animation: {
         'marquee': 'marquee 30s linear infinite',

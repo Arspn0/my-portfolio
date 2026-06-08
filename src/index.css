@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100;
+    @apply bg-neo-light-bg text-neo-light-text dark:bg-neo-dark-bg dark:text-neo-dark-text;
   }
 }
 
@@ -23,12 +23,12 @@
   }
 
   .scrollbar-custom::-webkit-scrollbar-thumb {
-    background: #000000;
-    border: 2px solid #000000;
+    background: #3d2e1e;
+    border: 2px solid #3d2e1e;
   }
 
   .scrollbar-custom::-webkit-scrollbar-thumb:hover {
-    background: transparent;
+    background: #f9e04b;
   }
 }
 

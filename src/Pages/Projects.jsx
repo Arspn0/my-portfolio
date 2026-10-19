@@ -1,160 +1,107 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import projectsData from '../data/projectsData.json'
+import SectionHead from '../components/Sectionhead'
+
+const pad = (n) => String(n).padStart(2, '0')
+const filters = ['All', 'Website', 'Mobile', 'Design']
 
 function Projects() {
   const [selectedFilter, setSelectedFilter] = useState('All')
-  const navigate = useNavigate()
 
-  const filters = ['All', 'Website', 'Mobile', 'Design']
-
-  // Filter projects based on selected filter
-  const filteredProjects = selectedFilter === 'All' 
-    ? projectsData.projects 
-    : projectsData.projects.filter(p => p.type === selectedFilter)
-
-  // Staggered animation delay
-  const getAnimationDelay = (index) => {
-    return `${index * 0.1}s`
-  }
-
-  const handleProjectClick = (slug) => {
-    navigate(`/projects/${slug}`, { state: { filter: selectedFilter } })
-  }
+  const all = projectsData.projects
+  const countOf = (f) => (f === 'All' ? all.length : all.filter((p) => p.type === f).length)
+  const filteredProjects = selectedFilter === 'All' ? all : all.filter((p) => p.type === selectedFilter)
 
   return (
-    <div className="bg-neo-light-bg dark:bg-neo-dark-bg min-h-screen transition-colors duration-300 py-4 overflow-x-hidden">
-      
-      {/* SECTION 1: TITLE & DESCRIPTION */}
-      <section className="pt-20 sm:pt-32 pb-8 sm:pb-16 px-4 sm:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-3xl">
-            {/* Title */}
-            <div className="mb-6 sm:mb-8">
-              <h1 className="text-4xl sm:text-7xl md:text-8xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-4 sm:mb-6 leading-tight">
-                MY WORK
-              </h1>
-              <div className="w-20 sm:w-32 h-2 bg-neo-yellow dark:bg-neo-green mb-6 sm:mb-8"></div>
-            </div>
+    <div className="page ink min-h-screen overflow-x-hidden pt-12 transition-colors duration-300 md:pt-14">
+      <div className="mx-auto max-w-7xl border-x hair">
 
-            {/* Description */}
-            <p className="text-base sm:text-xl text-neo-light-text dark:text-neo-dark-text font-neo leading-relaxed opacity-90">
-              A collection of projects showcasing my expertise in web development, mobile applications, 
-              and creative design. Each project represents a unique challenge solved with innovative 
-              solutions and cutting-edge technologies.
+        {/* 01 INTRO */}
+        <section>
+          <SectionHead n={1} title="Projects" meta={`${all.length} total`} />
+          <div className="grid border-t hair md:grid-cols-[1fr_1fr]">
+            <h1 className="p-6 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:p-12 sm:text-7xl">
+              My work
+            </h1>
+            <p className="muted border-t hair p-6 leading-relaxed sm:p-12 sm:text-lg md:border-l md:border-t-0">
+              A collection of projects showcasing my expertise in web development, mobile
+              applications, and creative design. Each project represents a unique challenge solved
+              with innovative solutions and cutting-edge technologies.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* SECTION 2: FILTER & PROJECTS GRID */}
-      <section className="pb-20 px-4 sm:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          
-          {/* Filter Buttons - Scrollable on Mobile */}
-          <div className="flex justify-start sm:justify-end mb-8 sm:mb-12 overflow-x-auto pb-4 sm:pb-0 scrollbar-hide">
-            <div className="inline-flex gap-2 sm:gap-3 p-1">
-              {filters.map((filter) => (
+        {/* 02 GRID */}
+        <section>
+          <SectionHead n={2} title="Index" meta={`Showing ${filteredProjects.length}`} />
+
+          {/* Filter tabs */}
+          <div role="group" aria-label="Filter projects" className="flex overflow-x-auto border-t hair">
+            {filters.map((filter) => {
+              const on = selectedFilter === filter
+              return (
                 <button
                   key={filter}
                   onClick={() => setSelectedFilter(filter)}
-                  className={`whitespace-nowrap px-4 py-2 sm:px-6 sm:py-3 font-black text-xs sm:text-sm font-neo uppercase transition-all duration-200 border-2 sm:border-2 ${
-                    selectedFilter === filter
-                      ? 'rounded-xl sm:rounded-2xl bg-neo-yellow dark:bg-neo-green text-neo-light-border dark:text-neo-dark-bg border-neo-light-border dark:border-neo-dark-border shadow-neo-sm'
-                      : 'rounded-xl sm:rounded-2xl bg-transparent text-neo-light-text dark:text-neo-dark-text border-transparent hover:border-neo-light-border dark:hover:border-neo-dark-border'
+                  aria-pressed={on}
+                  className={`flex items-center gap-2 whitespace-nowrap border-r hair px-5 py-3 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors ${
+                    on ? 'tab-on' : 'muted hover:surface hover:ink'
                   }`}
                 >
                   {filter}
+                  <span className="opacity-60">{pad(countOf(filter))}</span>
                 </button>
+              )
+            })}
+          </div>
+
+          {filteredProjects.length > 0 ? (
+            <div
+              key={selectedFilter}
+              className="animate-fade-in -ml-px grid grid-cols-2 overflow-hidden border-t hair lg:grid-cols-3"
+            >
+              {filteredProjects.map((project, i) => (
+                <Link
+                  key={project.id}
+                  to={`/projects/${project.slug}`}
+                  state={{ filter: selectedFilter }}
+                  className="group flex flex-col border-b border-l hair transition-colors hover:surface"
+                >
+                  <div className="relative aspect-video overflow-hidden border-b hair">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <span className="label surface absolute left-0 top-0 border-b border-r hair px-2 py-1 sm:px-3">
+                      {project.type}
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col gap-2 p-3 sm:p-6">
+                    <div className="label flex justify-between">
+                      <span>{pad(i + 1)}</span>
+                      <span>{project.month} {project.year}</span>
+                    </div>
+                    <h3 className="font-display text-sm font-semibold leading-tight transition-colors group-hover:accent sm:text-2xl">
+                      {project.title}
+                    </h3>
+                    <p className="muted line-clamp-3 text-[11px] leading-snug sm:text-base sm:leading-relaxed">
+                      {project.shortDescription}
+                    </p>
+                  </div>
+                </Link>
               ))}
             </div>
-          </div>
-
-          {/* Projects Grid */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-8 relative">
-            {filteredProjects.map((project, index) => (
-              <div
-                key={project.id}
-                onClick={() => handleProjectClick(project.slug)}
-                className={`rounded-2xl sm:rounded-3xl group cursor-pointer bg-neo-light-card dark:bg-neo-dark-card border-2 sm:border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-1 hover:translate-y-1 sm:hover:translate-x-2 sm:hover:translate-y-2 transition-all duration-300 overflow-hidden animate-fade-in
-                  ${index % 2 === 1 ? 'mt-8 sm:mt-16' : ''}
-                  hover:z-10 relative flex flex-col h-full
-                `}
-                style={{ 
-                  animationDelay: getAnimationDelay(index),
-                  animationFillMode: 'both'
-                }}
-              >
-
-                {/* Project Image */}
-                <div className="relative h-32 sm:h-64 overflow-hidden border-b-2 sm:border-b-4 border-neo-light-border dark:border-neo-dark-border flex-shrink-0">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  
-                  {/* Type Badge */}
-                  <div className="absolute top-2 right-2 sm:top-4 sm:right-4">
-                    <div className={`rounded-lg sm:rounded-xl px-2 py-1 sm:px-4 sm:py-2 border-2 sm:border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm font-black text-[8px] sm:text-sm uppercase font-neo
-                      ${project.type === 'Website' ? 'bg-neo-cyan text-neo-light-border dark:text-neo-dark-bg' : ''}
-                      ${project.type === 'Mobile' ? 'bg-neo-pink text-neo-light-border dark:text-neo-dark-bg' : ''}
-                      ${project.type === 'Design' ? 'bg-neo-yellow text-neo-light-border dark:text-neo-dark-bg' : ''}
-                    `}>
-                      {project.type}
-                    </div>
-                  </div>
-
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-neo-light-bg/0 dark:bg-neo-dark-bg/0 group-hover:bg-neo-light-bg/30 dark:group-hover:bg-neo-dark-bg/30 transition-all duration-300"></div>
-                </div>
-
-                {/* Project Info */}
-                <div className="p-3 sm:p-6 flex flex-col flex-grow">
-                  {/* Title */}
-                  <h3 className="text-sm sm:text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-1 sm:mb-3 group-hover:text-neo-cyan dark:group-hover:text-neo-pink transition-colors duration-300 leading-tight">
-                    {project.title}
-                  </h3>
-
-                  {/* Date */}
-                  <p className="text-[10px] sm:text-base text-neo-light-text dark:text-neo-dark-text opacity-70 font-neo font-bold mb-2 sm:mb-4">
-                    {project.month} {project.year}
-                  </p>
-
-                  {/* Short Description */}
-                  <p className="text-[10px] sm:text-base text-neo-light-text dark:text-neo-dark-text font-neo leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none opacity-90">
-                    {project.shortDescription}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Empty State */}
-          {filteredProjects.length === 0 && (
-            <div className="text-center py-20">
-              <div className="inline-block bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-8 sm:p-12 shadow-neo mx-4">
-                <p className="text-lg sm:text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
-                  No Projects Found
-                </p>
-              </div>
+          ) : (
+            <div className="border-t hair p-10 text-center sm:p-20">
+              <p className="font-display text-xl font-semibold">No projects in this category yet.</p>
+              <button onClick={() => setSelectedFilter('All')} className="btn mt-6">Show all projects</button>
             </div>
           )}
-        </div>
-      </section>
+        </section>
 
-      {/* Dimming Overlay CSS */}
-      <style jsx>{`
-        /* Efek opacity hanya aktif di layar besar (hover support) agar tidak aneh di touchscreen */
-        @media (hover: hover) {
-          .group:hover ~ .group {
-            opacity: 0.5;
-          }
-          .group:hover {
-            opacity: 1 !important;
-          }
-        }
-      `}</style>
+      </div>
     </div>
   )
 }

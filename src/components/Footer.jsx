@@ -59,18 +59,17 @@ function Footer() {
                 {social.label}
               </a>
             ))}
+            {/* <button onClick={scrollToTop} className="btn !px-3 !py-2" aria-label="Scroll to top">
+              Top <ArrowUp size={14} />
+            </button> */}
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="label flex flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center sm:px-10">
+        <div className="label flex flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center sm:px-10 border-t hair">
           <span>© {currentYear} Aris. All rights reserved.</span>
           <span>Built with React & Tailwind</span>
-          <button onClick={scrollToTop} className="btn !px-3 !py-2" aria-label="Scroll to top">
-            Top <ArrowUp size={14} />
-          </button>
         </div>
-
       </div>
     </footer>
   )

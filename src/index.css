@@ -4,8 +4,51 @@
 
 @layer base {
   body {
-    @apply bg-neo-light-bg text-neo-light-text dark:bg-neo-dark-bg dark:text-neo-dark-text;
+    @apply bg-neo-light-bg text-neo-light-text dark:bg-neo-dark-bg dark:text-neo-dark-text font-neo;
   }
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .page   { @apply bg-neo-light-bg dark:bg-neo-dark-bg; }
+  .surface{ @apply bg-neo-light-card dark:bg-neo-dark-card; }
+  .hair   { @apply border-neo-light-border dark:border-neo-dark-border; }
+  .ink    { @apply text-neo-light-text dark:text-neo-dark-text; }
+  .muted  { @apply text-neo-light-muted dark:text-neo-dark-muted; }
+  .accent { @apply text-neo-light-accent dark:text-neo-dark-accent; }
+  .tab-on { @apply bg-neo-light-text text-neo-light-bg dark:bg-neo-dark-text dark:text-neo-dark-bg; }
+ 
+  /* label kecil bergaya referensi */
+  .label {
+    @apply font-mono text-[11px] uppercase tracking-[0.08em] text-neo-light-muted dark:text-neo-dark-muted;
+  }
+ 
+  .btn {
+    @apply inline-flex items-center gap-2 border px-5 py-3 font-mono text-xs uppercase tracking-widest transition-colors
+           border-neo-light-border text-neo-light-text hover:bg-neo-light-card
+           dark:border-neo-dark-border dark:text-neo-dark-text dark:hover:bg-neo-dark-card;
+  }
+  .btn-solid {
+    @apply inline-flex items-center gap-2 border px-5 py-3 font-mono text-xs uppercase tracking-widest transition-opacity hover:opacity-85
+           border-neo-light-text bg-neo-light-text text-neo-light-bg
+           dark:border-neo-dark-text dark:bg-neo-dark-text dark:text-neo-dark-bg;
+  }
+}
+ 
+/* fokus keyboard yang terlihat */
+:focus-visible { outline: 2px solid #B5532F; outline-offset: 2px; }
+.dark :focus-visible { outline-color: #D17A5A; }
+ 
+/* hormati preferensi reduced motion untuk marquee */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee, .animate-marquee-reverse { animation: none; }
+}
+
+@media (min-width: 768px) {
+  html { scrollbar-width: none; }
+  html::-webkit-scrollbar { display: none; }
 }
 
 @layer utilities {
@@ -14,34 +57,21 @@
     opacity: 0;
   }
 
-  .scrollbar-custom::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  .scrollbar-custom::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
+  .scrollbar-custom::-webkit-scrollbar { height: 8px; }
+  .scrollbar-custom::-webkit-scrollbar-track { background: transparent; }
   .scrollbar-custom::-webkit-scrollbar-thumb {
-    background: #3d2e1e;
-    border: 2px solid #3d2e1e;
+    background: #DDD8D0;
+    border-radius: 4px;
   }
-
-  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
-    background: #f9e04b;
-  }
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover { background: #B5532F; }
+  .dark .scrollbar-custom::-webkit-scrollbar-thumb { background: #272B33; }
+  .dark .scrollbar-custom::-webkit-scrollbar-thumb:hover { background: #D17A5A; }
 }
 
 /* Slide Up Animation */
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) rotate(-2deg);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotate(0deg);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {

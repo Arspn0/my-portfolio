@@ -1,337 +1,152 @@
 import React from 'react'
-import { Download, FileText, Lightbulb, Code, Rocket, CheckCircle, PenBox } from 'lucide-react'
+import { Download, Lightbulb, Code, Rocket, CheckCircle, PenBox } from 'lucide-react'
 import experienceData from '../data/experienceData.json'
 import ProfilePicture from '../assets/profile/profile-picture.png'
+import SectionHead from '../components/Sectionhead'
+
+const pad = (n) => String(n).padStart(2, '0')
+
+const techStack = [
+  'React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'MongoDB', 'PostgreSQL', 'Tailwind CSS',
+  'React Native', 'Flutter', 'Three.js', 'Blender', 'Figma', 'Git', 'Docker', 'AWS',
+]
+
+const workProcess = [
+  { id: 1, title: 'Discovery', icon: Lightbulb, description: 'Understanding your needs, goals, and target audience to create the perfect strategy' },
+  { id: 2, title: 'Design', icon: Code, description: 'Crafting beautiful and functional designs that align with your brand identity' },
+  { id: 3, title: 'Development', icon: Rocket, description: 'Building robust and scalable solutions using modern technologies and best practices' },
+  { id: 4, title: 'Delivery', icon: CheckCircle, description: 'Launching your product with ongoing support and maintenance for success' },
+  { id: 5, title: 'Revision', icon: PenBox, description: 'Revision the work for the best experience' },
+]
+
+function MarqueeRow({ items, className }) {
+  return (
+    <div className="overflow-hidden py-2">
+      <div className={`flex whitespace-nowrap ${className}`}>
+        {[...Array(2)].map((_, copy) => (
+          <div key={copy} className="flex items-center">
+            {items.map((tech) => (
+              <React.Fragment key={tech}>
+                <span className="mx-4 font-display text-lg font-semibold sm:mx-6 sm:text-3xl">{tech}</span>
+                <span className="accent" aria-hidden="true">/</span>
+              </React.Fragment>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 function About() {
-
-  // Tech Stack
-  const techStack = [
-    { name: 'React', icon: '⚛️' },
-    { name: 'Next.js', icon: '▲' },
-    { name: 'TypeScript', icon: '📘' },
-    { name: 'Node.js', icon: '🟢' },
-    { name: 'Python', icon: '🐍' },
-    { name: 'MongoDB', icon: '🍃' },
-    { name: 'PostgreSQL', icon: '🐘' },
-    { name: 'Tailwind CSS', icon: '💨' },
-    { name: 'React Native', icon: '📱' },
-    { name: 'Flutter', icon: '🎯' },
-    { name: 'Three.js', icon: '🎮' },
-    { name: 'Blender', icon: '🎨' },
-    { name: 'Figma', icon: '🎭' },
-    { name: 'Git', icon: '🔀' },
-    { name: 'Docker', icon: '🐳' },
-    { name: 'AWS', icon: '☁️' },
-  ]
-
-  // Work Process
-  const workProcess = [
-    {
-      id: 1,
-      title: 'Discovery',
-      icon: Lightbulb,
-      description: 'Understanding your needs, goals, and target audience to create the perfect strategy',
-      color: 'neo-yellow'
-    },
-    {
-      id: 2,
-      title: 'Design',
-      icon: Code,
-      description: 'Crafting beautiful and functional designs that align with your brand identity',
-      color: 'neo-cyan'
-    },
-    {
-      id: 3,
-      title: 'Development',
-      icon: Rocket,
-      description: 'Building robust and scalable solutions using modern technologies and best practices',
-      color: 'neo-pink'
-    },
-    {
-      id: 4,
-      title: 'Delivery',
-      icon: CheckCircle,
-      description: 'Launching your product with ongoing support and maintenance for success',
-      color: 'neo-green'
-    },
-    {
-      id: 5,
-      title: 'Revision',
-      icon: PenBox,
-      description: 'Revision the work for the best experience',
-      color: 'neo-cyan'
-    }
-  ]
-
   return (
-    <div className="bg-neo-light-bg dark:bg-neo-dark-bg min-h-screen py-10 sm:py-20 px-0 sm:px-4 transition-colors duration-300 overflow-x-hidden">
-      
-      {/* SECTION 1: PROFILE + INTRO */}
-      <section className="flex flex-col items-center px-6 sm:px-16 pt-10 sm:pt-20 pb-10 sm:pb-20">
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-10 sm:gap-20 items-center">
-            
-            {/* Left: Photo with Unique Frame */}
-            <div className="relative flex justify-center lg:justify-center order-1 lg:order-none">
-              <div className="relative inline-block w-48 sm:w-64 md:w-80 lg:w-[30rem] aspect-square">
-                {/* Main frame */}
-                <div className="rounded-3xl absolute inset-0 z-10 border-4 sm:border-6 border-neo-light-border dark:border-neo-dark-border bg-neo-light-card dark:bg-neo-dark-card p-2 sm:p-4">
-                  {/* Image follows frame */}
-                  <img 
-                    src={ProfilePicture}
-                    alt="Profile - Aris"
-                    className="rounded-2xl w-full h-full object-cover border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"
-                  />
-                </div>
+    <div className="page ink min-h-screen overflow-x-hidden pt-12 transition-colors duration-300 md:pt-14">
+      <div className="mx-auto max-w-7xl border-x hair">
 
-                {/* Corner Decor */}
-                <div className="rounded-ss-3xl absolute -top-2 -left-2 sm:-top-4 sm:-left-4 w-10 h-10 sm:w-16 sm:h-16 bg-neo-yellow dark:bg-neo-green border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"></div>
-                <div className="rounded-ee-3xl absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 w-12 h-12 sm:w-20 sm:h-20 bg-neo-cyan dark:bg-neo-pink border-2 sm:border-3 border-neo-light-border dark:border-neo-dark-border"></div>
-
-                {/* Side Lines */}
-                <div className="absolute top-1/4 -right-4 sm:-right-8 w-8 sm:w-14 h-1 sm:h-1.5 bg-neo-pink dark:bg-neo-yellow"></div>
-                <div className="absolute bottom-1/3 -left-4 sm:-left-8 w-6 sm:w-12 h-1 sm:h-1.5 bg-neo-green dark:bg-neo-cyan"></div>
-              </div>
+        {/* 01 PROFILE */}
+        <section>
+          <SectionHead n={1} title="About" />
+          <div className="grid border-t hair lg:grid-cols-[1fr_1.4fr]">
+            <div className="border-b hair lg:border-b-0 lg:border-r">
+              <img
+                src={ProfilePicture}
+                alt="Profile - Aris"
+                className="aspect-square h-full w-full object-cover"
+              />
             </div>
 
-            {/* Right: Text Content */}
-            <div className="space-y-4 text-center lg:text-left order-2 lg:order-none mt-8 lg:mt-0">
-              <div>
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-4 leading-tight">
-                  I'M ARIS SOPIAN
-                </h1>
-                <div className="w-20 sm:w-32 h-2 bg-neo-yellow dark:bg-neo-green mb-6 mx-auto lg:mx-0"></div>
-              </div>
-
-              {/* Description */}
-              <div className="space-y-4 px-2 sm:px-0">
-                <p className="text-lg sm:text-xl font-bold text-neo-light-text dark:text-neo-dark-text font-neo">
-                  Aspiring Full Stack Developer & Creative Problem Solver
-                </p>
-                <p className="text-base sm:text-lg text-neo-light-text dark:text-neo-dark-text opacity-80 font-neo leading-relaxed">
-                  I’m a passionate learner who enjoys turning ideas into interactive, user-focused digital products. I’m currently developing my skills in web development, mobile app development, and 3D design — combining creativity with logical problem-solving.
-                </p>
-                <p className="text-base sm:text-lg text-neo-light-text dark:text-neo-dark-text opacity-80 font-neo leading-relaxed hidden sm:block">
-                  Even though I’m still early in my journey, I love experimenting, building, and improving with every project. My goal is to create meaningful solutions that are functional, visually appealing, and impactful.
-                </p>
-              </div>
-
-              {/* Resume Button */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-                <a
-                  href="/resume.pdf"
-                  download
-                  className="rounded-full sm:rounded-full inline-flex items-center justify-center gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg shadow-neo hover:shadow-neo-hover hover:translate-x-1 hover:translate-y-1 sm:hover:translate-x-2 sm:hover:translate-y-2 transition-all duration-200 font-black text-base sm:text-lg uppercase"
-                >
-                  <Download size={20} strokeWidth={3} className="sm:w-6 sm:h-6" />
-                  Download CV
+            <div className="flex flex-col justify-center p-6 sm:p-12">
+              <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
+                I'm Aris Sopian
+              </h1>
+              <p className="mt-5 text-lg font-medium sm:text-xl">
+                Aspiring Full Stack Developer & Creative Problem Solver
+              </p>
+              <p className="muted mt-4 max-w-xl leading-relaxed sm:text-lg">
+                I'm a passionate learner who enjoys turning ideas into interactive, user-focused
+                digital products. I'm currently developing my skills in web development, mobile app
+                development, and 3D design, combining creativity with logical problem-solving.
+              </p>
+              <p className="muted mt-4 hidden max-w-xl leading-relaxed sm:block sm:text-lg">
+                Even though I'm still early in my journey, I love experimenting, building, and
+                improving with every project. My goal is to create meaningful solutions that are
+                functional, visually appealing, and impactful.
+              </p>
+              <div className="mt-8">
+                <a href="/resume.pdf" download className="btn-solid">
+                  <Download size={14} /> Download CV
                 </a>
-                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* SECTION 2: TECH STACK MARQUEE */}
-      <section className="py-10 sm:py-16 border-t-4 border-b-4 border-neo-light-border dark:border-neo-dark-border bg-neo-light-card dark:bg-neo-dark-card overflow-hidden">
-        <div className="mb-8 text-center px-4">
-          <div className="rounded-3xl inline-block bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-2 sm:px-8 sm:py-3 shadow-neo">
-            <h2 className="text-2xl sm:text-4xl font-black text-neo-light-bg dark:text-neo-dark-bg font-neo uppercase">
-              Tech Stack
-            </h2>
+        {/* 02 TECH STACK */}
+        <section>
+          <SectionHead n={2} title="Tech stack" meta={`${techStack.length} tools`} />
+          <div className="border-t hair py-4 sm:py-6">
+            <MarqueeRow items={techStack.slice(0, 8)} className="animate-marquee-reverse" />
+            <MarqueeRow items={techStack.slice(8)} className="animate-marquee" />
           </div>
-        </div>
+        </section>
 
-        {/* Marquee Row 1 */}
-        <div className="overflow-hidden py-2 sm:py-4 mb-2 sm:mb-4">
-          <div className="flex animate-marquee-reverse whitespace-nowrap">
-            {[...Array(2)].map((_, arrayIndex) => (
-              <div key={arrayIndex} className="flex items-center">
-                {techStack.slice(0, 8).map((tech, index) => (
-                  <div
-                    key={index}
-                    className="rounded-full mx-2 sm:mx-4 bg-neo-light-bg dark:bg-neo-dark-bg border-2 sm:border-4 border-neo-light-border dark:border-neo-dark-border px-4 py-2 sm:px-8 sm:py-4 flex items-center gap-2 sm:gap-4"
-                  >
-                    <span className="text-2xl sm:text-4xl">{tech.icon}</span>
-                    <span className="text-lg sm:text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
-                      {tech.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Marquee Row 2 */}
-        <div className="overflow-hidden py-2 sm:py-4">
-          <div className="flex animate-marquee whitespace-nowrap">
-            {[...Array(2)].map((_, arrayIndex) => (
-              <div key={arrayIndex} className="flex items-center">
-                {techStack.slice(8).map((tech, index) => (
-                  <div
-                    key={index}
-                    className="rounded-full mx-2 sm:mx-4 bg-neo-light-bg dark:bg-neo-dark-bg border-2 sm:border-4 border-neo-light-border dark:border-neo-dark-border px-4 py-2 sm:px-8 sm:py-4 flex items-center gap-2 sm:gap-4"
-                  >
-                    <span className="text-2xl sm:text-4xl">{tech.icon}</span>
-                    <span className="text-lg sm:text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
-                      {tech.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 3: WORK EXPERIENCE */}
-      <section className="py-10 sm:py-20 px-4 sm:px-8">
-        <div className="max-w-5xl mx-auto">
-          {/* Section Header */}
-          <div className="mb-10 sm:mb-16 text-center sm:text-left">
-            <div className="rounded-2xl sm:rounded-3xl inline-block bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-2 sm:px-8 sm:py-3 shadow-neo mb-4 sm:mb-6">
-              <h2 className="text-2xl sm:text-5xl font-black text-neo-light-border dark:text-neo-dark-bg font-neo uppercase">
-                My Experience
-              </h2>
-            </div>
-            <p className="text-lg sm:text-xl text-neo-light-text dark:text-neo-dark-text font-neo font-bold max-w-2xl mx-auto sm:mx-0">
+        {/* 03 EXPERIENCE */}
+        <section>
+          <SectionHead n={3} title="Experience" />
+          <div className="border-t hair p-6 sm:px-12 sm:py-10">
+            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">My experience</h2>
+            <p className="muted mt-3 max-w-2xl leading-relaxed">
               Building digital products and leading teams across various companies and projects
             </p>
           </div>
-
-          {/* Timeline */}
-          <div className="relative">
-            {/* Vertical Line */}
-            <div className="hidden sm:block absolute left-8 top-0 bottom-0 w-1 bg-neo-light-border dark:border-neo-dark-border"></div>
-
-            {/* Experience Items */}
-            <div className="space-y-8 sm:space-y-12">
-              {experienceData.experiences.slice().reverse().map((exp, index) => (
-                <div key={exp.id} className="relative pl-0 sm:pl-24">
-                  
-                  {/* Timeline Dot */}
-                  <div className="hidden sm:flex rounded-2xl absolute left-0 top-6 w-16 h-16 bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border items-center justify-center">
-                    <span className="text-2xl font-black text-neo-light-border dark:text-neo-dark-bg font-neo">
-                      {index + 1}
-                    </span>
-                  </div>
-
-                  {/* Content Card */}
-                  <div className="rounded-2xl sm:rounded-3xl bg-neo-light-card dark:bg-neo-dark-card border-2 sm:border-4 border-neo-light-border dark:border-neo-dark-border p-5 sm:p-8 shadow-neo hover:shadow-neo-hover hover:translate-x-1 hover:translate-y-1 sm:hover:translate-x-2 sm:hover:translate-y-2 transition-all duration-200">
-                    
-                    {/* Mobile Only Header */}
-                    <div className="flex sm:hidden justify-between items-center mb-4">
-                       <div className="rounded-lg bg-neo-cyan dark:bg-neo-pink border-2 border-neo-light-border dark:border-neo-dark-border w-8 h-8 flex items-center justify-center">
-                          <span className="font-black text-neo-light-border dark:text-neo-dark-bg">{index + 1}</span>
-                       </div>
-                       <div className="rounded-lg bg-neo-yellow dark:bg-neo-green border-2 border-neo-light-border dark:border-neo-dark-border px-3 py-1">
-                        <span className="text-xs font-black text-neo-light-border dark:text-neo-dark-bg font-neo uppercase">
-                          {exp.year}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Desktop Year Badge */}
-                    <div className="hidden sm:inline-block rounded-xl bg-neo-yellow dark:bg-neo-green border-2 border-neo-light-border dark:border-neo-dark-border px-4 py-1 mb-4">
-                      <span className="text-sm font-black text-neo-light-border dark:text-neo-dark-bg font-neo uppercase">
-                        {exp.year}
-                      </span>
-                    </div>
-
-                    {/* Position & Company */}
-                    <h3 className="text-xl sm:text-3xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-1 sm:mb-2">
-                      {exp.position}
-                    </h3>
-                    <p className="text-sm sm:text-xl font-bold text-neo-light-text dark:text-neo-dark-text opacity-70 font-neo mb-3 sm:mb-4">
-                      {exp.company} • {exp.duration}
-                    </p>
-
-                    {/* Description */}
-                    <p className="text-sm sm:text-base text-neo-light-text dark:text-neo-dark-text font-neo mb-4 leading-relaxed">
-                      {exp.description}
-                    </p>
-
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-1 sm:gap-2">
-                      {exp.technologies.map((tech, i) => (
-                        <span
-                          key={i}
-                          className="rounded-lg sm:rounded-xl px-2 py-1 sm:px-3 sm:py-1 bg-neo-light-bg dark:bg-neo-dark-bg border sm:border-2 border-neo-light-border dark:border-neo-dark-border text-neo-light-text dark:text-neo-dark-text text-[10px] sm:text-sm mt-1 sm:mt-2 font-neo font-bold uppercase"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+          {experienceData.experiences.slice().reverse().map((exp, index) => (
+            <article key={exp.id} className="grid border-t hair md:grid-cols-[220px_1fr]">
+              <div className="flex items-baseline gap-4 px-6 pt-6 sm:px-12 md:block md:border-r hair md:py-8">
+                <span className="label">{pad(index + 1)}</span>
+                <p className="accent font-mono text-sm md:mt-2">{exp.year}</p>
+              </div>
+              <div className="p-6 sm:p-8">
+                <h3 className="font-display text-xl font-semibold sm:text-2xl">{exp.position}</h3>
+                <p className="muted mt-1 text-sm sm:text-base">{exp.company} · {exp.duration}</p>
+                <p className="mt-4 max-w-2xl leading-relaxed">{exp.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {exp.technologies.map((tech, i) => (
+                    <span key={i} className="label border hair px-2 py-1">{tech}</span>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+              </div>
+            </article>
+          ))}
+        </section>
 
-      {/* SECTION 4: WORK PROCESS */}
-      <section className="py-10 sm:py-20 px-4 sm:px-8 border-t-4 border-neo-light-border dark:border-neo-dark-border bg-neo-light-card dark:bg-neo-dark-card overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className="mb-10 sm:mb-16 text-center">
-            <div className="rounded-2xl sm:rounded-3xl inline-block bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-2 sm:px-8 sm:py-3 shadow-neo mb-4 sm:mb-6">
-              <h2 className="text-2xl sm:text-5xl font-black text-neo-light-bg dark:text-neo-dark-bg font-neo uppercase">
-                How I Work
-              </h2>
-            </div>
-            <p className="text-lg sm:text-xl text-neo-light-text dark:text-neo-dark-text font-neo font-bold max-w-2xl mx-auto">
+        {/* 04 PROCESS */}
+        <section>
+          <SectionHead n={4} title="Process" />
+          <div className="border-t hair p-6 sm:px-12 sm:py-10">
+            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">How I work</h2>
+            <p className="muted mt-3 max-w-2xl leading-relaxed">
               My systematic approach to bringing your ideas to life
             </p>
           </div>
-
-          {/* Process Cards - Always Horizontal Scroll */}
-          <div className="relative">
-            {/* Scroll Container */}
-            <div className="overflow-x-auto overflow-y-hidden pb-6 -mx-4 px-4 scrollbar-custom">
-              <div className="flex gap-4 sm:gap-6 w-max">
-                {workProcess.map((process, index) => (
-                  <div
-                    key={process.id}
-                    // PERBAIKAN 6: Ukuran card sedikit dikecilkan di mobile (w-72)
-                    className="rounded-3xl flex-shrink-0 w-72 sm:w-80 bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border p-5 sm:p-6 shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 transition-all duration-200 group"
-                  >
-                    {/* Number Badge & Icon */}
-                    <div className="flex items-start justify-between mb-4 sm:mb-6">
-                      <div className={`rounded-2xl p-3 sm:p-4 bg-${process.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm group-hover:shadow-neo-sm-hover group-hover:translate-x-1 group-hover:translate-y-1 transition-all duration-200`}>
-                        <process.icon size={24} strokeWidth={3} className="text-neo-light-border dark:text-neo-dark-bg sm:w-8 sm:h-8" />
-                      </div>
-                      <div className="rounded-xl w-10 h-10 sm:w-12 sm:h-12 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border flex items-center justify-center">
-                        <span className="text-xl sm:text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo">
-                          {index + 1}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl sm:text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-2 sm:mb-4">
-                      {process.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-sm sm:text-base text-neo-light-text dark:text-neo-dark-text font-neo leading-relaxed min-h-[100px] sm:min-h-[120px]">
-                      {process.description}
-                    </p>
-
-                    {/* Decorative Line */}
-                    <div className={`mt-4 sm:mt-6 h-2 bg-${process.color} w-20`}></div>
-                  </div>
-                ))}
+          <div className="grid border-t hair sm:grid-cols-2 lg:grid-cols-5">
+            {workProcess.map((step, i) => (
+              <div key={step.id} className="border-b hair p-6 sm:border-r sm:even:border-r-0 lg:border-b-0 lg:even:border-r lg:last:border-r-0">
+                <div className="flex items-center justify-between">
+                  <span className="grid h-10 w-10 place-items-center border hair accent">
+                    <step.icon size={18} />
+                  </span>
+                  <span className="label">{pad(i + 1)}</span>
+                </div>
+                <h3 className="mt-6 font-display text-xl font-semibold">{step.title}</h3>
+                <p className="muted mt-2 text-sm leading-relaxed">{step.description}</p>
               </div>
-            </div>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
+      </div>
     </div>
-)
+  )
 }
 
 export default About

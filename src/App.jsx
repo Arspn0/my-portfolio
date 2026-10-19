@@ -3,12 +3,13 @@ import Navbar from './components/Navbar'
 import Home from './Pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
-import Contact from './pages/Contact'
+import Contact from './Pages/Contact'
 import Footer from './components/Footer'
 import PageTitle from './components/PageTitle'
-import ProjectDetail from './pages/ProjectsDetail'
+import ProjectsDetail from './Pages/ProjectsDetail'
 import ScrollToTop from './components/ScrollTop'
 import ScrollRuler from './components/ScrollRuler'
+import Cursor from './components/Cursor'
 
 import { ThemeProvider } from './context/ThemeContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -19,6 +20,7 @@ function App() {
       <Router>
         <div className="bg-light-bg dark:bg-dark-bg min-h-screen transition-colors duration-300">
           <Navbar />
+          <Cursor />
           <ScrollRuler />
           <PageTitle />
           <ScrollToTop />
@@ -26,7 +28,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:slug" element={<ProjectDetail />} />
+            <Route path="/projects/:slug" element={<ProjectsDetail />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
           <Footer />

@@ -68,6 +68,13 @@
   .dark .scrollbar-custom::-webkit-scrollbar-thumb:hover { background: #D17A5A; }
 }
 
+html.custom-cursor,
+html.custom-cursor * { cursor: none !important; }
+
+html.custom-cursor input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+html.custom-cursor textarea { cursor: text !important; }
+html.custom-cursor select { cursor: pointer !important; }
+
 /* Slide Up Animation */
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(24px); }

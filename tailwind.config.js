@@ -8,40 +8,44 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Neo Brutalism Colors - Dark Theme (soft deep slate, not pitch black)
-        'neo-dark': {
-          bg: '#1e1e2e',
-          card: '#2a2a3e',
-          border: '#3d3d5c',
-          text: '#e8e8f0',
-          accent: '#a78bfa',
-        },
-        // Neo Brutalism Colors - Light Theme (pastel cream)
-        'neo-light': {
-          bg: '#fdf6ec',
-          card: '#fff8f0',
-          border: '#3d2e1e',
-          text: '#2d1f0e',
-          accent: '#e05c8a',
-        },
-        // Accent colors - pastel/muted variants
-        'neo-yellow': '#f9e04b',
-        'neo-cyan': '#67e8d4',
-        'neo-pink': '#f0a0c8',
-        'neo-green': '#7dd9a0',
-        'neo-orange': '#f4956a',
-        'neo-purple': '#c4a8f5',
-        'neo-lavender': '#b8c5f5',
+      // Slate & clay - dark
+      'neo-dark': {
+        bg: '#101216',
+        card: '#181B21',
+        border: '#272B33',
+        text: '#ECEAE6',
+        muted: '#8B8F98',
+        accent: '#D17A5A',
       },
-      fontFamily: {
-        'neo': ['Space Grotesk', 'Inter', 'sans-serif'],
+      // Slate & clay - light
+      'neo-light': {
+        bg: '#F2EFEA',
+        card: '#FAF8F5',
+        border: '#DDD8D0',
+        text: '#15171C',
+        muted: '#666A73',
+        accent: '#B5532F',
       },
-      boxShadow: {
-        'neo': '4px 4px 0px 0px #3d2e1e',
-        'neo-hover': '0px 0px 0px 0px #3d2e1e',
-        'neo-sm': '2px 2px 0px 0px #3d2e1e',
-        'neo-sm-hover': '0px 0px 0px 0px #3d2e1e',
-      },
+      // Aksen pastel lama
+      'neo-yellow': '#D8B26E',
+      'neo-cyan': '#7FB5B0',
+      'neo-pink': '#D49AA0',
+      'neo-green': '#8DB596',
+      'neo-orange': '#D17A5A',
+      'neo-purple': '#A79BC9',
+      'neo-lavender': '#9FB0CC',
+    },
+    fontFamily: {
+      neo: ['"DM Sans"', 'sans-serif'],
+      display: ['Sora', 'sans-serif'],
+      mono: ['"JetBrains Mono"', 'monospace'],
+    },
+    boxShadow: {
+      'neo': '0 1px 2px rgb(0 0 0 / 0.08)',
+      'neo-hover': '0 0 0 0 transparent',
+      'neo-sm': '0 1px 2px rgb(0 0 0 / 0.06)',
+      'neo-sm-hover': '0 0 0 0 transparent',
+    },
       animation: {
         'marquee': 'marquee 30s linear infinite',
         'marquee-reverse': 'marquee-reverse 30s linear infinite',

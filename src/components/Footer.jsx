@@ -3,91 +3,74 @@ import { ArrowUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { socialMediaLinks } from '../data/SocialMediaData'
 
+const quickLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+  { name: 'Projects', path: '/projects' },
+  { name: 'Contact', path: '/contact' },
+]
+
 function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const quickLinks = [
-    { name: 'HOME', path: '/' },
-    { name: 'ABOUT', path: '/about' },
-    { name: 'PROJECTS', path: '/projects' },
-    { name: 'CONTACT', path: '/contact' }
-  ]
-
   const currentYear = new Date().getFullYear()
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
-    <footer className="relative bg-neo-light-card dark:bg-neo-dark-card border-t-4 border-neo-light-border dark:border-neo-dark-border">
-      
-      {/* Scroll to Top Button */}
-      <button
-        onClick={scrollToTop}
-        className="rounded-2xl absolute -top-8 left-1/2 transform -translate-x-1/2 p-4 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-border dark:text-neo-dark-bg transition-all duration-200"
-        aria-label="Scroll to top"
-      >
-        <ArrowUp size={24} strokeWidth={3} />
-      </button>
+    <footer className="page ink border-t hair pb-14 md:pb-0">
+      <div className="mx-auto max-w-7xl border-x hair">
 
-      {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
-        
-        {/* Top Section */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          
-          {/* Brand & Description */}
-          <div className="md:col-span-1">
-            <div className="mb-6">
-              <h3 className="text-4xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase mb-4">
-                ARIS
-              </h3>
-              <div className="w-20 h-2 bg-neo-yellow dark:bg-neo-green border-2 border-neo-light-border dark:border-neo-dark-border mb-4"></div>
-              <p className="text-neo-light-text dark:text-neo-dark-text font-neo font-bold leading-relaxed">
-                Full Stack Developer passionate about creating bold digital experiences.
-              </p>
+        <div className="grid md:grid-cols-[1.6fr_1fr_1fr]">
+          {/* Brand */}
+          <div className="p-6 sm:p-10">
+            <div className="flex items-center gap-3">
+              <span className="grid h-10 w-10 place-items-center border hair font-display font-bold">AS</span>
+              <span className="font-display text-2xl font-bold tracking-tight">Aris</span>
             </div>
-            
-            {/* Social Links */}
-            <div className="flex gap-3">
-              {socialMediaLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`rounded-xl p-3 bg-${social.color} border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo-sm hover:shadow-neo-sm-hover hover:translate-x-1 hover:translate-y-1 active:translate-x-2 active:translate-y-2 transition-all duration-200 cursor-pointer`}
-                  aria-label={social.label}
-                >
-                  <social.icon size={20} strokeWidth={3} className="text-neo-light-border dark:text-neo-dark-bg" />
-                </a>
-              ))}
-            </div>
+            <p className="muted mt-5 max-w-sm leading-relaxed">
+              Designing and building websites, mobile apps, and 3D concepts.
+            </p>
           </div>
 
-        </div>
+          {/* Pages */}
+          <nav aria-label="Footer" className="border-t hair md:border-l md:border-t-0">
+            <div className="label border-b hair px-6 py-3 sm:px-10">Pages</div>
+            {quickLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className="block border-b hair px-6 py-3 text-sm transition-colors hover:accent sm:px-10"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t-4 border-neo-light-border dark:border-neo-dark-border">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            
-            {/* Copyright */}
-            <div className="px-6 py-3">
-              <p className="text-neo-light-text dark:text-neo-dark-text text-sm font-bold font-neo uppercase">
-                © {currentYear} ARIS. ALL RIGHTS RESERVED.
-              </p>
-            </div>
-
-            {/* Made With */}
-            <div className="flex items-center gap-2">
-              <div className="px-6 py-3">
-                <p className="text-neo-light-text dark:text-neo-dark-text text-sm font-bold font-neo uppercase flex items-center gap-2">
-                  Made with 
-                  React & Tailwind
-                </p>
-              </div>
-            </div>
+          {/* Social */}
+          <div className="border-t hair md:border-l md:border-t-0">
+            <div className="label border-b hair px-6 py-3 sm:px-10">Social</div>
+            {socialMediaLinks.map((social, i) => (
+              <a
+                key={i}
+                href={social.href ?? social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 border-b hair px-6 py-3 text-sm transition-colors hover:accent sm:px-10"
+              >
+                <social.icon size={16} />
+                {social.label}
+              </a>
+            ))}
           </div>
         </div>
+
+        {/* Bottom bar */}
+        <div className="label flex flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center sm:px-10">
+          <span>© {currentYear} Aris. All rights reserved.</span>
+          <span>Built with React & Tailwind</span>
+          <button onClick={scrollToTop} className="btn !px-3 !py-2" aria-label="Scroll to top">
+            Top <ArrowUp size={14} />
+          </button>
+        </div>
+
       </div>
     </footer>
   )

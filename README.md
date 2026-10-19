@@ -17,7 +17,7 @@ This is my personal portfolio website showcasing my projects, skills, and experi
 
 ## Features
 
-- **Neo-Brutalism Design** - Bold, colorful, and unapologetically loud
+- **Blueprint-Brutalism Design** - Bold, colorful, and unapologetically loud
 - **Dark/Light Theme** - Toggle between themes with smooth transitions
 - **Responsive Layout** - Optimized for various screen sizes (work in progress)
 - **Custom Cursor** - Interactive cursor effects on project pages

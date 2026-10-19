@@ -1,252 +1,160 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate, useLocation, Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useParams, useLocation, Link } from 'react-router-dom'
 import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 import projectsData from '../data/projectsData.json'
+import SectionHead from '../components/Sectionhead'
 
-function ProjectDetail() {
+function Row({ label, children }) {
+  return (
+    <div className="grid border-t hair md:grid-cols-[220px_1fr]">
+      <div className="label px-6 pt-6 sm:px-12 md:border-r hair md:py-8">{label}</div>
+      <div className="p-6 sm:p-8">{children}</div>
+    </div>
+  )
+}
+
+function ProjectsDetail() {
   const { slug } = useParams()
-  const navigate = useNavigate()
   const location = useLocation()
-  const [project, setProject] = useState(null)
-  const [prevProject, setPrevProject] = useState(null)
-  const [nextProject, setNextProject] = useState(null)
-
-  // Get filter from navigation state or default to 'All'
   const currentFilter = location.state?.filter || 'All'
 
+  const all = projectsData.projects
+  const project = all.find((p) => p.slug === slug)
+
+  // Daftar mengikuti filter asal; jika proyek tidak ada di daftar itu (akses langsung), pakai semua
+  let list = currentFilter === 'All' ? all : all.filter((p) => p.type === currentFilter)
+  let index = list.findIndex((p) => p.slug === slug)
+  if (index === -1) {
+    list = all
+    index = all.findIndex((p) => p.slug === slug)
+  }
+  const prevProject = index > 0 ? list[index - 1] : null
+  const nextProject = index >= 0 && index < list.length - 1 ? list[index + 1] : null
+
   useEffect(() => {
-    // Find current project
-    const currentProject = projectsData.projects.find(p => p.slug === slug)
-    setProject(currentProject)
-
-    if (currentProject) {
-        // Filter projects based on current filter
-        const filteredProjects = currentFilter === 'All' 
-            ? projectsData.projects 
-            : projectsData.projects.filter(p => p.type === currentFilter)
-
-        // Find current index in filtered list
-        const currentIndex = filteredProjects.findIndex(p => p.slug === slug)
-
-        // Set previous and next projects
-        if (currentIndex > 0) {
-        setPrevProject(filteredProjects[currentIndex - 1])
-        } else {
-        setPrevProject(null)
-        }
-
-        if (currentIndex < filteredProjects.length - 1) {
-            setNextProject(filteredProjects[currentIndex + 1])
-        } else {
-            setNextProject(null)
-        }
-    }
-
-    // Scroll to top
     window.scrollTo(0, 0)
-  }, [slug, currentFilter])
+  }, [slug])
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-neo-light-bg dark:bg-neo-dark-bg flex items-center justify-center">
-        <div className="bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-12 shadow-neo">
-          <p className="text-2xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
-            Project Not Found
-          </p>
+      <div className="page ink flex min-h-screen items-center justify-center px-4">
+        <div className="text-center">
+          <p className="font-display text-2xl font-semibold">Project not found</p>
+          <Link to="/projects" className="btn mt-6">
+            <ArrowLeft size={14} /> Back to projects
+          </Link>
         </div>
       </div>
     )
   }
 
-  const handleNavigate = (projectSlug) => {
-    navigate(`/projects/${projectSlug}`, { state: { filter: currentFilter } })
-  }
-
   return (
-    <div className="bg-neo-light-bg dark:bg-neo-dark-bg min-h-screen transition-colors duration-300">
-      
-        {/* SECTION 1: BACK BUTTON & DATE */}
-        <section className="pt-28 pb-8 px-4 sm:px-8 lg:px-16 border-b-4 border-neo-light-border dark:border-neo-dark-border">
-        <div className="max-w-7xl mx-auto mt-5">
-            <div className="flex items-center justify-between">
-            {/* Back Button */}
-            <Link
-                to="/projects"
-                state={{ filter: currentFilter }}
-                className="rounded-3xl inline-flex items-center gap-3 px-6 py-3 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-text dark:text-neo-dark-text shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 active:translate-x-3 active:translate-y-3 transition-all duration-200 font-black text-lg uppercase"
-            >
-                <ArrowLeft size={24} strokeWidth={3} />
-                Back to Projects
-            </Link>
+    <div className="page ink min-h-screen overflow-x-hidden pt-12 transition-colors duration-300 md:pt-14">
+      <div className="mx-auto max-w-7xl border-x hair">
 
-            {/* Date */}
-            <div className="rounded-2xl bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-3 shadow-neo">
-                <span className="font-black text-neo-light-border dark:text-neo-dark-bg font-neo uppercase">
-                {project.month} {project.year}
-                </span>
-            </div>
-            </div>
+        <SectionHead n={1} title="Project" meta={`${project.month} ${project.year}`} />
+
+        {/* BACK */}
+        <div className="border-t hair p-4 sm:px-8">
+          <Link to="/projects" state={{ filter: currentFilter }} className="btn">
+            <ArrowLeft size={14} /> Back to projects
+          </Link>
         </div>
+
+        {/* TITLE + LIVE LINK */}
+        <section className="flex flex-col justify-between gap-8 border-t hair p-6 sm:p-12 lg:flex-row lg:items-end">
+          <div className="max-w-4xl">
+            <p className="label mb-4">{project.type} · {project.month} {project.year}</p>
+            <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-7xl">
+              {project.title}
+            </h1>
+          </div>
+          {project.liveLink && (
+            <a
+              href={project.liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-solid shrink-0 self-start lg:self-auto"
+            >
+              <ExternalLink size={14} /> Check it out
+            </a>
+          )}
         </section>
 
-        {/* SECTION 2: TITLE, DESCRIPTION & LINK */}
-        <section className="py-16 px-4 sm:px-8 lg:px-16">
-            <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-12">
-                    {/* Title */}
-                    <div className="max-w-4xl">
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase leading-none mb-6">
-                        {project.title}
-                        </h1>
-                        <div className="w-32 h-2 bg-neo-cyan dark:bg-neo-pink"></div>
-                    </div>
+        <Row label="Overview">
+          <p className="max-w-3xl leading-relaxed sm:text-lg">{project.fullDescription}</p>
+        </Row>
 
-                    {/* Check it Out Button */}
-                    <a
-                        href={project.liveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-3xl flex-shrink-0 inline-flex items-center gap-3 px-8 py-4 bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border text-neo-light-bg dark:text-neo-dark-bg shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 active:translate-x-3 active:translate-y-3 transition-all duration-200 font-black text-xl uppercase"
-                    >
-                        <ExternalLink size={24} strokeWidth={3} />
-                        Check it Out
-                    </a>
-                </div>
+        <Row label="Key features">
+          <ul className="max-w-3xl">
+            {project.features.map((feature, i) => (
+              <li key={i} className="flex gap-4 border-b hair py-3 first:pt-0 last:border-b-0 last:pb-0">
+                <span className="accent font-mono" aria-hidden="true">+</span>
+                <span className="leading-relaxed">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </Row>
 
-                {/* Full Description */}
-                <div className="max-w-4xl mb-16">
-                    <p className="text-xl text-neo-light-text dark:text-neo-dark-text font-neo leading-relaxed">
-                        {project.fullDescription}
-                    </p>
-                </div>
+        <Row label="Tech stack">
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((tech, i) => (
+              <span key={i} className="label border hair px-3 py-2">{tech}</span>
+            ))}
+          </div>
+        </Row>
 
-                {/* Features */}
-                <div className="mb-16">
-                    <div className="rounded-2xl inline-block bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-2 shadow-neo-sm mb-8">
-                        <h2 className="text-2xl font-black text-neo-light-border dark:text-neo-dark-bg font-neo uppercase">
-                        Key Features
-                        </h2>
-                    </div>
+        <Row label="Screenshots">
+          <div className="grid gap-4 md:grid-cols-2">
+            {project.screenshots.map((screenshot, i) => (
+              <img
+                key={i}
+                src={screenshot}
+                alt={`${project.title} screenshot ${i + 1}`}
+                className="h-auto w-full border hair object-cover"
+              />
+            ))}
+          </div>
+        </Row>
 
-                    <div className="rounded-3xl bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border p-8 max-w-4xl">
-                        <ul className="space-y-4">
-                            {project.features.map((feature, index) => (
-                                <li key={index} className="flex items-start gap-4">
-                                    <div className="rounded-xl flex-shrink-0 w-8 h-8 bg-neo-cyan dark:bg-neo-pink border-2 border-neo-light-border dark:border-neo-dark-border flex items-center justify-center mt-1">
-                                        <span className="text-sm font-black text-neo-light-border dark:text-neo-dark-bg font-neo">
-                                            {index + 1}
-                                        </span>
-                                    </div>
-                                    <p className="text-lg text-neo-light-text dark:text-neo-dark-text font-neo">
-                                        {feature}
-                                    </p>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
+        {/* PREVIOUS / NEXT */}
+        <nav aria-label="Project navigation" className="grid border-t hair sm:grid-cols-2">
+          {prevProject ? (
+            <Link
+              to={`/projects/${prevProject.slug}`}
+              state={{ filter: currentFilter }}
+              className="group flex items-center gap-4 border-b hair p-6 transition-colors hover:surface sm:border-b-0 sm:border-r sm:p-8"
+            >
+              <ChevronLeft size={20} className="muted shrink-0 group-hover:accent" />
+              <div>
+                <p className="label">Previous</p>
+                <p className="mt-1 font-display text-lg font-semibold sm:text-xl">{prevProject.title}</p>
+              </div>
+            </Link>
+          ) : (
+            <div className="hidden sm:block sm:border-r hair" />
+          )}
 
-                {/* Tech Stack */}
-                <div className="mb-16">
-                    <div className="rounded-2xl inline-block bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-2 shadow-neo-sm mb-8">
-                        <h2 className="text-2xl font-black text-neo-light-border dark:text-neo-dark-bg font-neo uppercase">
-                            Tech Stack
-                        </h2>
-                    </div>
+          {nextProject ? (
+            <Link
+              to={`/projects/${nextProject.slug}`}
+              state={{ filter: currentFilter }}
+              className="group flex items-center justify-end gap-4 p-6 text-right transition-colors hover:surface sm:p-8"
+            >
+              <div>
+                <p className="label">Next</p>
+                <p className="mt-1 font-display text-lg font-semibold sm:text-xl">{nextProject.title}</p>
+              </div>
+              <ChevronRight size={20} className="muted shrink-0 group-hover:accent" />
+            </Link>
+          ) : (
+            <div />
+          )}
+        </nav>
 
-                    <div className="flex flex-wrap gap-4">
-                        {project.tech.map((tech, index) => (
-                            <div
-                                key={index}
-                                className="rounded-full px-6 py-3 bg-neo-light-card dark:bg-neo-dark-card border-4 border-neo-light-border dark:border-neo-dark-border"
-                            >
-                                <span className="text-lg font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase">
-                                    {tech}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Screenshots */}
-                <div className="mb-16">
-                    <div className="rounded-2xl inline-block bg-neo-pink dark:bg-neo-cyan border-4 border-neo-light-border dark:border-neo-dark-border px-6 py-2 shadow-neo-sm mb-8">
-                        <h2 className="text-2xl font-black text-neo-light-bg dark:text-neo-dark-bg font-neo uppercase">
-                            Screenshots
-                        </h2>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-8">
-                        {project.screenshots.map((screenshot, index) => (
-                            <div
-                                key={index}
-                                className="rounded-3xl border-4 border-neo-light-border dark:border-neo-dark-border overflow-hidden group cursor-pointer"
-                            >
-                                <img 
-                                    src={screenshot} 
-                                    alt={`Screenshot ${index + 1}`}
-                                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        {/* NAVIGATION: PREVIOUS & NEXT */}
-        <section className="py-16 px-4 sm:px-8 lg:px-16 border-t-4 border-neo-light-border dark:border-neo-dark-border bg-neo-light-card dark:bg-neo-dark-card">
-            <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col sm:flex-row justify-between items-stretch gap-6">
-
-                    {/* Previous Project */}
-                    {prevProject ? (
-                        <button
-                            onClick={() => handleNavigate(prevProject.slug)}
-                            className="rounded-3xl flex-1 flex items-center gap-4 p-6 bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 active:translate-x-3 active:translate-y-3 transition-all duration-200 text-left group"
-                        >
-                            <div className="rounded-2xl p-3 bg-neo-yellow dark:bg-neo-green border-4 border-neo-light-border dark:border-neo-dark-border group-hover:shadow-neo-sm transition-all duration-200">
-                                <ChevronLeft size={32} strokeWidth={3} className="text-neo-light-border dark:text-neo-dark-bg" />
-                            </div>
-                            <div>
-                                <p className="text-sm font-bold text-neo-light-text dark:text-neo-dark-text opacity-70 font-neo uppercase mb-1">
-                                    Previous Project
-                                </p>
-                                <h3 className="text-xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase group-hover:text-neo-yellow dark:group-hover:text-neo-green transition-colors duration-200">
-                                    {prevProject.title}
-                                </h3>
-                            </div>
-                        </button>
-                    ) : (
-                        <div className="flex-1"></div>
-                    )}
-
-                    {/* Next Project */}
-                    {nextProject ? (
-                        <button
-                            onClick={() => handleNavigate(nextProject.slug)}
-                            className="rounded-3xl flex-1 flex items-center justify-end gap-4 p-6 bg-neo-light-bg dark:bg-neo-dark-bg border-4 border-neo-light-border dark:border-neo-dark-border shadow-neo hover:shadow-neo-hover hover:translate-x-2 hover:translate-y-2 active:translate-x-3 active:translate-y-3 transition-all duration-200 text-right group"
-                        >
-                            <div>
-                                <p className="text-sm font-bold text-neo-light-text dark:text-neo-dark-text opacity-70 font-neo uppercase mb-1">
-                                    Next Project
-                                </p>
-                                <h3 className="text-xl font-black text-neo-light-text dark:text-neo-dark-text font-neo uppercase group-hover:text-neo-cyan dark:group-hover:text-neo-pink transition-colors duration-200">
-                                    {nextProject.title}
-                                </h3>
-                            </div>
-                            <div className="rounded-2xl p-3 bg-neo-cyan dark:bg-neo-pink border-4 border-neo-light-border dark:border-neo-dark-border group-hover:shadow-neo-sm transition-all duration-200">
-                                <ChevronRight size={32} strokeWidth={3} className="text-neo-light-border dark:text-neo-dark-bg" />
-                            </div>
-                        </button>
-                    ) : (
-                        <div className="flex-1"></div>
-                    )}
-                </div>
-            </div>
-        </section>
+      </div>
     </div>
   )
 }
 
-export default ProjectDetail
+export default ProjectsDetail

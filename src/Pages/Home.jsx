@@ -3,6 +3,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import projectsData from '../data/projectsData.json'
 import { socialMediaLinks } from '../data/SocialMediaData'
+import SectionHead from '../components/Sectionhead'
 
 const specialities = [
   {
@@ -33,14 +34,14 @@ const techStack = [
 
 const pad = (n) => String(n).padStart(2, '0')
 
-function SectionHead({ n, title, meta }) {
-  return (
-    <div className="label flex items-center justify-between border-t hair px-4 py-3 sm:px-8">
-      <span>{pad(n)} / {title}</span>
-      {meta && <span className="hidden sm:inline">{meta}</span>}
-    </div>
-  )
-}
+// function SectionHead({ n, title, meta }) {
+//   return (
+//     <div className="label flex items-center justify-between border-t hair px-4 py-3 sm:px-8">
+//       <span>{pad(n)} / {title}</span>
+//       {meta && <span className="hidden sm:inline">{meta}</span>}
+//     </div>
+//   )
+// }
 
 function Home() {
   const [activeId, setActiveId] = useState('mobile')

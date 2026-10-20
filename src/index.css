@@ -36,6 +36,19 @@
            dark:border-neo-dark-text dark:bg-neo-dark-text dark:text-neo-dark-bg;
   }
 }
+
+.bleed-left { position: relative; }
+.bleed-left::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: -1px;
+  width: 100vw;
+  height: 1px;
+  background: #DDD8D0;
+  pointer-events: none;
+}
+.dark .bleed-left::before { background: #272B33; }
  
 /* fokus keyboard yang terlihat */
 :focus-visible { outline: 2px solid #B5532F; outline-offset: 2px; }
@@ -90,4 +103,32 @@ html.custom-cursor select { cursor: pointer !important; }
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Shutter tengah: area tema baru terbuka dari garis tengah */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) {
+  animation: shutter-open 800ms cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+@keyframes shutter-open {
+  from { clip-path: inset(50% 0 50% 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+/* Dua garis aksen: durasi dan easing sama dengan pembukaan */
+::view-transition-group(shutter-a),
+::view-transition-group(shutter-b) {
+  animation-duration: 800ms;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
+::view-transition-old(shutter-a),
+::view-transition-old(shutter-b) { display: none; }
+::view-transition-new(shutter-a),
+::view-transition-new(shutter-b) {
+  animation: none;
+  mix-blend-mode: normal;
 }

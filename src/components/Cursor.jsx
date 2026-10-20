@@ -35,6 +35,7 @@ function Cursor() {
 
     const frame = () => {
       s.raf = 0
+      if (s.el && !s.el.isConnected) apply(document.elementFromPoint(s.mx, s.my))
       let tx, ty, tw, th
       if (s.el) {
         const r = s.el.getBoundingClientRect()

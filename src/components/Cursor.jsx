@@ -74,7 +74,7 @@ function Cursor() {
         box.classList.toggle('ink', !el)
       }
       if (el) {
-        setLabel(el.dataset.cursor || (el.tagName === 'A' ? 'open' : 'press'))
+        setLabel(el.dataset.cursor || (el.tagName === 'A' ? 'click!' : 'press!'))
       } else {
         // koordinat halaman, ikut berubah saat scroll
         setLabel(`x:${Math.round(s.mx + window.scrollX)} y:${Math.round(s.my + window.scrollY)}`)

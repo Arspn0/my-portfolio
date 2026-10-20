@@ -3,6 +3,7 @@ import { ArrowUp } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import { brandStyle } from '../data/BrandColors'
+import FooterStats from './FooterStats'
 
 const quickLinks = [
   { name: 'Home', path: '/' },
@@ -70,12 +71,13 @@ function Footer() {
         )}
 
         {/* Bottom bar */}
-        <div className="label flex flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center sm:px-10">
+        <div className="border-t hair label flex flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center sm:px-10">
           <span>© {currentYear} Aris. All rights reserved.</span>
-          <span>Built with React & Tailwind</span>
+          <FooterStats />
           <button onClick={scrollToTop} className="btn !px-3 !py-2" aria-label="Scroll to top">
             Top <ArrowUp size={14} />
           </button>
+          <span>Built with React & Tailwind</span>
         </div>
 
       </div>

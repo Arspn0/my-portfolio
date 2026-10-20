@@ -1,8 +1,9 @@
 import React from 'react'
-import { Download, Lightbulb, Code, Rocket, CheckCircle, PenBox } from 'lucide-react'
+import { Lightbulb, Code, Rocket, CheckCircle, PenBox } from 'lucide-react'
 import experienceData from '../data/experienceData.json'
 import ProfilePicture from '../assets/profile/profile-picture.png'
 import SectionHead from '../components/Sectionhead'
+import CvButton from '../components/CvButton'
 
 const pad = (n) => String(n).padStart(2, '0')
 
@@ -73,9 +74,7 @@ function About() {
                 functional, visually appealing, and impactful.
               </p>
               <div className="mt-8">
-                <a href="/resume.pdf" download className="btn-solid">
-                  <Download size={14} /> Download CV
-                </a>
+                <CvButton />
               </div>
             </div>
           </div>

@@ -3,9 +3,9 @@ import { Send, Check, ChevronDown } from 'lucide-react'
 import ProfilePicture from '../assets/profile/profile-picture.png'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import { useTheme } from '../context/ThemeContext'
-import SectionHead from '../components/SectionHead'
+import SectionHead from '../components/Sectionhead'
 
-const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
+const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY
 const ENDPOINT = '/.netlify/functions/contact'
 
 const subjectOptions = [
@@ -20,85 +20,85 @@ const field =
   'surface ink w-full border hair px-4 py-3 text-base placeholder:text-neo-light-muted dark:placeholder:text-neo-dark-muted ' +
   'transition-colors focus:outline-none focus:border-neo-light-accent dark:focus:border-neo-dark-accent'
 
-// Hanya untuk menampilkan email di layar. Server yang memverifikasi token sebenarnya.
-function decodeJwt(token) {
-  const b64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')
-  const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0))
-  return JSON.parse(new TextDecoder().decode(bytes))
-}
-
 function Contact() {
   const { theme } = useTheme()
-  const [formData, setFormData] = useState({ fullName: '', subject: 'General Inquiry', message: '' })
-  const [user, setUser] = useState(null) // { credential, email, name }
-  const [gsiReady, setGsiReady] = useState(false)
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    subject: 'General Inquiry',
+    message: '',
+  })
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
   const [errorMsg, setErrorMsg] = useState('')
+  const [tsReady, setTsReady] = useState(false)
+  const [tsFailed, setTsFailed] = useState(false)
+  const [token, setToken] = useState('')
 
-  const btnRef = useRef(null)
+  const tsRef = useRef(null)
+  const widgetId = useRef(null)
   const hpRef = useRef(null)
   const startedAt = useRef(Date.now())
-  const handlerRef = useRef(null)
 
-  // muat Google Identity Services
+  // muat skrip Cloudflare Turnstile
   useEffect(() => {
-    if (window.google?.accounts?.id) {
-      setGsiReady(true)
+    if (window.turnstile) {
+      setTsReady(true)
       return
     }
     const s = document.createElement('script')
-    s.src = 'https://accounts.google.com/gsi/client'
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
     s.async = true
     s.defer = true
-    s.onload = () => setGsiReady(true)
+    s.onload = () => setTsReady(true)
+    s.onerror = () => setTsFailed(true)
     document.head.appendChild(s)
   }, [])
 
-  handlerRef.current = (resp) => {
-    try {
-      const p = decodeJwt(resp.credential)
-      setUser({ credential: resp.credential, email: p.email, name: p.name || '' })
-      setFormData((f) => ({ ...f, fullName: f.fullName || p.name || '' }))
-      setStatus('idle')
-      setErrorMsg('')
-    } catch {
-      setStatus('error')
-      setErrorMsg('Could not read the Google sign-in. Please try again.')
-    }
-  }
-
-  // gambar tombol "Continue with Google"; gambar ulang saat tema berganti
+  // pasang widget; dipasang ulang saat tema berganti agar warnanya cocok.
+  // appearance "interaction-only": widget tersembunyi kecuali perlu interaksi.
   useEffect(() => {
-    if (!gsiReady || user || !CLIENT_ID || !btnRef.current) return
-    window.google.accounts.id.initialize({
-      client_id: CLIENT_ID,
-      callback: (r) => handlerRef.current(r),
+    if (!tsReady || !SITE_KEY || !tsRef.current) return
+    const id = window.turnstile.render(tsRef.current, {
+      sitekey: SITE_KEY,
+      theme: theme === 'dark' ? 'dark' : 'light',
+      appearance: 'interaction-only',
+      callback: (t) => {
+        setToken(t)
+        setTsFailed(false)
+      },
+      'expired-callback': () => setToken(''),
+      'error-callback': () => {
+        setToken('')
+        setTsFailed(true)
+      },
     })
-    window.google.accounts.id.renderButton(btnRef.current, {
-      type: 'standard',
-      theme: theme === 'dark' ? 'filled_black' : 'outline',
-      size: 'large',
-      text: 'continue_with',
-      shape: 'rectangular',
-    })
-  }, [gsiReady, user, theme])
+    widgetId.current = id
+    return () => {
+      try {
+        window.turnstile.remove(id)
+      } catch {}
+      setToken('')
+    }
+  }, [tsReady, theme])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
     if (status === 'sent' || status === 'error') setStatus('idle')
   }
 
-  const signOut = () => {
-    window.google?.accounts?.id?.disableAutoSelect()
-    setUser(null)
-    setStatus('idle')
+  const resetCaptcha = () => {
+    // token hanya berlaku sekali: minta token baru setelah setiap percobaan kirim
+    setToken('')
+    try {
+      window.turnstile.reset(widgetId.current)
+    } catch {}
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!user) {
+    if (!token) {
       setStatus('error')
-      setErrorMsg('Please verify your email with Google first.')
+      setErrorMsg('Still verifying your browser. Please wait a moment and try again.')
       return
     }
     setStatus('sending')
@@ -108,10 +108,11 @@ function Contact() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          credential: user.credential,
           fullName: formData.fullName,
+          email: formData.email,
           subject: formData.subject,
           message: formData.message,
+          turnstileToken: token,
           website: hpRef.current?.value || '', // honeypot
           t: Date.now() - startedAt.current,   // lama pengisian form (ms)
         }),
@@ -121,18 +122,20 @@ function Contact() {
         setStatus('sent')
         setFormData((f) => ({ ...f, message: '' }))
         startedAt.current = Date.now()
-        return
+      } else {
+        setStatus('error')
+        setErrorMsg(data.message || 'Something went wrong. Please try again.')
       }
-      if (res.status === 401) setUser(null) // token kedaluwarsa: minta masuk ulang
-      setStatus('error')
-      setErrorMsg(data.message || 'Something went wrong. Please try again.')
     } catch {
       setStatus('error')
       setErrorMsg('Network error. Please check your connection and try again.')
+    } finally {
+      resetCaptcha()
     }
   }
 
   const sending = status === 'sending'
+  const verifying = !token && !tsFailed && !!SITE_KEY
 
   return (
     <div className="page ink min-h-screen overflow-x-hidden pt-12 transition-colors duration-300 md:pt-14">
@@ -151,47 +154,40 @@ function Contact() {
             </p>
 
             <form onSubmit={handleSubmit} className="relative mt-10 space-y-5">
-              {/* Email: diverifikasi lewat akun Google */}
-              <div>
-                <span className="label mb-2 block">Email</span>
-                {user ? (
-                  <div className="surface flex items-center justify-between gap-3 border hair px-4 py-3">
-                    <span className="flex min-w-0 items-center gap-2">
-                      <Check size={16} className="accent shrink-0" />
-                      <span className="truncate">{user.email}</span>
-                    </span>
-                    <button type="button" onClick={signOut} className="label shrink-0 transition-colors hover:accent">
-                      Change
-                    </button>
-                  </div>
-                ) : CLIENT_ID ? (
-                  <div>
-                    <div ref={btnRef} className="min-h-[44px]" />
-                    <p className="muted mt-2 text-sm leading-relaxed">
-                      Continue with Google so I know your email is real. It's only used to reply to you.
-                    </p>
-                  </div>
-                ) : (
-                  <p className="accent text-sm">Google sign-in is not configured yet.</p>
-                )}
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="fullName" className="label mb-2 block">Full name</label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    autoComplete="name"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    minLength={2}
+                    maxLength={80}
+                    className={field}
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="label mb-2 block">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autoComplete="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    maxLength={254}
+                    className={field}
+                    placeholder="your@email.com"
+                  />
+                </div>
               </div>
-
-              <div>
-                <label htmlFor="fullName" className="label mb-2 block">Full name</label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  autoComplete="name"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  required
-                  minLength={2}
-                  maxLength={80}
-                  className={field}
-                  placeholder="Your name"
-                />
-              </div>
+              <p className="muted -mt-2 text-sm">Double-check your email so I can reply.</p>
 
               <div>
                 <label htmlFor="subject" className="label mb-2 block">Subject</label>
@@ -237,10 +233,13 @@ function Contact() {
                 </label>
               </div>
 
+              {/* Turnstile (hampir selalu tidak terlihat) */}
+              <div ref={tsRef} />
+
               <div className="flex flex-wrap items-center gap-4">
                 <button
                   type="submit"
-                  disabled={sending || !user}
+                  disabled={sending || !token}
                   className="btn-solid disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {sending ? (
@@ -255,11 +254,21 @@ function Contact() {
                   )}
                 </button>
 
-                <p role="status" aria-live="polite" className="accent text-sm">
-                  {status === 'sent' && "Thank you! I'll get back to you soon."}
+                <p role="status" aria-live="polite" className="muted text-sm">
+                  {status === 'sent' && <span className="accent">Thank you! I'll get back to you soon.</span>}
+                  {status !== 'sent' && verifying && 'Checking your browser…'}
                 </p>
               </div>
 
+              {!SITE_KEY && (
+                <p className="accent text-sm">The contact form is not configured yet.</p>
+              )}
+              {tsFailed && (
+                <p role="alert" className="border hair px-4 py-3 text-sm leading-relaxed">
+                  <span className="accent">Error · </span>
+                  Browser verification failed to load. Please refresh the page or disable extensions that block scripts.
+                </p>
+              )}
               {status === 'error' && errorMsg && (
                 <p role="alert" className="border hair px-4 py-3 text-sm leading-relaxed">
                   <span className="accent">Error · </span>{errorMsg}

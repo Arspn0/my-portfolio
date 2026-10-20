@@ -5,24 +5,29 @@ import projectsData from '../data/projectsData.json'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import SectionHead from '../components/Sectionhead'
 
+import SrcP1 from '../assets/SrcP1.jfif'
+import SrcP2 from '../assets/SrcP2.jfif'
+import SrcP3 from '../assets/SrcP3.jfif'
+
+
 const specialities = [
   {
     id: 'mobile',
     title: 'Mobile App',
     description: 'Creating smooth and intuitive mobile experiences with React Native and Flutter',
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80',
+    image: SrcP1,
   },
   {
     id: 'website',
     title: 'Website',
     description: 'Building modern, responsive websites with cutting-edge technologies',
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80',
+    image: SrcP2,
   },
   {
     id: '3d',
     title: '3D Design',
     description: 'Crafting stunning 3D visuals and interactive experiences',
-    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=80',
+    image: SrcP3,
   },
 ]
 

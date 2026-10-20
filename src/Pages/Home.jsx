@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import projectsData from '../data/projectsData.json'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import SectionHead from '../components/Sectionhead'
-
+import { brandStyle } from '../data/BrandColors'
 import SrcP1 from '../assets/SrcP1.jfif'
 import SrcP2 from '../assets/SrcP2.jfif'
 import SrcP3 from '../assets/SrcP3.jfif'
@@ -90,9 +90,10 @@ function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="grid h-11 w-11 place-items-center border hair transition-colors hover:accent"
+                      style={brandStyle(social)}
+                      className="brand-hover grid h-11 w-11 place-items-center border hair transition-colors"
                     >
-                      <social.icon size={18} />
+                      <social.icon size={18}/>
                     </a>
                   ))}
                 </div>

@@ -1,5 +1,13 @@
 import { getStore } from '@netlify/blobs'
 import { createHash } from 'node:crypto'
+import { resolveMx, resolve4 } from 'node:dns/promises'
+
+for (const p of ['.env', '../../../.env']) {
+  try {
+    process.loadEnvFile?.(p)
+    break
+  } catch {}
+}
 
 const SUBJECTS = [
   'General Inquiry',
@@ -8,16 +16,22 @@ const SUBJECTS = [
   'Freelance Work',
   'Just Saying Hi',
 ]
+const SENDER_NAME = 'Client Message'
+const SUBJECT_TAG = 'Portfolio Web Message'
 const MIN_FILL_MS = 3000 // form yang terisi lebih cepat dari ini dianggap bot
-const DAY = 24 * 60 * 60 * 1000
+const MIN = 60 * 1000
+const HOUR = 60 * MIN
+const DAY = 24 * HOUR
 
-// batas kirim (semuanya dicek sebelum email dikirim)
-const rules = ({ sub, ip }) => [
-  { key: `acct:${sub}:10m`, windowMs: 10 * 60 * 1000, max: 1 }, // 1 pesan / 10 menit / akun Google
-  { key: `acct:${sub}:day`, windowMs: DAY, max: 3 },            // 3 pesan / hari / akun Google
-  { key: `ip:${sha(ip)}:hour`, windowMs: 60 * 60 * 1000, max: 5 }, // 5 pesan / jam / IP
-  { key: `global:${new Date().toISOString().slice(0, 10)}`, windowMs: DAY, max: 50 }, // rem darurat harian
-]
+const EMAIL_RE = /^[^\s@<>(),;:"\[\]\\]+@[^\s@<>(),;:"\[\]\\]+\.[^\s@<>(),;:"\[\]\\]{2,}$/
+
+// Daftar sebagian domain email sekali pakai. Tambahkan sendiri bila perlu.
+const DISPOSABLE = new Set([
+  'mailinator.com', 'guerrillamail.com', 'guerrillamail.net', 'sharklasers.com', '10minutemail.com',
+  'tempmail.com', 'temp-mail.org', 'yopmail.com', 'trashmail.com', 'getnada.com', 'dispostable.com',
+  'maildrop.cc', 'throwawaymail.com', 'fakeinbox.com', 'mintemail.com', 'mohmal.com',
+  'emailondeck.com', 'tempail.com', 'burnermail.io', 'spam4.me', 'moakt.com', 'tmpmail.org',
+])
 
 const sha = (s) => createHash('sha256').update(String(s)).digest('hex').slice(0, 32)
 const oneLine = (s) => String(s ?? '').replace(/[\u0000-\u001F\u007F]+/g, ' ').replace(/\s+/g, ' ').trim()
@@ -30,18 +44,42 @@ const json = (status, body) =>
     headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
   })
 
-// Verifikasi ID token Google: hanya akun Google asli dengan email terverifikasi yang lolos
-async function verifyGoogleToken(credential) {
-  const res = await fetch(
-    `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(credential)}`
-  )
-  if (!res.ok) return null
-  const t = await res.json()
-  const issOk = t.iss === 'accounts.google.com' || t.iss === 'https://accounts.google.com'
-  const verified = t.email_verified === true || t.email_verified === 'true'
-  if (t.aud !== process.env.GOOGLE_CLIENT_ID || !issOk || !verified || !t.email || !t.sub) return null
-  if (Number(t.exp) * 1000 < Date.now()) return null
-  return { email: String(t.email).toLowerCase(), sub: String(t.sub), name: t.name || '' }
+// kunci pembatasan: buang +tag dan titik Gmail agar tidak bisa dihindari dengan trik alamat
+function normalizeEmail(email) {
+  const [local, domain] = email.split('@')
+  const isGmail = domain === 'gmail.com' || domain === 'googlemail.com'
+  let l = local.split('+')[0]
+  if (isGmail) l = l.replace(/\./g, '')
+  return `${l}@${isGmail ? 'gmail.com' : domain}`
+}
+
+const withTimeout = (p, ms) =>
+  Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms))])
+
+// domain email harus bisa menerima surat (MX, atau A sebagai cadangan)
+async function canReceiveMail(domain) {
+  try {
+    const mx = await withTimeout(resolveMx(domain), 3000)
+    if (mx.length) return true
+  } catch {}
+  try {
+    const a = await withTimeout(resolve4(domain), 3000)
+    return a.length > 0
+  } catch {
+    return false
+  }
+}
+
+async function verifyTurnstile(token, ip) {
+  const form = new URLSearchParams({ secret: process.env.TURNSTILE_SECRET_KEY, response: token })
+  if (ip && ip !== 'unknown') form.set('remoteip', ip)
+  const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    body: form,
+  })
+  if (!res.ok) return false
+  const data = await res.json()
+  return data.success === true
 }
 
 async function checkLimits(store, list, now) {
@@ -68,11 +106,12 @@ export default async (req, context) => {
   const origin = req.headers.get('origin')
   if (allowed.length && (!origin || !allowed.includes(origin))) return json(403, { error: 'forbidden' })
 
-  const { GOOGLE_CLIENT_ID, RESEND_API_KEY, CONTACT_TO_EMAIL } = process.env
-  if (!GOOGLE_CLIENT_ID || !RESEND_API_KEY || !CONTACT_TO_EMAIL) {
-    console.error('contact: environment variables belum lengkap')
+  const missing = ['TURNSTILE_SECRET_KEY', 'RESEND_API_KEY', 'CONTACT_TO_EMAIL'].filter((k) => !process.env[k])
+  if (missing.length) {
+    console.error('contact: variabel belum terisi:', missing.join(', '))
     return json(500, { error: 'server_misconfigured', message: 'The contact form is not available right now.' })
   }
+  const { RESEND_API_KEY, CONTACT_TO_EMAIL } = process.env
 
   const raw = await req.text()
   if (raw.length > 10_000) return json(413, { error: 'too_large', message: 'Message is too large.' })
@@ -91,31 +130,63 @@ export default async (req, context) => {
   }
 
   const name = oneLine(body.fullName)
+  const email = String(body.email ?? '').trim().toLowerCase()
   const subject = String(body.subject ?? '')
   const message = multiLine(body.message)
+
   if (name.length < 2 || name.length > 80) {
     return json(400, { error: 'invalid_name', message: 'Please enter your name (2 to 80 characters).' })
+  }
+  if (email.length > 254 || !EMAIL_RE.test(email)) {
+    return json(400, { error: 'invalid_email', message: 'Please enter a valid email address.' })
+  }
+  const domain = email.split('@')[1]
+  if (DISPOSABLE.has(domain)) {
+    return json(400, { error: 'disposable_email', message: 'Please use a permanent email address so I can reply.' })
   }
   if (!SUBJECTS.includes(subject)) return json(400, { error: 'invalid_subject', message: 'Invalid subject.' })
   if (message.length < 10 || message.length > 2000) {
     return json(400, { error: 'invalid_message', message: 'Message must be 10 to 2000 characters.' })
   }
-  if (typeof body.credential !== 'string' || body.credential.length > 4000) {
-    return json(401, { error: 'unverified', message: 'Please verify your email with Google first.' })
+
+  const ip = context.ip || req.headers.get('x-nf-client-connection-ip') || 'unknown'
+
+  // Turnstile: pastikan pengirim bukan bot
+  if (typeof body.turnstileToken !== 'string' || !body.turnstileToken || body.turnstileToken.length > 4000) {
+    return json(403, { error: 'captcha_missing', message: 'Verification is missing. Please refresh the page and try again.' })
+  }
+  let human = false
+  try {
+    human = await verifyTurnstile(body.turnstileToken, ip)
+  } catch (err) {
+    console.error('contact: Turnstile tidak dapat dihubungi', err)
+    return json(502, { error: 'captcha_unavailable', message: 'Verification service is unavailable. Please try again later.' })
+  }
+  if (!human) {
+    return json(403, { error: 'captcha_failed', message: 'Verification failed. Please try again.' })
   }
 
-  const user = await verifyGoogleToken(body.credential)
-  if (!user) {
-    return json(401, { error: 'unverified', message: 'Google verification failed or expired. Please sign in again.' })
+  if (!(await canReceiveMail(domain))) {
+    return json(400, { error: 'invalid_email', message: 'That email domain cannot receive mail. Please check for typos.' })
   }
 
   const store = getStore('contact-guard')
   const now = Date.now()
-  const ip = context.ip || req.headers.get('x-nf-client-connection-ip') || 'unknown'
+  const nEmail = normalizeEmail(email)
   let recs = []
 
   try {
-    const limit = await checkLimits(store, rules({ sub: user.sub, ip }), now)
+    const limit = await checkLimits(
+      store,
+      [
+        { key: `email:${sha(nEmail)}:10m`, windowMs: 10 * MIN, max: 1 }, // 1 pesan / 10 menit / email
+        { key: `email:${sha(nEmail)}:day`, windowMs: DAY, max: 3 },      // 3 pesan / hari / email
+        { key: `ip:${sha(ip)}:10m`, windowMs: 10 * MIN, max: 2 },        // 2 pesan / 10 menit / IP
+        { key: `ip:${sha(ip)}:hour`, windowMs: HOUR, max: 5 },           // 5 pesan / jam / IP
+        { key: `global:${new Date().toISOString().slice(0, 10)}`, windowMs: DAY, max: 50 }, // rem darurat harian
+      ],
+      now
+    )
     if (!limit.ok) {
       const mins = Math.max(1, Math.ceil(limit.retryAfter / 60))
       return json(429, {
@@ -126,7 +197,7 @@ export default async (req, context) => {
     }
     recs = limit.recs
 
-    const dupKey = `dup:${sha(`${user.sub}|${message.toLowerCase().replace(/\s+/g, ' ')}`)}`
+    const dupKey = `dup:${sha(`${nEmail}|${message.toLowerCase().replace(/\s+/g, ' ')}`)}`
     const prev = await store.get(dupKey, { type: 'json' })
     if (prev && now - prev.t < DAY) {
       return json(409, { error: 'duplicate', message: 'You already sent this exact message.' })
@@ -137,7 +208,7 @@ export default async (req, context) => {
     // email teks biasa saja (tanpa HTML) agar aman dari injeksi
     const text = [
       `Name: ${name}`,
-      `Email (verified by Google): ${user.email}`,
+      `Email (not verified): ${email}`,
       `Subject: ${subject}`,
       '',
       message,
@@ -147,10 +218,10 @@ export default async (req, context) => {
       method: 'POST',
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: `Portfolio Contact <${process.env.CONTACT_FROM || 'onboarding@resend.dev'}>`,
+        from: `${SENDER_NAME} <${process.env.CONTACT_FROM || 'onboarding@resend.dev'}>`,
         to: [CONTACT_TO_EMAIL],
-        reply_to: user.email,
-        subject: `[Portfolio] ${subject}: ${name}`,
+        reply_to: email, // tombol Reply di Gmail langsung mengarah ke pengunjung
+        subject: `[${SUBJECT_TAG}] ${subject}: ${name}`,
         text,
       }),
     })

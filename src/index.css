@@ -37,6 +37,11 @@
   }
 }
 
+.brand { color: var(--brand, currentColor); }
+.dark .brand { color: var(--brand-dark, currentColor); }
+.brand-hover:hover { color: var(--brand, currentColor); }
+.dark .brand-hover:hover { color: var(--brand-dark, currentColor); }
+
 .bleed-left { position: relative; }
 .bleed-left::before {
   content: '';

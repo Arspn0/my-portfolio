@@ -7,8 +7,8 @@ import SectionHead from '../components/Sectionhead'
 const pad = (n) => String(n).padStart(2, '0')
 
 const techStack = [
-  'React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'MongoDB', 'PostgreSQL', 'Tailwind CSS',
-  'React Native', 'Flutter', 'Three.js', 'Blender', 'Figma', 'Git', 'Docker', 'AWS',
+  'React', 'TypeScript', 'Node.js', 'Python', 'MongoDB', 'PostgreSQL', 'Tailwind CSS',
+  'React Native', 'Flutter', 'Three.js', 'Blender', 'Figma', 'Git', 'Adobe Photoshop', 'Adobe Illustrator',
 ]
 
 const workProcess = [

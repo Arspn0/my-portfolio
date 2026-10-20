@@ -3,10 +3,13 @@ import { Send, Check, ChevronDown } from 'lucide-react'
 import ProfilePicture from '../assets/profile/profile-picture.png'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import { useTheme } from '../context/ThemeContext'
+import { brandStyle } from '../data/BrandColors'
 import SectionHead from '../components/Sectionhead'
 
 const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY
 const ENDPOINT = '/.netlify/functions/contact'
+const EMPTY_FORM = { fullName: '', email: '', subject: 'General Inquiry', message: '' }
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 const subjectOptions = [
   'General Inquiry',
@@ -22,22 +25,21 @@ const field =
 
 function Contact() {
   const { theme } = useTheme()
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    subject: 'General Inquiry',
-    message: '',
-  })
+  const [formData, setFormData] = useState(EMPTY_FORM)
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
   const [errorMsg, setErrorMsg] = useState('')
   const [tsReady, setTsReady] = useState(false)
   const [tsFailed, setTsFailed] = useState(false)
   const [token, setToken] = useState('')
+  const [notice, setNotice] = useState(false) // pesan terima kasih
 
   const tsRef = useRef(null)
   const widgetId = useRef(null)
   const hpRef = useRef(null)
   const startedAt = useRef(Date.now())
+  const timers = useRef([])
+
+  useEffect(() => () => timers.current.forEach(clearTimeout), [])
 
   // muat skrip Cloudflare Turnstile
   useEffect(() => {
@@ -83,7 +85,8 @@ function Contact() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
-    if (status === 'sent' || status === 'error') setStatus('idle')
+    if (status === 'error') setStatus('idle')
+    setNotice(false)
   }
 
   const resetCaptcha = () => {
@@ -119,9 +122,13 @@ function Contact() {
       })
       const data = await res.json().catch(() => ({}))
       if (res.ok) {
+        // semua kolom dikosongkan; tombol menampilkan "Message sent" sebentar lalu kembali seperti semula
+        setFormData(EMPTY_FORM)
         setStatus('sent')
-        setFormData((f) => ({ ...f, message: '' }))
+        setNotice(true)
         startedAt.current = Date.now()
+        timers.current.push(setTimeout(() => setStatus((s) => (s === 'sent' ? 'idle' : s)), 2500))
+        timers.current.push(setTimeout(() => setNotice(false), 7000))
       } else {
         setStatus('error')
         setErrorMsg(data.message || 'Something went wrong. Please try again.')
@@ -135,6 +142,13 @@ function Contact() {
   }
 
   const sending = status === 'sending'
+  // tombol hanya bisa diklik jika semua kolom terisi dan verifikasi browser selesai
+  const canSend =
+    !sending &&
+    !!token &&
+    formData.fullName.trim().length >= 2 &&
+    EMAIL_RE.test(formData.email.trim()) &&
+    formData.message.trim().length >= 10
   const verifying = !token && !tsFailed && !!SITE_KEY
 
   return (
@@ -239,7 +253,7 @@ function Contact() {
               <div className="flex flex-wrap items-center gap-4">
                 <button
                   type="submit"
-                  disabled={sending || !token}
+                  disabled={!canSend}
                   className="btn-solid disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {sending ? (
@@ -255,8 +269,8 @@ function Contact() {
                 </button>
 
                 <p role="status" aria-live="polite" className="muted text-sm">
-                  {status === 'sent' && <span className="accent">Thank you! I'll get back to you soon.</span>}
-                  {status !== 'sent' && verifying && 'Checking your browser…'}
+                  {notice && <span className="accent">Thank you! I'll get back to you soon.</span>}
+                  {!notice && verifying && 'Checking your browser…'}
                 </p>
               </div>
 
@@ -302,9 +316,10 @@ function Contact() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 border-b hair px-6 py-3 text-sm transition-colors hover:accent sm:px-8"
+                style={brandStyle(social)}
+                className="brand-hover flex items-center gap-3 border-b hair px-6 py-3 text-sm transition-colors sm:px-8"
               >
-                <social.icon size={16} />
+                <social.icon size={16} className="brand" />
                 {social.label}
               </a>
             ))}

@@ -13,19 +13,19 @@ import SrcP3 from '../assets/SrcP3.jfif'
 const specialities = [
   {
     id: 'mobile',
-    title: 'Mobile App',
+    title: 'Website & Mobile App',
     description: 'Creating smooth and intuitive mobile experiences with React Native and Flutter',
     image: SrcP1,
   },
   {
-    id: 'website',
-    title: 'Website',
+    id: 'design',
+    title: 'Design',
     description: 'Building modern, responsive websites with cutting-edge technologies',
     image: SrcP2,
   },
   {
     id: '3d',
-    title: '3D Design',
+    title: '3D',
     description: 'Crafting stunning 3D visuals and interactive experiences',
     image: SrcP3,
   },

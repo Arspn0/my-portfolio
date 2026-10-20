@@ -2,6 +2,7 @@ import React from 'react'
 import { ArrowUp } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { socialMediaLinks } from '../data/SocialMediaData'
+import { brandStyle } from '../data/BrandColors'
 
 const quickLinks = [
   { name: 'Home', path: '/' },
@@ -57,7 +58,8 @@ function Footer() {
                   href={social.href ?? social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 border-b hair px-6 py-3 text-sm transition-colors hover:accent sm:px-10"
+                  style={brandStyle(social)}
+                  className="brand-hover flex items-center gap-3 border-b hair px-6 py-3 text-sm transition-colors sm:px-10"
                 >
                   <social.icon size={16} />
                   {social.label}

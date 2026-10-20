@@ -319,7 +319,7 @@ function Contact() {
                 style={brandStyle(social)}
                 className="brand-hover flex items-center gap-3 border-b hair px-6 py-3 text-sm transition-colors sm:px-8"
               >
-                <social.icon size={16} className="brand" />
+                <social.icon size={16} />
                 {social.label}
               </a>
             ))}

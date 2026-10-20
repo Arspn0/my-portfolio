@@ -56,15 +56,13 @@ function FooterStats() {
   const showLikes = stats.likes >= MIN
 
   return (
-    <div className="label flex items-center justify-between gap-3 border-t hair px-6 py-3 sm:px-10">
-      <span className="flex items-center gap-2">
-        {showVisitors && (
-          <>
-            <Eye size={14} aria-hidden="true" />
-            {stats.visitors.toLocaleString()} visitors
-          </>
-        )}
-      </span>
+    <div className="flex items-center gap-4">
+      {showVisitors && (
+        <span className="flex items-center gap-2">
+          <Eye size={14} aria-hidden="true" />
+          {stats.visitors.toLocaleString()} {stats.visitors === 1 ? 'visitor' : 'visitors'}
+        </span>
+      )}
       <button
         type="button"
         onClick={handleLike}

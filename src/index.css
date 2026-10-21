@@ -137,3 +137,22 @@ html.custom-cursor select { cursor: pointer !important; }
   animation: none;
   mix-blend-mode: normal;
 }
+
+@keyframes fx-flick {
+  0%   { opacity: 0 }
+  15%  { opacity: 1 }
+  30%  { opacity: .15 }
+  45%  { opacity: 1 }
+  60%  { opacity: .5 }
+  75%  { opacity: 1 }
+  100% { opacity: 1 }
+}
+
+.fx-flicker > a {
+  animation: fx-flick .45s steps(1, end) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-flicker > a { animation: none }
+}

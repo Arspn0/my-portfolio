@@ -1,5 +1,5 @@
 const BRANDS = [
-  { match: ['github'], light: '#24292F', dark: '#F0F6FC' },
+  { match: ['github'], light: '#6E7781', dark: '#8B949E' },
   { match: ['linkedin'], light: '#0A66C2', dark: '#4C9AE6' },
   { match: ['instagram'], light: '#E4405F', dark: '#F0627C' },
   { match: ['twitter', 'x.com'], light: '#0F1419', dark: '#E7E9EA' },

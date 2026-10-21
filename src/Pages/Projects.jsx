@@ -14,7 +14,7 @@ function Projects() {
   const filteredProjects = selectedFilter === 'All' ? all : all.filter((p) => p.type === selectedFilter)
 
   return (
-    <div className="page ink min-h-screen overflow-x-hidden pt-12 transition-colors duration-300 md:pt-14">
+    <div className="page ink min-h-screen overflow-x-clip pt-12 transition-colors duration-300 md:pt-14">
       <div className="mx-auto max-w-7xl border-x hair">
 
         {/* 01 INTRO */}
@@ -59,13 +59,14 @@ function Projects() {
           {filteredProjects.length > 0 ? (
             <div
               key={selectedFilter}
-              className="animate-fade-in -ml-px grid grid-cols-2 overflow-hidden border-t hair lg:grid-cols-3"
+              className="fx-flicker -ml-px grid grid-cols-2 overflow-hidden border-t hair lg:grid-cols-3"
             >
               {filteredProjects.map((project, i) => (
                 <Link
                   key={project.id}
                   to={`/projects/${project.slug}`}
                   state={{ filter: selectedFilter }}
+                  style={{ '--i': i }}
                   className="group flex flex-col border-b border-l hair transition-colors hover:surface"
                 >
                   <div className="relative aspect-video overflow-hidden border-b hair">

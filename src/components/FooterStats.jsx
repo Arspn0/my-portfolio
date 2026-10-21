@@ -3,10 +3,6 @@ import { Eye, Heart } from 'lucide-react'
 
 const ENDPOINT = '/.netlify/functions/stats'
 
-// Angka baru tampil setelah mencapai batas ini. Saat testing isi VITE_STATS_MIN=0 di .env
-const parsed = Number(import.meta.env.VITE_STATS_MIN ?? 100)
-const MIN = Number.isFinite(parsed) ? parsed : 100
-
 async function call(action) {
   const res = await fetch(ENDPOINT, {
     method: 'POST',
@@ -22,6 +18,7 @@ let visitPromise = null // satu kunjungan per pemuatan halaman, walau Footer dir
 function FooterStats() {
   const [stats, setStats] = useState(null) // { visitors, likes, liked }
   const [busy, setBusy] = useState(false)
+  const [failed, setFailed] = useState(false)
 
   useEffect(() => {
     let alive = true
@@ -40,10 +37,13 @@ function FooterStats() {
   const handleLike = async () => {
     if (!stats || stats.liked || busy) return
     setBusy(true)
+    setFailed(false)
     try {
       setStats(await call('like'))
     } catch (err) {
       console.warn('Like gagal:', err.message)
+      setFailed(true)
+      setTimeout(() => setFailed(false), 3000)
     } finally {
       setBusy(false)
     }
@@ -52,27 +52,30 @@ function FooterStats() {
   // jika function tidak tersedia, footer tetap tampil normal tanpa bagian ini
   if (!stats) return null
 
-  const showVisitors = stats.visitors >= MIN
-  const showLikes = stats.likes >= MIN
-
   return (
     <div className="flex items-center gap-4">
-      {showVisitors && (
-        <span className="flex items-center gap-2">
-          <Eye size={14} aria-hidden="true" />
-          {stats.visitors.toLocaleString()} {stats.visitors === 1 ? 'visitor' : 'visitors'}
-        </span>
-      )}
+      <span className="flex items-center gap-2">
+        <Eye size={14} aria-hidden="true" />
+        {stats.visitors.toLocaleString()} {stats.visitors === 1 ? 'visitor' : 'visitors'}
+      </span>
       <button
         type="button"
         onClick={handleLike}
         aria-pressed={stats.liked}
-        aria-label={stats.liked ? 'You liked this site' : 'Like this site'}
+        aria-label="Like this site"
         className="btn !px-3 !py-2"
       >
-        <Heart size={14} fill={stats.liked ? 'currentColor' : 'none'} aria-hidden="true" />
-        {showLikes ? stats.likes.toLocaleString() : stats.liked ? 'Liked' : 'Like'}
+        <Heart
+          size={14}
+          fill={stats.liked ? 'currentColor' : 'none'}
+          className={stats.liked ? 'accent' : ''}
+          aria-hidden="true"
+        />
+        {stats.likes.toLocaleString()}
       </button>
+      <span role="status" aria-live="polite" className="accent">
+        {failed && 'Try again later'}
+      </span>
     </div>
   )
 }

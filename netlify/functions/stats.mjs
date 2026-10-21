@@ -33,18 +33,21 @@ function normalizeIp(raw) {
   return ip
 }
 
-// Jumlah dihitung dari penanda yang ada (satu penanda per pengunjung/like), bukan dari penghitung
-// yang ditambah satu-satu. Penghitung read-modify-write rawan kehilangan data saat dua permintaan
-// bersamaan, dan nilai 'counts' di bawah hanyalah cache yang dihitung ulang dari kebenaran.
-async function countKeys(store, prefix) {
-  const { blobs } = await store.list({ prefix })
-  return blobs.length
-}
-async function recount(store) {
-  const [visitors, likes] = await Promise.all([countKeys(store, 'v:'), countKeys(store, 'l:')])
-  const counts = { visitors, likes }
-  await store.setJSON('counts', counts)
-  return counts
+// Penghitung disimpan di satu blob 'counts' dan dinaikkan dengan tulis bersyarat
+// (compare-and-swap lewat etag): jika dua permintaan bersamaan, salah satunya mengulang
+// dengan nilai terbaru, sehingga tidak ada hitungan yang hilang. Tidak memakai store.list(),
+// yang bisa terlambat menampilkan data baru (konsistensi akhir) dan membuat angka tertahan di 0.
+async function bump(store, field) {
+  for (let i = 0; i < 6; i++) {
+    const cur = await store.getWithMetadata('counts', { type: 'json' })
+    const next = { visitors: cur?.data?.visitors || 0, likes: cur?.data?.likes || 0 }
+    next[field] += 1
+    const r = cur
+      ? await store.setJSON('counts', next, { onlyIfMatch: cur.etag })
+      : await store.setJSON('counts', next, { onlyIfNew: true })
+    if (r.modified) return next
+  }
+  throw new Error('counter_contention')
 }
 
 export default async (req, context) => {
@@ -80,23 +83,24 @@ export default async (req, context) => {
   const ua = req.headers.get('user-agent') || ''
 
   try {
-    const store = getStore('site-stats')
-    const [visitor, liker] = await Promise.all([
+    const store = getStore('site-stats-v2')
+    const [visitor, liker, cached] = await Promise.all([
       store.get(`v:${id}`, { type: 'json' }),
       store.get(`l:${id}`, { type: 'json' }),
+      store.get('counts', { type: 'json' }),
     ])
 
     let isVisitor = !!visitor
     let isLiked = !!liker
-    let changed = false
+    let counts = { visitors: cached?.visitors || 0, likes: cached?.likes || 0 }
     const now = Date.now()
 
-    // onlyIfNew: penulisan atomik. Jika dua permintaan datang bersamaan, hanya satu yang menang
-    // (modified = true), sehingga tidak ada pengunjung atau like ganda.
+    // onlyIfNew: penanda ditulis atomik. Hanya permintaan yang menang (modified = true)
+    // yang menaikkan penghitung, jadi tidak ada pengunjung atau like ganda.
     if (action === 'visit' && !isVisitor && ua && !BOT_RE.test(ua)) {
       const r = await store.setJSON(`v:${id}`, { t: now }, { onlyIfNew: true })
       isVisitor = true
-      changed = r.modified
+      if (r.modified) counts = await bump(store, 'visitors')
     }
 
     if (action === 'like') {
@@ -107,13 +111,9 @@ export default async (req, context) => {
       if (!isLiked) {
         const r = await store.setJSON(`l:${id}`, { t: now }, { onlyIfNew: true })
         isLiked = true
-        changed = r.modified
+        if (r.modified) counts = await bump(store, 'likes')
       }
     }
-
-    // hitung ulang hanya saat ada perubahan, atau saat cache belum ada
-    let counts = changed ? await recount(store) : await store.get('counts', { type: 'json' })
-    if (!counts) counts = await recount(store)
 
     return json(200, { visitors: counts.visitors, likes: counts.likes, liked: isLiked })
   } catch (err) {

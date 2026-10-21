@@ -68,7 +68,7 @@ function FooterStats() {
         <Heart
           size={14}
           fill={stats.liked ? 'currentColor' : 'none'}
-          className={stats.liked ? 'accent' : ''}
+          style={stats.liked ? { color: '#EA4335' } : undefined}
           aria-hidden="true"
         />
         {stats.likes.toLocaleString()}

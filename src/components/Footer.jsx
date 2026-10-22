@@ -22,6 +22,7 @@ function Footer() {
   return (
     <footer className="page ink border-t hair pb-14 md:pb-0">
       <div className="mx-auto max-w-7xl border-x hair">
+        <div className="label flex items-center justify-between border-b hair px-4 py-4 sm:px-8"></div>
 
         {!compact && (
           <div className="grid md:grid-cols-[1.6fr_1fr_1fr]">
@@ -74,9 +75,9 @@ function Footer() {
         <div className="border-t hair label flex flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center sm:px-10">
           <span>© {currentYear} Aris. All rights reserved.</span>
           <FooterStats />
-          <button onClick={scrollToTop} className="btn !px-3 !py-2" aria-label="Scroll to top">
+          {/* <button onClick={scrollToTop} className="btn !px-3 !py-2" aria-label="Scroll to top">
             Top <ArrowUp size={14} />
-          </button>
+          </button> */}
           <span>Built with React & Tailwind</span>
         </div>
 

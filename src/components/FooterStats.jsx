@@ -15,8 +15,17 @@ async function call(action) {
 
 let visitPromise = null // satu kunjungan per pemuatan halaman, walau Footer dirender ulang
 
+const CACHE_KEY = 'site-stats-cache'
+const readCache = () => {
+  try {
+    return JSON.parse(localStorage.getItem(CACHE_KEY))
+  } catch {
+    return null
+  }
+}
+
 function FooterStats() {
-  const [stats, setStats] = useState(null) // { visitors, likes, liked }
+  const [stats, setStats] = useState(readCache) // { visitors, likes, liked }
   const [busy, setBusy] = useState(false)
   const [failed, setFailed] = useState(false)
 
@@ -24,10 +33,10 @@ function FooterStats() {
     let alive = true
     visitPromise ??= call('visit')
     visitPromise
-      .then((data) => alive && setStats(data))
-      .catch((err) => {
-        visitPromise = null
-        console.warn('Statistik tidak dapat dimuat:', err.message)
+      .then((data) => {
+        if (!alive) return
+        setStats(data)
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)) } catch {}
       })
     return () => {
       alive = false

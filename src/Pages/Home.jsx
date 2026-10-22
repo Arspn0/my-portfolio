@@ -119,7 +119,7 @@ function Home() {
 
         {/* 02 ABOUT */}
         <section>
-          <SectionHead n={2} title="About" />
+          <SectionHead n={2} title="About Me" />
           <div className="grid border-t hair md:grid-cols-[1fr_2fr]">
             <h2 className="p-6 font-display text-3xl font-bold tracking-tight sm:p-12 sm:text-4xl">About me</h2>
             <p className="muted border-t hair p-6 leading-relaxed sm:p-12 sm:text-lg md:border-l md:border-t-0">

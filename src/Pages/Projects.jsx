@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import projectsData from '../data/projectsData.json'
-import SectionHead from '../components/Sectionhead'
+import SectionHead from '../components/SectionHead'
 
 const pad = (n) => String(n).padStart(2, '0')
 const filters = ['All', 'Website', 'Mobile', 'Design']

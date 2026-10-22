@@ -2,7 +2,7 @@ import React from 'react'
 import { Lightbulb, Code, Rocket, CheckCircle, PenBox } from 'lucide-react'
 import experienceData from '../data/experienceData.json'
 import ProfilePicture from '../assets/profile/profile-picture.png'
-import SectionHead from '../components/Sectionhead'
+import SectionHead from '../components/SectionHead'
 import CvButton from '../components/CvButton'
 
 const pad = (n) => String(n).padStart(2, '0')

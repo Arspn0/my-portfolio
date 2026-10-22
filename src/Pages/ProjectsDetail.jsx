@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams, useLocation, Link } from 'react-router-dom'
 import { ArrowLeft, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 import projectsData from '../data/projectsData.json'
-import SectionHead from '../components/Sectionhead'
+import SectionHead from '../components/SectionHead'
 
 function Row({ label, children }) {
   return (

@@ -4,7 +4,7 @@ import ProfilePicture from '../assets/profile/profile-picture.png'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import { useTheme } from '../context/ThemeContext'
 import { brandStyle } from '../data/BrandColors'
-import SectionHead from '../components/Sectionhead'
+import SectionHead from '../components/SectionHead'
 
 const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY
 const ENDPOINT = '/.netlify/functions/contact'

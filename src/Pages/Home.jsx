@@ -5,9 +5,9 @@ import projectsData from '../data/projectsData.json'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import SectionHead from '../components/SectionHead'
 import { brandStyle } from '../data/BrandColors'
-import SrcP1 from '../assets/SrcP1.jfif'
-import SrcP2 from '../assets/SrcP2.jfif'
-import SrcP3 from '../assets/SrcP3.jfif'
+import SrcP1 from '../assets/SrcP1.webp'
+import SrcP2 from '../assets/SrcP2.webp'
+import SrcP3 from '../assets/SrcP3.webp'
 
 
 const specialities = [

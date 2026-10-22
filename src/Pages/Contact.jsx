@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Send, Check, ChevronDown } from 'lucide-react'
-import ProfilePicture from '../assets/profile/profile-picture.png'
+import ProfilePicture from '../assets/profile/profile-picture.webp'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import { useTheme } from '../context/ThemeContext'
 import { brandStyle } from '../data/BrandColors'

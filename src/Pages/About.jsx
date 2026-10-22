@@ -1,7 +1,7 @@
 import React from 'react'
 import { Lightbulb, Code, Rocket, CheckCircle, PenBox } from 'lucide-react'
 import experienceData from '../data/experienceData.json'
-import ProfilePicture from '../assets/profile/profile-picture.png'
+import ProfilePicture from '../assets/profile/profile-picture.webp'
 import SectionHead from '../components/SectionHead'
 import CvButton from '../components/CvButton'
 

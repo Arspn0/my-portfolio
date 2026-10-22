@@ -12,6 +12,7 @@
     "content": "node scripts/fetch-content.mjs"
   },
   "dependencies": {
+    "@google/model-viewer": "^4.4.0",
     "@netlify/blobs": "^11.1.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

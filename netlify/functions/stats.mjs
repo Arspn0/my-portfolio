@@ -37,9 +37,11 @@ function normalizeIp(raw) {
 // (compare-and-swap lewat etag): jika dua permintaan bersamaan, salah satunya mengulang
 // dengan nilai terbaru, sehingga tidak ada hitungan yang hilang. Tidak memakai store.list(),
 // yang bisa terlambat menampilkan data baru (konsistensi akhir) dan membuat angka tertahan di 0.
+// consistency: 'strong' penting di sini: dengan pembacaan 'eventual' (bawaan), nilai dan etag
+// bisa tertinggal sampai sekitar 60 detik setelah penulisan, sehingga semua percobaan gagal.
 async function bump(store, field) {
   for (let i = 0; i < 6; i++) {
-    const cur = await store.getWithMetadata('counts', { type: 'json' })
+    const cur = await store.getWithMetadata('counts', { type: 'json', consistency: 'strong' })
     const next = { visitors: cur?.data?.visitors || 0, likes: cur?.data?.likes || 0 }
     next[field] += 1
     const r = cur
@@ -48,6 +50,20 @@ async function bump(store, field) {
     if (r.modified) return next
   }
   throw new Error('counter_contention')
+}
+
+// Menulis penanda lalu menaikkan penghitung. Jika penghitung gagal naik, penanda dihapus lagi
+// supaya kunjungan atau like berikutnya dari IP yang sama masih bisa dihitung
+// (tanpa ini, penanda sudah ada dan angkanya tidak akan pernah bertambah untuk IP itu).
+async function markAndCount(store, key, field, now) {
+  const r = await store.setJSON(key, { t: now }, { onlyIfNew: true })
+  if (!r.modified) return null // permintaan lain sudah menang
+  try {
+    return await bump(store, field)
+  } catch (err) {
+    await store.delete(key).catch(() => {})
+    throw err
+  }
 }
 
 export default async (req, context) => {
@@ -98,9 +114,8 @@ export default async (req, context) => {
     // onlyIfNew: penanda ditulis atomik. Hanya permintaan yang menang (modified = true)
     // yang menaikkan penghitung, jadi tidak ada pengunjung atau like ganda.
     if (action === 'visit' && !isVisitor && ua && !BOT_RE.test(ua)) {
-      const r = await store.setJSON(`v:${id}`, { t: now }, { onlyIfNew: true })
       isVisitor = true
-      if (r.modified) counts = await bump(store, 'visitors')
+      counts = (await markAndCount(store, `v:${id}`, 'visitors', now)) ?? counts
     }
 
     if (action === 'like') {
@@ -109,9 +124,8 @@ export default async (req, context) => {
         return json(403, { error: 'not_visitor', message: 'Visit the site first, then you can like it.' })
       }
       if (!isLiked) {
-        const r = await store.setJSON(`l:${id}`, { t: now }, { onlyIfNew: true })
         isLiked = true
-        if (r.modified) counts = await bump(store, 'likes')
+        counts = (await markAndCount(store, `l:${id}`, 'likes', now)) ?? counts
       }
     }
 

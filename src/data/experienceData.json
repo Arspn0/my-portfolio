@@ -5,18 +5,28 @@
       "company": "PT FIF",
       "position": "Admin",
       "year": "Jun 2021 - Sep 2021",
-      "duration": "3 Months",
+      "duration": "4 Months",
       "description": "Leading development team in building scalable web applications. Implemented microservices architecture and CI/CD pipelines.",
-      "technologies": ["React", "Node.js", "Docker", "AWS"]
+      "technologies": [
+        "React",
+        "Node.js",
+        "Docker",
+        "AWS"
+      ]
     },
     {
       "id": 2,
       "company": "Clover Gaming Indonesia",
       "position": "Frontliner & Technicial",
-      "year": "Oct 2025 - Des 2025",
+      "year": "Oct 2025 - Dec 2025",
       "duration": "3 Months",
       "description": "Developed multiple client projects including e-commerce platforms and corporate websites. Collaborated with designers and product managers.",
-      "technologies": ["Next.js", "TypeScript", "MongoDB", "Tailwind"]
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "MongoDB",
+        "Tailwind"
+      ]
     }
   ]
 }

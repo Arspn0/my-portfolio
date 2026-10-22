@@ -10,9 +10,16 @@
       "shortDescription": "Modern e-commerce solution with seamless payment integration",
       "fullDescription": "A comprehensive e-commerce platform built for a fashion retail brand. Features include real-time inventory management, secure payment processing, order tracking, and an intuitive admin dashboard. The platform handles thousands of daily transactions and provides detailed analytics for business insights.",
       "image": "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&q=80",
-      "tech": ["React", "Node.js", "MongoDB", "Stripe", "Redux", "Express"],
-      "liveLink": "https://example.com/ecommerce",
-      "githubLink": "https://github.com/yourusername/ecommerce",
+      "tech": [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Stripe",
+        "Redux",
+        "Express"
+      ],
+      "liveLink": "https://react.dev",
+      "githubLink": "https://github.com/facebook/react",
       "features": [
         "Real-time inventory management system",
         "Secure payment gateway integration with Stripe",
@@ -28,7 +35,11 @@
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80"
       ],
-      "featured": true
+      "featured": true,
+      "family": "dev",
+      "brief": "",
+      "modelUrl": "",
+      "processImages": []
     },
     {
       "id": 2,
@@ -40,9 +51,14 @@
       "shortDescription": "Track workouts and monitor fitness progress on the go",
       "fullDescription": "A cross-platform mobile application designed to help users track their fitness journey. Built with React Native, it offers workout logging, progress visualization, nutrition tracking, and social features to connect with other fitness enthusiasts.",
       "image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80",
-      "tech": ["React Native", "Firebase", "Redux", "Chart.js"],
-      "liveLink": "https://example.com/fitness",
-      "githubLink": "https://github.com/yourusername/fitness",
+      "tech": [
+        "React Native",
+        "Firebase",
+        "Redux",
+        "Chart.js"
+      ],
+      "liveLink": "https://reactnative.dev",
+      "githubLink": "https://github.com/facebook/react-native",
       "features": [
         "Workout logging and tracking",
         "Progress visualization with charts",
@@ -58,7 +74,11 @@
         "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80",
         "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=1200&q=80"
       ],
-      "featured": true
+      "featured": true,
+      "family": "dev",
+      "brief": "",
+      "modelUrl": "",
+      "processImages": []
     },
     {
       "id": 3,
@@ -70,9 +90,14 @@
       "shortDescription": "Complete brand identity package for a tech startup",
       "fullDescription": "Comprehensive brand identity design project for a technology startup. Includes logo design, color palette, typography system, brand guidelines, marketing materials, and digital assets. Created a modern and professional visual language that resonates with the target audience.",
       "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
-      "tech": ["Figma", "Adobe Illustrator", "Adobe Photoshop", "Blender"],
-      "liveLink": "https://example.com/brand",
-      "githubLink": "#",
+      "tech": [
+        "Figma",
+        "Adobe Illustrator",
+        "Adobe Photoshop",
+        "Blender"
+      ],
+      "liveLink": "",
+      "githubLink": "",
       "features": [
         "Logo design and variations",
         "Color palette and guidelines",
@@ -88,7 +113,16 @@
         "https://images.unsplash.com/photo-1558655146-d09347e92766?w=1200&q=80",
         "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&q=80"
       ],
-      "featured": true
+      "featured": true,
+      "family": "design",
+      "brief": "The brief was to build a visual identity that feels credible to enterprise buyers yet approachable to early adopters. I started from the product's core idea, simplicity under pressure, and let it drive every decision: a restrained palette, a geometric wordmark with one deliberate imperfection, and a type system that stays legible from a favicon to a billboard.",
+      "modelUrl": "",
+      "processImages": [
+        "https://picsum.photos/seed/brand-process-1/1200/800",
+        "https://picsum.photos/seed/brand-process-2/1200/800",
+        "https://picsum.photos/seed/brand-process-3/1200/800",
+        "https://picsum.photos/seed/brand-process-4/1200/800"
+      ]
     },
     {
       "id": 4,
@@ -100,9 +134,15 @@
       "shortDescription": "WebSocket-based chat with file sharing and video calls",
       "fullDescription": "A modern real-time chat application with advanced features including group chats, file sharing, video calls, and end-to-end encryption. Built with scalability in mind, supporting thousands of concurrent users with minimal latency.",
       "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
-      "tech": ["React", "Socket.io", "Node.js", "WebRTC", "Redis"],
-      "liveLink": "https://example.com/chat",
-      "githubLink": "https://github.com/yourusername/chat",
+      "tech": [
+        "React",
+        "Socket.io",
+        "Node.js",
+        "WebRTC",
+        "Redis"
+      ],
+      "liveLink": "https://socket.io",
+      "githubLink": "https://github.com/socketio/socket.io",
       "features": [
         "Real-time messaging with WebSocket",
         "Group chat functionality",
@@ -118,7 +158,11 @@
         "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=1200&q=80",
         "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=1200&q=80"
       ],
-      "featured": true
+      "featured": true,
+      "family": "dev",
+      "brief": "",
+      "modelUrl": "",
+      "processImages": []
     },
     {
       "id": 5,
@@ -130,9 +174,14 @@
       "shortDescription": "Discover and save your favorite recipes",
       "fullDescription": "A beautiful and intuitive mobile app for discovering recipes, saving favorites, and planning meals. Features include ingredient-based search, step-by-step cooking instructions, nutritional information, and a shopping list generator.",
       "image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80",
-      "tech": ["Flutter", "Dart", "Firebase", "REST API"],
-      "liveLink": "https://example.com/recipe",
-      "githubLink": "https://github.com/yourusername/recipe",
+      "tech": [
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "REST API"
+      ],
+      "liveLink": "https://flutter.dev",
+      "githubLink": "https://github.com/flutter/flutter",
       "features": [
         "Recipe search by ingredients",
         "Step-by-step cooking guide",
@@ -148,7 +197,11 @@
         "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=1200&q=80",
         "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80"
       ],
-      "featured": false
+      "featured": false,
+      "family": "dev",
+      "brief": "",
+      "modelUrl": "",
+      "processImages": []
     },
     {
       "id": 6,
@@ -160,9 +213,14 @@
       "shortDescription": "Interactive 3D models for e-commerce products",
       "fullDescription": "Created interactive 3D product visualizations for an online furniture store. Customers can rotate, zoom, and view products from any angle. Includes AR features for visualizing products in their own space using their smartphone camera.",
       "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80",
-      "tech": ["Three.js", "Blender", "React", "WebGL"],
-      "liveLink": "https://example.com/3d-viz",
-      "githubLink": "https://github.com/yourusername/3d-viz",
+      "tech": [
+        "Three.js",
+        "Blender",
+        "React",
+        "WebGL"
+      ],
+      "liveLink": "",
+      "githubLink": "",
       "features": [
         "360-degree product rotation",
         "High-quality 3D rendering",
@@ -178,7 +236,16 @@
         "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
         "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80"
       ],
-      "featured": false
+      "featured": false,
+      "family": "design",
+      "brief": "Shoppers hesitate when they cannot judge scale, material, and finish from flat photos. The goal was a lightweight 3D viewer that loads fast on mid-range phones: models are modelled and baked in Blender, compressed to a few megabytes, and presented with soft studio lighting so the product, not the tooling, takes center stage.",
+      "modelUrl": "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
+      "processImages": [
+        "https://picsum.photos/seed/model-process-1/1200/800",
+        "https://picsum.photos/seed/model-process-2/1200/800",
+        "https://picsum.photos/seed/model-process-3/1200/800",
+        "https://picsum.photos/seed/model-process-4/1200/800"
+      ]
     }
   ]
 }

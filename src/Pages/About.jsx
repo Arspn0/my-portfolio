@@ -1,16 +1,13 @@
 import React from 'react'
 import { Lightbulb, Code, Rocket, CheckCircle, PenBox } from 'lucide-react'
 import experienceData from '../data/experienceData.json'
-import ProfilePicture from '../assets/profile/profile-picture.webp'
 import SectionHead from '../components/SectionHead'
 import CvButton from '../components/CvButton'
+import siteData from '../data/siteData.json'
 
 const pad = (n) => String(n).padStart(2, '0')
-
-const techStack = [
-  'React', 'TypeScript', 'Node.js', 'Python', 'MongoDB', 'PostgreSQL', 'Tailwind CSS',
-  'React Native', 'Flutter', 'Three.js', 'Blender', 'Figma', 'Git', 'Adobe Photoshop', 'Adobe Illustrator',
-]
+const techStack = siteData.techStack.about
+const profilePicture = siteData.settings?.profileImageUrl
 
 const workProcess = [
   { id: 1, title: 'Discovery', icon: Lightbulb, description: 'Understanding your needs, goals, and target audience to create the perfect strategy' },
@@ -50,7 +47,7 @@ function About() {
           <div className="grid border-t hair lg:grid-cols-[1fr_1.4fr]">
             <div className="border-b hair lg:border-b-0 lg:border-r">
               <img
-                src={ProfilePicture}
+                src={profilePicture}
                 alt="Profile - Aris"
                 className="aspect-square h-full w-full object-cover"
               />

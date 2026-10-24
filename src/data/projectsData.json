@@ -36,6 +36,7 @@
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80"
       ],
       "featured": true,
+      "date": "2024-01-01",
       "family": "dev",
       "brief": "",
       "modelUrl": "",
@@ -75,6 +76,7 @@
         "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=1200&q=80"
       ],
       "featured": true,
+      "date": "2024-02-01",
       "family": "dev",
       "brief": "",
       "modelUrl": "",
@@ -114,6 +116,7 @@
         "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&q=80"
       ],
       "featured": true,
+      "date": "2024-03-01",
       "family": "design",
       "brief": "The brief was to build a visual identity that feels credible to enterprise buyers yet approachable to early adopters. I started from the product's core idea, simplicity under pressure, and let it drive every decision: a restrained palette, a geometric wordmark with one deliberate imperfection, and a type system that stays legible from a favicon to a billboard.",
       "modelUrl": "",
@@ -159,6 +162,7 @@
         "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=1200&q=80"
       ],
       "featured": true,
+      "date": "2024-04-01",
       "family": "dev",
       "brief": "",
       "modelUrl": "",
@@ -198,6 +202,7 @@
         "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80"
       ],
       "featured": false,
+      "date": "2024-05-01",
       "family": "dev",
       "brief": "",
       "modelUrl": "",
@@ -237,6 +242,7 @@
         "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80"
       ],
       "featured": false,
+      "date": "2024-06-01",
       "family": "design",
       "brief": "Shoppers hesitate when they cannot judge scale, material, and finish from flat photos. The goal was a lightweight 3D viewer that loads fast on mid-range phones: models are modelled and baked in Blender, compressed to a few megabytes, and presented with soft studio lighting so the product, not the tooling, takes center stage.",
       "modelUrl": "https://modelviewer.dev/shared-assets/models/Astronaut.glb",

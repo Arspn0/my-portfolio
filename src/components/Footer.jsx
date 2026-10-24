@@ -15,14 +15,12 @@ const quickLinks = [
 function Footer() {
   const currentYear = new Date().getFullYear()
   const { pathname } = useLocation()
-  // Di halaman Contact, deskripsi, daftar halaman, dan sosial sudah ada di kartu halaman itu
   const compact = pathname === '/contact'
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
     <footer className="page ink border-t hair pb-14 md:pb-0">
       <div className="mx-auto max-w-7xl border-x hair">
-        <div className="label flex items-center justify-between border-b hair px-4 py-4 sm:px-8"></div>
 
         {!compact && (
           <div className="grid md:grid-cols-[1.6fr_1fr_1fr]">
@@ -72,7 +70,7 @@ function Footer() {
         )}
 
         {/* Bottom bar */}
-        <div className="border-t hair label flex flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center sm:px-10">
+        <div className="border-t hair label flex flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center sm:px-8">
           <span>© {currentYear} Aris. All rights reserved.</span>
           <FooterStats />
           {/* <button onClick={scrollToTop} className="btn !px-3 !py-2" aria-label="Scroll to top">

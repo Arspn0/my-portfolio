@@ -1,0 +1,68 @@
+{
+  "specialities": [
+    {
+      "id": "mobile",
+      "title": "Mobile App",
+      "description": "Creating smooth and intuitive mobile experiences with React Native and Flutter",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Specialities/SrcP1.webp"
+    },
+    {
+      "id": "website",
+      "title": "Website",
+      "description": "Building modern, responsive websites with cutting-edge technologies",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Specialities/SrcP2.webp"
+    },
+    {
+      "id": "design",
+      "title": "3D & Design",
+      "description": "Crafting stunning 3D visuals and interactive experiences",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Specialities/SrcP3.webp"
+    },
+    {
+      "id": "art",
+      "title": "Art & Illustration",
+      "description": "Creating captivating visual content and artistic designs",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Specialities/SrcP4.webp"
+    }
+  ],
+  "techStack": {
+    "home": [
+      "React",
+      "Dart",
+      "TypeScript",
+      "Node.js",
+      "Python",
+      "MongoDB",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "React Native",
+      "Flutter",
+      "C++",
+      "Blender",
+      "Figma",
+      "Git"
+    ],
+    "about": [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Python",
+      "MongoDB",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "React Native",
+      "Flutter",
+      "Three.js",
+      "Blender",
+      "Figma",
+      "Git",
+      "Adobe Photoshop",
+      "Adobe Illustrator"
+    ]
+  },
+  "settings": {
+    "cvFilename": "Aris-Sopian-CV-2.pdf",
+    "cvUrl": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Cv/Aris-Sopian-CV-2.pdf",
+    "profileImageUrl": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Profile/profile-picture.webp"
+  }
+}

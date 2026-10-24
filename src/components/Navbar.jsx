@@ -11,6 +11,9 @@ const menuItems = [
   { name: 'Contact', path: '/contact' },
 ]
 
+// Catatan: tautan/tombol tetap memenuhi satu sel (area klik besar), tetapi latar dan kotak kursor
+// hanya mengikuti elemen dalam bertanda data-cursor-box, yang lebih kecil dari selnya.
+
 function Navbar() {
   const { theme, toggleTheme } = useTheme()
   const { pathname } = useLocation()
@@ -20,9 +23,9 @@ function Navbar() {
     <Link
       to="/"
       aria-label="Home"
-      className="grid h-full w-12 md:w-14 place-items-center border-r hair ink font-display text-lg font-bold hover:accent"
+      className="group grid h-full w-12 md:w-14 place-items-center border-r hair ink font-display text-lg font-bold"
     >
-      AS
+      <span data-cursor-box className="px-2 py-1 transition-colors group-hover:accent">AS</span>
     </Link>
   )
 
@@ -30,9 +33,11 @@ function Navbar() {
     <button
       onClick={toggleTheme}
       aria-label="Toggle theme"
-      className="grid h-full w-12 md:w-14 place-items-center border-l hair ink transition-colors hover:accent"
+      className="group grid h-full w-12 md:w-14 place-items-center border-l hair ink"
     >
-      {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+      <span data-cursor-box className="grid place-items-center p-2 transition-colors group-hover:accent">
+        {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+      </span>
     </button>
   )
 
@@ -49,11 +54,16 @@ function Navbar() {
                 key={item.name}
                 to={item.path}
                 aria-current={isActive(item.path) ? 'page' : undefined}
-                className={`${tabBase} flex items-center border-r hair px-6 transition-colors ${
-                  isActive(item.path) ? 'tab-on' : 'muted hover:surface hover:ink'
-                }`}
+                className="group flex items-center border-r hair px-3"
               >
-                {item.name}
+                <span
+                  data-cursor-box
+                  className={`${tabBase} px-3 py-2 transition-colors ${
+                    isActive(item.path) ? 'tab-on' : 'muted group-hover:surface group-hover:ink'
+                  }`}
+                >
+                  {item.name}
+                </span>
               </Link>
             ))}
           </nav>
@@ -72,11 +82,13 @@ function Navbar() {
             key={item.name}
             to={item.path}
             aria-current={isActive(item.path) ? 'page' : undefined}
-            className={`${tabBase} py-4 text-center border-r hair last:border-r-0 ${
-              isActive(item.path) ? 'tab-on' : 'muted'
-            }`}
+            className="flex items-center justify-center border-r hair py-2 last:border-r-0"
           >
-            {item.name}
+            <span
+              className={`${tabBase} px-3 py-2 ${isActive(item.path) ? 'tab-on' : 'muted'}`}
+            >
+              {item.name}
+            </span>
           </Link>
         ))}
       </nav>

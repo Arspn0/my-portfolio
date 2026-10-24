@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Send, Check, ChevronDown } from 'lucide-react'
-import ProfilePicture from '../assets/profile/profile-picture.webp'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import { useTheme } from '../context/ThemeContext'
 import { brandStyle } from '../data/BrandColors'
 import SectionHead from '../components/SectionHead'
+import siteData from '../data/siteData.json'
 
 const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY
 const ENDPOINT = '/.netlify/functions/contact'
 const EMPTY_FORM = { fullName: '', email: '', subject: 'General Inquiry', message: '' }
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+const profilePicture = siteData.settings?.profileImageUrl
 
 const subjectOptions = [
   'General Inquiry',
@@ -299,7 +300,7 @@ function Contact() {
             </div>
 
             <img
-              src={ProfilePicture}
+              src={profilePicture}
               alt="Profile"
               className="aspect-[4/3] w-full border-b hair object-cover"
             />

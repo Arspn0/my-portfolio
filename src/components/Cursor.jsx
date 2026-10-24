@@ -24,7 +24,7 @@ function Cursor() {
     const label = labelRef.current
     root.classList.add('custom-cursor')
 
-    const s = { mx: 0, my: 0, x: 0, y: 0, w: BASE, h: BASE, el: null, seen: false, raf: 0, text: '' }
+    const s = { mx: 0, my: 0, x: 0, y: 0, w: BASE, h: BASE, el: null, box: null, seen: false, raf: 0, text: '' }
 
     const setLabel = (t) => {
       if (t !== s.text) {
@@ -37,8 +37,8 @@ function Cursor() {
       s.raf = 0
       if (s.el && !s.el.isConnected) apply(document.elementFromPoint(s.mx, s.my))
       let tx, ty, tw, th
-      if (s.el) {
-        const r = s.el.getBoundingClientRect()
+      if (s.box) {
+        const r = s.box.getBoundingClientRect()
         tx = r.left - PAD; ty = r.top - PAD; tw = r.width + PAD * 2; th = r.height + PAD * 2
       } else {
         tx = s.mx - BASE / 2; ty = s.my - BASE / 2; tw = BASE; th = BASE
@@ -71,6 +71,7 @@ function Cursor() {
 
       if (el !== s.el) {
         s.el = el
+        s.box = el ? el.querySelector('[data-cursor-box]') || el : null
         box.classList.toggle('accent', !!el)
         box.classList.toggle('ink', !el)
       }

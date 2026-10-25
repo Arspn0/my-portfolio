@@ -43,10 +43,11 @@
 .dark .brand-hover:hover { color: var(--brand-dark, currentColor); }
 
 .bleed-left { position: relative; }
-.bleed-left::before {
+.bleed-left::before,
+.bleed-left::after {
   content: '';
+  display: none;            /* di HP kontainer sudah selebar layar, tidak perlu */
   position: absolute;
-  right: 100%;
   top: -1px;
   width: 100vw;
   height: 1px;
@@ -57,6 +58,15 @@
 .bleed-left::after  { left: 100%; }
 .dark .bleed-left::before,
 .dark .bleed-left::after { background: #272B33; }
+
+@media (min-width: 768px) {
+  .bleed-left::before,
+  .bleed-left::after { display: block; }
+}
+
+/* kedua elemen perlu clip: jika html tidak punya overflow, aturan body diteruskan ke
+   jendela tampilan dan tidak benar-benar memotong isi body */
+html, body { overflow-x: clip; }
  
 /* fokus keyboard yang terlihat */
 :focus-visible { outline: 2px solid #B5532F; outline-offset: 2px; }

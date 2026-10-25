@@ -19,7 +19,7 @@ function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
-    <footer className="page ink border-t hair pb-14 md:pb-0">
+    <footer className="page ink border-t hair pb-14 md:pb-0 bleed-left">
       <div className="mx-auto max-w-7xl border-x hair">
 
         {!compact && (

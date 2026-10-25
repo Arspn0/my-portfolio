@@ -72,11 +72,10 @@ function Footer() {
         {/* Bottom bar */}
         <div className="border-t hair label flex flex-col items-start justify-between gap-3 px-6 py-4 sm:flex-row sm:items-center sm:px-8">
           <span>© {currentYear} Aris. All rights reserved.</span>
-          <FooterStats />
-          {/* <button onClick={scrollToTop} className="btn !px-3 !py-2" aria-label="Scroll to top">
+          <button onClick={scrollToTop} className="btn !px-3 !py-2" aria-label="Scroll to top">
             Top <ArrowUp size={14} />
-          </button> */}
-          <span>Built with React & Tailwind</span>
+          </button>
+          <FooterStats />
         </div>
 
       </div>

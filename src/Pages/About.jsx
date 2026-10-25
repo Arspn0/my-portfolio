@@ -38,7 +38,7 @@ function MarqueeRow({ items, className }) {
 
 function About() {
   return (
-    <div className="page ink min-h-screen overflow-x-hidden pt-12 transition-colors duration-300 md:pt-14">
+    <div className="page ink min-h-screen pt-12 transition-colors duration-300 md:pt-14">
       <div className="mx-auto max-w-7xl border-x hair">
 
         {/* 01 PROFILE */}

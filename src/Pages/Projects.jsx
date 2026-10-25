@@ -14,7 +14,7 @@ function Projects() {
   const filteredProjects = selectedFilter === 'All' ? all : all.filter((p) => p.type === selectedFilter)
 
   return (
-    <div className="page ink min-h-screen overflow-x-clip pt-12 transition-colors duration-300 md:pt-14">
+    <div className="page ink min-h-screen pt-12 transition-colors duration-300 md:pt-14">
       <div className="mx-auto max-w-7xl border-x hair">
 
         {/* 01 INTRO */}

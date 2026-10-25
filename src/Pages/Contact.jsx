@@ -153,7 +153,7 @@ function Contact() {
   const verifying = !token && !tsFailed && !!SITE_KEY
 
   return (
-    <div className="page ink min-h-screen overflow-x-hidden pt-12 transition-colors duration-300 md:pt-14">
+    <div className="page ink min-h-screen pt-12 transition-colors duration-300 md:pt-14">
       <div className="mx-auto max-w-7xl border-x hair">
         <SectionHead n={1} title="Contact" meta="Replies within 24 hours" />
 

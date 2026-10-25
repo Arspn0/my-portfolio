@@ -105,7 +105,7 @@ function ScrollRuler() {
     <div
       ref={rootRef}
       aria-hidden="true"
-      className="page muted fixed bottom-0 right-0 top-14 z-40 hidden w-[calc(var(--ruler-w)+1px)] cursor-pointer touch-none select-none border-l hair md:block"
+      className="muted fixed bottom-0 right-0 top-14 z-40 hidden w-[calc(var(--ruler-w)+1px)] cursor-pointer touch-none select-none hair md:block"
       onPointerDown={(e) => {
         e.currentTarget.setPointerCapture(e.pointerId)
         dragging.current = true

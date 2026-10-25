@@ -156,3 +156,9 @@ html.custom-cursor select { cursor: pointer !important; }
 @media (prefers-reduced-motion: reduce) {
   .fx-flicker > a { animation: none }
 }
+
+:root { --ruler-w: 0px; }
+@media (min-width: 768px) {
+  :root { --ruler-w: 56px; }
+  body { padding-inline: var(--ruler-w); }
+}

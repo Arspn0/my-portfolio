@@ -1,56 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useLayoutEffect } from 'react'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import projectsData from '../data/projectsData.json'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import SectionHead from '../components/SectionHead'
 import { brandStyle } from '../data/BrandColors'
-import SrcP1 from '../assets/SrcP1.webp'
-import SrcP2 from '../assets/SrcP2.webp'
-import SrcP3 from '../assets/SrcP3.webp'
+import siteData from '../data/siteData.json'
 
-
-const specialities = [
-  {
-    id: 'mobile',
-    title: 'Mobile App',
-    description: 'Creating smooth and intuitive mobile experiences with React Native and Flutter',
-    image: SrcP1,
-  },
-  {
-    id: 'website',
-    title: 'Website',
-    description: 'Building modern, responsive websites with cutting-edge technologies',
-    image: SrcP2,
-  },
-  {
-    id: 'design',
-    title: '3D & Design',
-    description: 'Crafting stunning 3D visuals and interactive experiences',
-    image: SrcP3,
-  },
-]
-
-const techStack = [
-  'React', 'Dart', 'TypeScript', 'Node.js', 'Python',
-  'MongoDB', 'PostgreSQL', 'Tailwind CSS', 'React Native',
-  'Flutter', 'C++', 'Blender', 'Figma', 'Git',
-]
-
+const { specialities } = siteData
+const techStack = siteData.techStack.home
 const pad = (n) => String(n).padStart(2, '0')
 
-// function SectionHead({ n, title, meta }) {
-//   return (
-//     <div className="label flex items-center justify-between border-t hair px-4 py-3 sm:px-8">
-//       <span>{pad(n)} / {title}</span>
-//       {meta && <span className="hidden sm:inline">{meta}</span>}
-//     </div>
-//   )
-// }
-
 function Home() {
-  const [activeId, setActiveId] = useState('mobile')
-  const active = specialities.find((s) => s.id === activeId)
+  const [activeId, setActiveId] = useState(specialities[0]?.id)
+  const active = specialities.find((s) => s.id === activeId) ?? specialities[0]
+
+  const activeIndex = Math.max(0, specialities.findIndex((s) => s.id === active.id))
+  const imgRefs = useRef([])
+  const scanRef = useRef(null)
+  const shownRef = useRef(0)
+  const zRef = useRef(1)
+
+  useLayoutEffect(() => {
+    if (activeIndex === shownRef.current) return
+    const prev = imgRefs.current[shownRef.current]
+    const next = imgRefs.current[activeIndex]
+    const scan = scanRef.current
+    if (!prev || !next) return
+    shownRef.current = activeIndex
+
+    // hentikan animasi yang sedang berjalan lalu sembunyikan semua kecuali gambar sebelumnya
+    imgRefs.current.forEach((el) => {
+      if (!el) return
+      el.getAnimations().forEach((a) => a.cancel())
+      el.style.opacity = el === prev ? '1' : '0'
+      el.style.zIndex = el === prev ? '1' : '0'
+    })
+    scan?.getAnimations().forEach((a) => a.cancel())
+
+    next.style.opacity = '1'
+    next.style.zIndex = String(++zRef.current)
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const duration = 800
+    const easing = 'steps(16, end)'
+    next.animate(
+      [{ clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)' }],
+      { duration, easing }
+    )
+    scan?.animate(
+      [
+        { transform: 'translateY(0)', opacity: 1 },
+        { transform: `translateY(${next.parentElement.clientHeight}px)`, opacity: 1 },
+      ],
+      { duration, easing }
+    )
+  }, [activeIndex])
 
   const featuredProjects = projectsData.projects
     .filter((p) => p.featured)
@@ -58,13 +64,15 @@ function Home() {
     .slice(0, 4)
 
   return (
-    <div className="page ink min-h-screen pt-12 pb-16 transition-colors duration-300 md:pt-14 md:pb-0">
+    // Jangan beri overflow-x-clip/hidden di akar halaman: garis atas section (bleed-left) harus bisa menembus ke kiri.
+    // pb dihapus: jarak untuk navigasi bawah di HP sudah disediakan oleh Footer (pb-14 md:pb-0)
+    <div className="page ink min-h-screen pt-12 transition-colors duration-300 md:pt-14">
       <div className="mx-auto max-w-7xl border-x hair">
 
         {/* 01 HOME */}
         <section>
           <SectionHead n={1} title="Home" meta="Open to work" />
-          <div className="grid border-t hair lg:grid-cols-[1.5fr_1fr]">
+          <div className="grid border-t hair lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
             <div className="p-6 sm:p-12">
               <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
                 Hai, it's me <span className="accent">Aris.</span>
@@ -120,7 +128,7 @@ function Home() {
         {/* 02 ABOUT */}
         <section>
           <SectionHead n={2} title="About Me" />
-          <div className="grid border-t hair md:grid-cols-[1fr_2fr]">
+          <div className="grid border-t hair md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
             <h2 className="p-6 font-display text-3xl font-bold tracking-tight sm:p-12 sm:text-4xl">About me</h2>
             <p className="muted border-t hair p-6 leading-relaxed sm:p-12 sm:text-lg md:border-l md:border-t-0">
               I'm currently growing my skills in web development, mobile apps, and 3D design.
@@ -135,27 +143,30 @@ function Home() {
         {/* 03 WORK */}
         <section>
           <SectionHead n={3} title="Selected work" meta={`${featuredProjects.length} projects`} />
-          <div className="grid grid-cols-2 gap-px border-t hair bg-neo-light-border dark:bg-neo-dark-border lg:grid-cols-4">
+          {/* 1 kolom di layar sangat sempit, 2 kolom mulai 420px (butuh Tailwind 3.2 ke atas) */}
+          <div className="grid grid-cols-1 gap-px border-t hair bg-neo-light-border dark:bg-neo-dark-border min-[420px]:grid-cols-2 lg:grid-cols-4">
             {featuredProjects.map((project, i) => (
               <article key={project.id} className="surface group flex flex-col">
                 <div className="aspect-video overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <div className="flex flex-1 flex-col gap-2 p-3 sm:p-5">
+                <div className="flex flex-1 flex-col gap-2 p-4 sm:p-5">
                   <span className="label">{pad(i + 1)}</span>
-                  <h3 className="line-clamp-2 font-display text-sm font-semibold leading-tight sm:text-xl">
+                  <h3 className="line-clamp-2 font-display text-base font-semibold leading-tight sm:text-xl">
                     {project.title}
                   </h3>
-                  <p className="muted line-clamp-2 text-[11px] leading-snug sm:line-clamp-3 sm:text-sm">
+                  <p className="muted line-clamp-3 text-xs leading-snug sm:text-sm">
                     {project.shortDescription}
                   </p>
                   <div className="mt-auto flex flex-wrap gap-1 pt-2">
                     {project.tech.slice(0, 2).map((tech, k) => (
-                      <span key={k} className="label border hair px-2 py-0.5 !text-[9px] sm:!text-[11px]">
+                      <span key={k} className="label border hair px-2 py-0.5 !text-[10px] sm:!text-[11px]">
                         {tech}
                       </span>
                     ))}
@@ -171,11 +182,11 @@ function Home() {
           </div>
         </section>
 
-        {/* 04 SPECIALITY */}
+        {/* 04 SPECIALITY: di HP daftar di atas dan gambar di bawah, mulai sm berdampingan */}
         <section>
           <SectionHead n={4} title="Speciality" />
-          <div className="grid grid-cols-2 border-t hair">
-            <div>
+          <div className="grid grid-cols-1 border-t hair sm:grid-cols-2">
+            <div className="min-w-0">
               {specialities.map((spec, i) => {
                 const isOpen = activeId === spec.id
                 return (
@@ -183,32 +194,55 @@ function Home() {
                     <button
                       onClick={() => setActiveId(spec.id)}
                       aria-expanded={isOpen}
-                      className="flex w-full items-center justify-between gap-2 p-3 text-left sm:p-6"
+                      className="flex min-h-[44px] w-full items-center justify-between gap-2 p-4 text-left sm:p-6"
                     >
-                      <span className="flex items-baseline gap-3">
+                      <span className="flex min-w-0 items-baseline gap-3">
                         <span className="label">{pad(i + 1)}</span>
-                        <span className={`font-display text-xs font-semibold sm:text-2xl ${isOpen ? 'accent' : ''}`}>
+                        <span className={`break-words font-display text-lg font-semibold sm:text-xl md:text-2xl ${isOpen ? 'accent' : ''}`}>
                           {spec.title}
                         </span>
                       </span>
                       <ChevronDown
-                        className={`h-4 w-4 shrink-0 transition-transform duration-300 sm:h-6 sm:w-6 ${isOpen ? 'rotate-180' : ''}`}
+                        className={`h-5 w-5 shrink-0 transition-transform duration-300 sm:h-6 sm:w-6 ${isOpen ? 'rotate-180' : ''}`}
                       />
                     </button>
-                    <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <p className="muted p-3 pt-0 text-[11px] leading-snug sm:p-6 sm:pt-0 sm:text-base">
-                        {spec.description}
-                      </p>
+                    <div
+                      aria-hidden={!isOpen}
+                      className={`grid transition-[grid-template-rows,opacity] duration-300 ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                    >
+                      <div className="overflow-hidden">
+                        <p className="muted p-4 pt-0 text-sm leading-snug sm:p-6 sm:pt-0 sm:text-base">
+                          {spec.description}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )
               })}
             </div>
-            <div className="border-l hair">
-              <img
-                src={active.image}
-                alt={active.title}
-                className="h-full min-h-[240px] w-full object-cover sm:h-[460px]"
+
+            {/* isolate: z-index gambar dan garis pemindai terkurung di sini, tidak bisa menimpa navbar */}
+            <div className="relative isolate aspect-[4/3] min-w-0 overflow-hidden border-t hair sm:aspect-auto sm:min-h-[460px] sm:border-l sm:border-t-0">
+              {specialities.map((s, i) => (
+                <img
+                  key={s.id}
+                  ref={(el) => {
+                    imgRefs.current[i] = el
+                  }}
+                  src={s.image}
+                  alt={s.title}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  aria-hidden={i !== activeIndex}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{ opacity: i === 0 ? 1 : 0, zIndex: i === 0 ? 1 : 0 }}
+                />
+              ))}
+              <div
+                ref={scanRef}
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 z-[99999] border-t border-white mix-blend-difference"
+                style={{ opacity: 0 }}
               />
             </div>
           </div>
@@ -218,7 +252,7 @@ function Home() {
         <section>
           <SectionHead n={5} title="Toolkit" />
           <div className="overflow-hidden border-t hair py-5 sm:py-7">
-            <div className="flex animate-marquee-reverse whitespace-nowrap">
+            <div className="flex animate-marquee-reverse whitespace-nowrap motion-reduce:animate-none">
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="flex items-center">
                   {techStack.map((tech) => (

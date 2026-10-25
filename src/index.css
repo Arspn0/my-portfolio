@@ -53,7 +53,10 @@
   background: #DDD8D0;
   pointer-events: none;
 }
-.dark .bleed-left::before { background: #272B33; }
+.bleed-left::before { right: 100%; }
+.bleed-left::after  { left: 100%; }
+.dark .bleed-left::before,
+.dark .bleed-left::after { background: #272B33; }
  
 /* fokus keyboard yang terlihat */
 :focus-visible { outline: 2px solid #B5532F; outline-offset: 2px; }

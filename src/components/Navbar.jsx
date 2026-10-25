@@ -44,7 +44,7 @@ function Navbar() {
   return (
     <>
       {/* DESKTOP + MOBILE TOP BAR */}
-      <header className="fixed top-0 z-50 h-12 w-full border-b hair bg-neo-light-bg/90 backdrop-blur dark:bg-neo-dark-bg/90 md:h-14">
+      <header className="fixed inset-x-0 top-0 z-50 h-12 border-b hair md:px-[var(--ruler-w)] bg-neo-light-bg/90 backdrop-blur dark:bg-neo-dark-bg/90 md:h-14">
         <div className="mx-auto flex h-full max-w-7xl border-x hair">
           {logo}
 
@@ -75,7 +75,7 @@ function Navbar() {
       {/* MOBILE BOTTOM NAV */}
       <nav
         aria-label="Main"
-        className="fixed bottom-0 z-50 grid w-full grid-cols-4 border-t hair bg-neo-light-bg dark:bg-neo-dark-bg md:hidden"
+        className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-4 border-t hair bg-neo-light-bg dark:bg-neo-dark-bg md:hidden"
       >
         {menuItems.map((item) => (
           <Link

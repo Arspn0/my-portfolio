@@ -1,256 +1,505 @@
 {
+  "types": [
+    "3D",
+    "Apps",
+    "Art",
+    "Design"
+  ],
   "projects": [
     {
-      "id": 1,
-      "title": "E-Commerce Platform",
-      "slug": "ecommerce-platform",
-      "type": "Website",
-      "month": "January",
-      "year": "2024",
-      "shortDescription": "Modern e-commerce solution with seamless payment integration",
-      "fullDescription": "A comprehensive e-commerce platform built for a fashion retail brand. Features include real-time inventory management, secure payment processing, order tracking, and an intuitive admin dashboard. The platform handles thousands of daily transactions and provides detailed analytics for business insights.",
-      "image": "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&q=80",
+      "id": 3,
+      "title": "Pendulum Satisfying Animation",
+      "slug": "pendulum-satisfying-animation",
+      "type": "3D",
+      "typeId": "3d",
+      "family": "design",
+      "month": "August",
+      "year": "2026",
+      "date": "2026-08-25",
+      "shortDescription": "Ini merupakan project animasi pendulum yang sangat satisfying",
+      "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "challenges": "Saya kedulitan meng animasikan pendulumnya dan merendernya",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Pendulum-Satisfying-Animation/02-Bts.gif",
       "tech": [
-        "React",
-        "Node.js",
-        "MongoDB",
-        "Stripe",
-        "Redux",
-        "Express"
+        "Blender",
+        "Adobe Photoshop"
       ],
-      "liveLink": "https://react.dev",
-      "githubLink": "https://github.com/facebook/react",
+      "liveLink": "",
+      "githubLink": "",
       "features": [
-        "Real-time inventory management system",
-        "Secure payment gateway integration with Stripe",
-        "Advanced product filtering and search",
-        "Customer review and rating system",
-        "Admin dashboard with analytics",
-        "Responsive design for all devices",
-        "Email notifications for orders",
-        "Wishlist and cart functionality"
+        "Tiga",
+        "Empat"
       ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=1200&q=80",
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80"
-      ],
-      "featured": true,
-      "date": "2024-01-01",
-      "family": "dev",
-      "brief": "",
-      "modelUrl": "",
-      "processImages": []
+      "brief": "Tiga",
+      "featured": false,
+      "media": [
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Pendulum-Satisfying-Animation/01-Final-Render.webp",
+          "label": "Final render"
+        },
+        {
+          "kind": "gif",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Pendulum-Satisfying-Animation/02-Bts.gif",
+          "label": "Behind the scenes"
+        },
+        {
+          "kind": "video",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Pendulum-Satisfying-Animation/03-Animation.mp4",
+          "label": "Animation"
+        }
+      ]
     },
     {
-      "id": 2,
-      "title": "Fitness Tracking App",
-      "slug": "fitness-tracking-app",
-      "type": "Mobile",
+      "id": 7,
+      "title": "Campfire Wolf Pixelart",
+      "slug": "campfire-wolf-pixelart",
+      "type": "Art",
+      "typeId": "art",
+      "family": "design",
+      "month": "June",
+      "year": "2026",
+      "date": "2026-06-15",
+      "shortDescription": "Ini merupakan art yang saya buat dengan style pixel art",
+      "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "challenges": "Saya kesulitan dalam coloring nya",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Art/Campfire-Wolf-Pixelart/01-Result.webp",
+      "tech": [
+        "Aseprite"
+      ],
+      "liveLink": "",
+      "githubLink": "",
+      "features": [
+        "Empat",
+        "Lima"
+      ],
+      "brief": "Empat",
+      "featured": false,
+      "media": [
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Art/Campfire-Wolf-Pixelart/01-Result.webp",
+          "label": "Result"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Art/Campfire-Wolf-Pixelart/02-Bts1.webp",
+          "label": "Behind the scenes"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Art/Campfire-Wolf-Pixelart/03-Bts2.webp",
+          "label": "Behind the scenes 2"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Art/Campfire-Wolf-Pixelart/04-Bts3.webp",
+          "label": "Behind the scenes 3"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Chill Lizard",
+      "slug": "chill-lizard",
+      "type": "Art",
+      "typeId": "art",
+      "family": "design",
       "month": "February",
-      "year": "2024",
-      "shortDescription": "Track workouts and monitor fitness progress on the go",
-      "fullDescription": "A cross-platform mobile application designed to help users track their fitness journey. Built with React Native, it offers workout logging, progress visualization, nutrition tracking, and social features to connect with other fitness enthusiasts.",
-      "image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80",
+      "year": "2026",
+      "date": "2026-02-17",
+      "shortDescription": "Ini merupakan art yang menampilkan kadal yang sedang bersantai.",
+      "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "challenges": "Saya kesulitan dalam menentukan coloring dan shadingnya.",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Art/Chill-Lizard/01-Result.webp",
+      "tech": [
+        "Affinity"
+      ],
+      "liveLink": "",
+      "githubLink": "",
+      "features": [
+        "Lima",
+        "Enam"
+      ],
+      "brief": "Lima",
+      "featured": false,
+      "media": [
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Art/Chill-Lizard/01-Result.webp",
+          "label": "Result"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Art/Chill-Lizard/02-Bts1.webp",
+          "label": "Behind the scenes 1"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Art/Chill-Lizard/03-Bts2.webp",
+          "label": "Behind the scenes 2"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Art/Chill-Lizard/04-Bts3.webp",
+          "label": "Behind the scenes 3"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Book Store App",
+      "slug": "book-store-app",
+      "type": "Apps",
+      "typeId": "apps",
+      "family": "dev",
+      "month": "January",
+      "year": "2026",
+      "date": "2026-01-01",
+      "shortDescription": "Ini merupakan project aplikasi toko buku",
+      "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "challenges": "Saya kesulitan dan kebingungan dengan kode dari dart karena membingungkan.",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Book-Store-App/Ss4.webp",
+      "tech": [
+        "Flutter",
+        "PostgreSQL",
+        "Node.js"
+      ],
+      "liveLink": "https://github.com/Arspn0",
+      "githubLink": "https://github.com/Arspn0/book_store_application",
+      "features": [
+        "Bisa checkout",
+        "Bisa liat buku bagus",
+        "Pembayaran asli"
+      ],
+      "brief": "",
+      "featured": false,
+      "media": [
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Book-Store-App/Ss1.webp",
+          "label": "Screenshot 1"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Book-Store-App/Ss2.webp",
+          "label": "Screenshot 2"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Book-Store-App/Ss3.webp",
+          "label": "Screenshot 3"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Book-Store-App/Ss4.webp",
+          "label": "Screenshot 4"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Book-Store-App/Ss5.webp",
+          "label": "Screenshot 5"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Budget Tracking",
+      "slug": "budget-tracking",
+      "type": "Apps",
+      "typeId": "apps",
+      "family": "dev",
+      "month": "June",
+      "year": "2025",
+      "date": "2025-06-15",
+      "shortDescription": "Ini merupakan project aplikasi budget tracking pribadi",
+      "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "challenges": "Saya kesulitan dalam membuat ui nya",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Budget-Tracking/Ss3.webp",
       "tech": [
         "React Native",
-        "Firebase",
-        "Redux",
-        "Chart.js"
+        "Tailwind",
+        "Three.js"
       ],
-      "liveLink": "https://reactnative.dev",
-      "githubLink": "https://github.com/facebook/react-native",
+      "liveLink": "https://github.com/Arspn0",
+      "githubLink": "https://github.com/Arspn0/budget-tracker-app",
       "features": [
-        "Workout logging and tracking",
-        "Progress visualization with charts",
-        "Custom workout plan creation",
-        "Nutrition and calorie tracking",
-        "Social feed and community",
-        "Goal setting and reminders",
-        "Offline mode support",
-        "Integration with wearable devices"
+        "Tracking hanya dari ss",
+        "fitur import & export",
+        "Fitur rekap bulanan dan tahunan"
       ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1200&q=80",
-        "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80",
-        "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=1200&q=80"
-      ],
-      "featured": true,
-      "date": "2024-02-01",
-      "family": "dev",
       "brief": "",
-      "modelUrl": "",
-      "processImages": []
+      "featured": false,
+      "media": [
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Budget-Tracking/Ss1.webp",
+          "label": "Screenshot 1"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Budget-Tracking/Ss2.webp",
+          "label": "Screenshot 2"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Budget-Tracking/Ss3.webp",
+          "label": "Screenshot 3"
+        }
+      ]
     },
     {
-      "id": 3,
-      "title": "Brand Identity Design",
-      "slug": "brand-identity-design",
-      "type": "Design",
+      "id": 1,
+      "title": "Chessboard Photorealism",
+      "slug": "chessboard-photorealism",
+      "type": "3D",
+      "typeId": "3d",
+      "family": "design",
       "month": "March",
-      "year": "2024",
-      "shortDescription": "Complete brand identity package for a tech startup",
-      "fullDescription": "Comprehensive brand identity design project for a technology startup. Includes logo design, color palette, typography system, brand guidelines, marketing materials, and digital assets. Created a modern and professional visual language that resonates with the target audience.",
-      "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+      "year": "2025",
+      "date": "2025-03-12",
+      "shortDescription": "Ini merupakan project 3d yang menampilkan ruangan chessboard dirender dengan cara photorealism",
+      "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "challenges": "Saya benar-benar kesulitan saat mengerjakan project ini.",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Chessboard-Photorealism/01-Final-Render.webp",
       "tech": [
-        "Figma",
-        "Adobe Illustrator",
-        "Adobe Photoshop",
         "Blender"
       ],
       "liveLink": "",
       "githubLink": "",
       "features": [
-        "Logo design and variations",
-        "Color palette and guidelines",
-        "Typography system",
-        "Business card design",
-        "Letterhead and stationery",
-        "Social media templates",
-        "Brand style guide",
-        "Marketing collateral designs"
+        "Satu",
+        "Dua"
       ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=80",
-        "https://images.unsplash.com/photo-1558655146-d09347e92766?w=1200&q=80",
-        "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&q=80"
-      ],
-      "featured": true,
-      "date": "2024-03-01",
-      "family": "design",
-      "brief": "The brief was to build a visual identity that feels credible to enterprise buyers yet approachable to early adopters. I started from the product's core idea, simplicity under pressure, and let it drive every decision: a restrained palette, a geometric wordmark with one deliberate imperfection, and a type system that stays legible from a favicon to a billboard.",
-      "modelUrl": "",
-      "processImages": [
-        "https://picsum.photos/seed/brand-process-1/1200/800",
-        "https://picsum.photos/seed/brand-process-2/1200/800",
-        "https://picsum.photos/seed/brand-process-3/1200/800",
-        "https://picsum.photos/seed/brand-process-4/1200/800"
+      "brief": "Satu",
+      "featured": false,
+      "media": [
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Chessboard-Photorealism/01-Final-Render.webp",
+          "label": "Final render"
+        },
+        {
+          "kind": "gif",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Chessboard-Photorealism/02-Bts.gif",
+          "label": "Behind the scenes"
+        },
+        {
+          "kind": "panorama",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Chessboard-Photorealism/03-Panorama-360.webp",
+          "label": "360° panorama"
+        }
       ]
     },
     {
-      "id": 4,
-      "title": "Real-time Chat Application",
-      "slug": "realtime-chat-app",
-      "type": "Website",
-      "month": "April",
-      "year": "2024",
-      "shortDescription": "WebSocket-based chat with file sharing and video calls",
-      "fullDescription": "A modern real-time chat application with advanced features including group chats, file sharing, video calls, and end-to-end encryption. Built with scalability in mind, supporting thousands of concurrent users with minimal latency.",
-      "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80",
-      "tech": [
-        "React",
-        "Socket.io",
-        "Node.js",
-        "WebRTC",
-        "Redis"
-      ],
-      "liveLink": "https://socket.io",
-      "githubLink": "https://github.com/socketio/socket.io",
-      "features": [
-        "Real-time messaging with WebSocket",
-        "Group chat functionality",
-        "File and image sharing",
-        "Video and voice calls",
-        "Message reactions and replies",
-        "Online status indicators",
-        "Message search and history",
-        "Push notifications"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&q=80",
-        "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=1200&q=80",
-        "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=1200&q=80"
-      ],
-      "featured": true,
-      "date": "2024-04-01",
-      "family": "dev",
-      "brief": "",
-      "modelUrl": "",
-      "processImages": []
-    },
-    {
-      "id": 5,
-      "title": "Recipe Finder Mobile App",
-      "slug": "recipe-finder-app",
-      "type": "Mobile",
-      "month": "May",
-      "year": "2024",
-      "shortDescription": "Discover and save your favorite recipes",
-      "fullDescription": "A beautiful and intuitive mobile app for discovering recipes, saving favorites, and planning meals. Features include ingredient-based search, step-by-step cooking instructions, nutritional information, and a shopping list generator.",
-      "image": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80",
-      "tech": [
-        "Flutter",
-        "Dart",
-        "Firebase",
-        "REST API"
-      ],
-      "liveLink": "https://flutter.dev",
-      "githubLink": "https://github.com/flutter/flutter",
-      "features": [
-        "Recipe search by ingredients",
-        "Step-by-step cooking guide",
-        "Nutritional information display",
-        "Favorite recipes collection",
-        "Shopping list generator",
-        "Meal planning calendar",
-        "Recipe rating and reviews",
-        "Offline recipe access"
-      ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1200&q=80",
-        "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=1200&q=80",
-        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=80"
-      ],
-      "featured": false,
-      "date": "2024-05-01",
-      "family": "dev",
-      "brief": "",
-      "modelUrl": "",
-      "processImages": []
-    },
-    {
-      "id": 6,
-      "title": "3D Product Visualization",
-      "slug": "3d-product-visualization",
+      "id": 10,
+      "title": "Ieu Basreng Brand",
+      "slug": "ieu-basreng-brand",
       "type": "Design",
-      "month": "June",
+      "typeId": "design",
+      "family": "design",
+      "month": "December",
       "year": "2024",
-      "shortDescription": "Interactive 3D models for e-commerce products",
-      "fullDescription": "Created interactive 3D product visualizations for an online furniture store. Customers can rotate, zoom, and view products from any angle. Includes AR features for visualizing products in their own space using their smartphone camera.",
-      "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80",
+      "date": "2024-12-16",
+      "shortDescription": "Ini merupakan project uts saya membuat logo branding",
+      "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "challenges": "Saya kesulitan dalam pembiayaan dan membuat model karena spesifikasi laptop Saya",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Ieu-Basreng-Brand/03-Brand-Identity-Overview.webp",
       "tech": [
-        "Three.js",
-        "Blender",
-        "React",
-        "WebGL"
+        "Adobe Photoshop",
+        "Adobe Illustrator"
       ],
       "liveLink": "",
       "githubLink": "",
       "features": [
-        "360-degree product rotation",
-        "High-quality 3D rendering",
-        "AR product placement",
-        "Material and color customization",
-        "Zoom and pan controls",
-        "Mobile-optimized performance",
-        "Product configurator",
-        "Export high-res images"
+        "Tujuh",
+        "Delapan"
       ],
-      "screenshots": [
-        "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&q=80",
-        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
-        "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80"
-      ],
+      "brief": "Tujuh",
       "featured": false,
-      "date": "2024-06-01",
+      "media": [
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Ieu-Basreng-Brand/01-Full-Logo.webp",
+          "label": "Full logo"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Ieu-Basreng-Brand/02-Logo-Guideline.webp",
+          "label": "Logo guideline"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Ieu-Basreng-Brand/03-Brand-Identity-Overview.webp",
+          "label": "Brand identity overview"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Ieu-Basreng-Brand/04-Mockup.webp",
+          "label": "Mockup 1"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Ieu-Basreng-Brand/05-Mockup2.webp",
+          "label": "Mockup 2"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Ieu-Basreng-Brand/06-Mockup3.webp",
+          "label": "Mockup 3"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Idola Sport",
+      "slug": "idola-sport",
+      "type": "Design",
+      "typeId": "design",
       "family": "design",
-      "brief": "Shoppers hesitate when they cannot judge scale, material, and finish from flat photos. The goal was a lightweight 3D viewer that loads fast on mid-range phones: models are modelled and baked in Blender, compressed to a few megabytes, and presented with soft studio lighting so the product, not the tooling, takes center stage.",
-      "modelUrl": "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
-      "processImages": [
-        "https://picsum.photos/seed/model-process-1/1200/800",
-        "https://picsum.photos/seed/model-process-2/1200/800",
-        "https://picsum.photos/seed/model-process-3/1200/800",
-        "https://picsum.photos/seed/model-process-4/1200/800"
+      "month": "August",
+      "year": "2024",
+      "date": "2024-08-15",
+      "shortDescription": "Ini merupakan project saat saya kuliah sistem multimedia dan membuat brand identity.",
+      "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "challenges": "Saya kesulitan dalam mencari orang untuk diwawancara dan peemodelan logo",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Idola-Sport/06-Mockup3.webp",
+      "tech": [
+        "Adobe Photoshop",
+        "Adobe Illustrator"
+      ],
+      "liveLink": "",
+      "githubLink": "",
+      "features": [
+        "Enam",
+        "Tujuh"
+      ],
+      "brief": "Enam",
+      "featured": false,
+      "media": [
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Idola-Sport/01-Full-Logo.webp",
+          "label": "Full logo"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Idola-Sport/02-Logo-Guideline.webp",
+          "label": "Logo guideline"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Idola-Sport/03-Brand-Identity-Overview.webp",
+          "label": "Brand identity overview"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Idola-Sport/04-Mockup.webp",
+          "label": "Mockup 1"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Idola-Sport/05-Mockup2.webp",
+          "label": "Mockup 2"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Design/Idola-Sport/06-Mockup3.webp",
+          "label": "Mockup 3"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Isometric Bedroom",
+      "slug": "isometric-bedroom",
+      "type": "3D",
+      "typeId": "3d",
+      "family": "design",
+      "month": "May",
+      "year": "2024",
+      "date": "2024-05-11",
+      "shortDescription": "Ini merupakan project 3d yang menampilkan stylized isometric bedroom",
+      "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "challenges": "Saya kesulitan dalam membuat lightning nya",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Isometric-Bedroom/01-Final-Render.webp",
+      "tech": [
+        "Blender"
+      ],
+      "liveLink": "",
+      "githubLink": "",
+      "features": [
+        "Dua",
+        "Tiga"
+      ],
+      "brief": "Dua",
+      "featured": false,
+      "media": [
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Isometric-Bedroom/01-Final-Render.webp",
+          "label": "Final render"
+        },
+        {
+          "kind": "gif",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Isometric-Bedroom/02-Bts.gif",
+          "label": "Behind the scenes"
+        },
+        {
+          "kind": "model",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/3D/Isometric-Bedroom/03-live-model.glb",
+          "label": "Interactive 3D model"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Loop Video Making",
+      "slug": "loop-video-making",
+      "type": "Apps",
+      "typeId": "apps",
+      "family": "dev",
+      "month": "May",
+      "year": "2023",
+      "date": "2023-05-02",
+      "shortDescription": "Ini merupakan project aplikasi desktop untuk membuat video loop",
+      "fullDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "challenges": "Saya kesulitan dalam hal ui nya dan optimisasinya",
+      "image": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Loop-Video-Making/Ss4.webp",
+      "tech": [
+        "Python"
+      ],
+      "liveLink": "https://github.com/Arspn0",
+      "githubLink": "https://github.com/Arspn0",
+      "features": [
+        "Memilih banyak video sekaligus",
+        "Memilih banya musik sekaligus",
+        "Menentukan durasi",
+        "Fitur matikan/hidupkan musik bawaan video"
+      ],
+      "brief": "",
+      "featured": false,
+      "media": [
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Loop-Video-Making/Ss1.webp",
+          "label": "Screenshot 1"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Loop-Video-Making/Ss2.webp",
+          "label": "Screenshot 2"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Loop-Video-Making/Ss3.webp",
+          "label": "Screenshot 3"
+        },
+        {
+          "kind": "image",
+          "url": "https://ivzwlrfusptxwyvjuyij.supabase.co/storage/v1/object/public/portfolio/Projects/Apps/Loop-Video-Making/Ss4.webp",
+          "label": "Screenshot 4"
+        }
       ]
     }
   ]

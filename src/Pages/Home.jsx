@@ -1,14 +1,15 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import projectsData from '../data/projectsData.json'
 import { socialMediaLinks } from '../data/SocialMediaData'
-import SectionHead from '../components/SectionHead'
 import { brandStyle } from '../data/BrandColors'
-import siteData from '../data/siteData.json'
+import SectionHead from '../components/SectionHead'
+import projectsData from '../data/projectsData.json'
+import specialityData from '../data/specialityData.json'
+import toolsData from '../data/toolsData.json'
 
-const { specialities } = siteData
-const techStack = siteData.techStack.home
+const { specialities, openToRoles } = specialityData
+const techStack = toolsData.home
 const pad = (n) => String(n).padStart(2, '0')
 
 function Home() {
@@ -58,10 +59,9 @@ function Home() {
     )
   }, [activeIndex])
 
-  const featuredProjects = projectsData.projects
-    .filter((p) => p.featured)
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 4)
+  const featuredProjects = [...projectsData.projects]
+  .sort((a, b) => (b.featured - a.featured) || new Date(b.date) - new Date(a.date))
+  .slice(0, 4)
 
   return (
     // Jangan beri overflow-x-clip/hidden di akar halaman: garis atas section (bleed-left) harus bisa menembus ke kiri.
@@ -118,8 +118,7 @@ function Home() {
               ))}
               <div className="label border-b hair px-6 py-3 sm:px-8">Open to roles</div>
               <p className="muted px-6 py-4 text-sm leading-relaxed sm:px-8">
-                IT support, administration, customer service, or other fields where I can
-                contribute while continuing my journey in tech.
+                {openToRoles}
               </p>
             </div>
           </div>

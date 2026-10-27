@@ -4,6 +4,8 @@ import { ArrowLeft, ExternalLink, Code, ChevronLeft, ChevronRight } from 'lucide
 import projectsData from '../data/projectsData.json'
 import SectionHead from '../components/SectionHead'
 
+const pad = (n) => String(n).padStart(2, '0')
+
 function Row({ label, children }) {
   return (
     <div className="grid border-t hair md:grid-cols-[220px_1fr]">
@@ -35,16 +37,6 @@ function SafeImg({ src, alt }) {
   )
 }
 
-function Gallery({ images, title }) {
-  return (
-    <div className="grid gap-4 md:grid-cols-2">
-      {images.map((src, i) => (
-        <SafeImg key={`${src}-${i}`} src={src} alt={`${title} ${i + 1}`} />
-      ))}
-    </div>
-  )
-}
-
 function Tags({ items }) {
   return (
     <div className="flex flex-wrap gap-2">
@@ -68,7 +60,44 @@ function BulletList({ items }) {
   )
 }
 
-// Tampilan 3D 360 derajat. Pustaka dimuat hanya di halaman yang memakainya (code splitting).
+// Komponen berat (model 3D, panorama, video) baru dipasang saat hampir terlihat di layar,
+// supaya file besar tidak diunduh oleh pengunjung yang tidak menggulir sampai ke sana.
+function Lazy({ className = '', drag = false, children }) {
+  const ref = useRef(null)
+  const [near, setNear] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el || near) return
+    if (!('IntersectionObserver' in window)) {
+      setNear(true)
+      return
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: '300px' }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [near])
+
+  return (
+    <div ref={ref} className={`relative border hair ${className}`} data-cursor={drag ? 'drag!' : undefined}>
+      {near ? (
+        children
+      ) : (
+        <div className="label absolute inset-0 grid place-items-center">Loading…</div>
+      )}
+    </div>
+  )
+}
+
+// Tampilan 3D interaktif. Pustaka dimuat hanya saat dibutuhkan (code splitting).
 // Perlu: npm i @google/model-viewer
 function ModelViewer({ src, title }) {
   const ref = useRef(null)
@@ -89,7 +118,7 @@ function ModelViewer({ src, title }) {
   }, [])
 
   return (
-    <div className="relative h-[360px] border hair sm:h-[520px]" data-cursor="drag!">
+    <>
       <model-viewer
         ref={ref}
         src={src}
@@ -105,6 +134,129 @@ function ModelViewer({ src, title }) {
           {state === 'failed' ? '3D model failed to load' : 'Loading 3D model…'}
         </div>
       )}
+    </>
+  )
+}
+
+// Panorama 360 derajat (gambar equirectangular, rasio 2:1).
+// Perlu: npm i @photo-sphere-viewer/core
+function PanoramaViewer({ src }) {
+  const ref = useRef(null)
+  const [failed, setFailed] = useState(false)
+
+  useEffect(() => {
+    let viewer
+    let cancelled = false
+    Promise.all([
+      import('@photo-sphere-viewer/core'),
+      import('@photo-sphere-viewer/core/index.css'),
+    ])
+      .then(([mod]) => {
+        if (cancelled || !ref.current) return
+        viewer = new mod.Viewer({
+          container: ref.current,
+          panorama: src,
+          navbar: ['zoom', 'fullscreen'],
+          touchmoveTwoFingers: false,
+          mousewheelCtrlKey: false,
+        })
+        viewer.addEventListener('panorama-error', () => setFailed(true))
+      })
+      .catch(() => setFailed(true))
+    return () => {
+      cancelled = true
+      viewer?.destroy()
+    }
+  }, [src])
+
+  return (
+    <>
+      <div ref={ref} className="absolute inset-0" />
+      {failed && (
+        <div className="label pointer-events-none absolute inset-0 grid place-items-center">
+          360° view failed to load
+        </div>
+      )}
+    </>
+  )
+}
+
+const WIDE = new Set(['panorama', 'model', 'video'])
+
+// Susunan dua kolom tanpa lubang dan tanpa mengubah urutan: item lebar mengambil satu baris penuh,
+// dan item tunggal di baris yang tidak punya pasangan juga dilebarkan.
+function fullWidthFlags(items) {
+  const flags = items.map(() => false)
+  let col = 0
+  items.forEach((m, i) => {
+    if (WIDE.has(m.kind)) {
+      if (col === 1) flags[i - 1] = true
+      flags[i] = true
+      col = 0
+    } else {
+      col = (col + 1) % 2
+    }
+  })
+  if (col === 1) flags[items.length - 1] = true
+  return flags
+}
+
+const HINT = { model: 'drag to rotate', panorama: 'drag to look around' }
+
+function MediaItem({ item, index, title, full }) {
+  const alt = `${title} - ${item.label || `media ${index + 1}`}`
+  let body
+  if (item.kind === 'model') {
+    body = (
+      <Lazy drag className="h-[360px] sm:h-[520px]">
+        <ModelViewer key={item.url} src={item.url} title={title} />
+      </Lazy>
+    )
+  } else if (item.kind === 'panorama') {
+    body = (
+      <Lazy drag className="h-[360px] sm:h-[520px]">
+        <PanoramaViewer key={item.url} src={item.url} />
+      </Lazy>
+    )
+  } else if (item.kind === 'video') {
+    body = (
+      <Lazy className="aspect-video bg-black">
+        <video
+          src={item.url}
+          controls
+          loop
+          playsInline
+          preload="metadata"
+          aria-label={alt}
+          className="h-full w-full object-contain"
+        />
+      </Lazy>
+    )
+  } else {
+    body = <SafeImg src={item.url} alt={alt} />
+  }
+
+  return (
+    <figure className={full ? 'md:col-span-2' : ''}>
+      {body}
+      <figcaption className="label mt-2 flex gap-3">
+        <span>{pad(index + 1)}</span>
+        <span>
+          {item.label}
+          {HINT[item.kind] ? ` · ${HINT[item.kind]}` : ''}
+        </span>
+      </figcaption>
+    </figure>
+  )
+}
+
+function MediaGallery({ items, title }) {
+  const flags = fullWidthFlags(items)
+  return (
+    <div className="grid gap-x-4 gap-y-6 md:grid-cols-2">
+      {items.map((item, i) => (
+        <MediaItem key={`${item.url}-${i}`} item={item} index={i} title={title} full={flags[i]} />
+      ))}
     </div>
   )
 }
@@ -146,11 +298,9 @@ function ProjectsDetail() {
 
   // Data lama (tanpa field "family") diperlakukan sebagai project website/mobile
   const isDesign = project.family === 'design'
-  const is3D = isDesign && !!project.modelUrl
-  const kind = is3D ? `${project.type} · 3D` : project.type
+  const media = project.media ?? []
+  const kind = project.type
   const features = project.features ?? []
-  const screenshots = project.screenshots ?? []
-  const processImages = project.processImages ?? []
   const tech = project.tech ?? []
 
   return (
@@ -194,6 +344,12 @@ function ProjectsDetail() {
           <p className="max-w-3xl leading-relaxed sm:text-lg">{project.fullDescription}</p>
         </Row>
 
+        {project.challenges && (
+          <Row label="Challenges">
+            <p className="max-w-3xl whitespace-pre-line leading-relaxed sm:text-lg">{project.challenges}</p>
+          </Row>
+        )}
+
         {isDesign ? (
           <>
             {project.brief && (
@@ -211,22 +367,6 @@ function ProjectsDetail() {
                 <BulletList items={features} />
               </Row>
             )}
-            {is3D && (
-              <Row label="3D viewer">
-                <ModelViewer key={project.modelUrl} src={project.modelUrl} title={project.title} />
-                <p className="label mt-3">Drag to rotate · scroll or pinch to zoom</p>
-              </Row>
-            )}
-            {screenshots.length > 0 && (
-              <Row label="Final results">
-                <Gallery images={screenshots} title={`${project.title} result`} />
-              </Row>
-            )}
-            {processImages.length > 0 && (
-              <Row label="Process">
-                <Gallery images={processImages} title={`${project.title} process`} />
-              </Row>
-            )}
           </>
         ) : (
           <>
@@ -240,12 +380,14 @@ function ProjectsDetail() {
                 <Tags items={tech} />
               </Row>
             )}
-            {screenshots.length > 0 && (
-              <Row label="Screenshots">
-                <Gallery images={screenshots} title={`${project.title} screenshot`} />
-              </Row>
-            )}
           </>
+        )}
+
+        {/* MEDIA: foto, GIF, video, model 3D, dan panorama, sesuai urutan di database */}
+        {media.length > 0 && (
+          <Row label={isDesign ? 'Gallery' : 'Screenshots'}>
+            <MediaGallery items={media} title={project.title} />
+          </Row>
         )}
 
         {/* PREVIOUS / NEXT */}

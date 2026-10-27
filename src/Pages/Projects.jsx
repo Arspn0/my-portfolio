@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import projectsData from '../data/projectsData.json'
 import SectionHead from '../components/SectionHead'
+import projectsData from '../data/projectsData.json'
 
 const pad = (n) => String(n).padStart(2, '0')
-const filters = ['All', 'Website', 'Mobile', 'Design']
+const filters = ['All', ...projectsData.types]
 
 function Projects() {
   const [selectedFilter, setSelectedFilter] = useState('All')
@@ -67,7 +67,7 @@ function Projects() {
                   to={`/projects/${project.slug}`}
                   state={{ filter: selectedFilter }}
                   style={{ '--i': i }}
-                  className="group flex flex-col border-b border-l hair transition-colors hover:surface"
+                  className="group flex flex-col border-b border-l border-r hair transition-colors hover:surface"
                 >
                   <div className="relative aspect-video overflow-hidden border-b hair">
                     <img

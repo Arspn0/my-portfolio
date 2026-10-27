@@ -1,13 +1,14 @@
 import React from 'react'
 import { Lightbulb, Code, Rocket, CheckCircle, PenBox } from 'lucide-react'
-import experienceData from '../data/experienceData.json'
 import SectionHead from '../components/SectionHead'
+import experienceData from '../data/experienceData.json'
 import CvButton from '../components/CvButton'
-import siteData from '../data/siteData.json'
+import toolsData from '../data/toolsData.json'
+import primerData from '../data/primerData.json'
 
 const pad = (n) => String(n).padStart(2, '0')
-const techStack = siteData.techStack.about
-const profilePicture = siteData.settings?.profileImageUrl
+const techStack = toolsData.about
+const profilePicture = primerData.profilePictureUrl
 
 const workProcess = [
   { id: 1, title: 'Discovery', icon: Lightbulb, description: 'Understanding your needs, goals, and target audience to create the perfect strategy' },

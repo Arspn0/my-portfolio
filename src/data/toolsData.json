@@ -1,0 +1,105 @@
+{
+  "tools": [
+    {
+      "name": "React",
+      "type": "frontend"
+    },
+    {
+      "name": "Dart",
+      "type": "frontend"
+    },
+    {
+      "name": "TypeScript",
+      "type": "frontend"
+    },
+    {
+      "name": "Node.js",
+      "type": "backend"
+    },
+    {
+      "name": "Python",
+      "type": "backend"
+    },
+    {
+      "name": "MongoDB",
+      "type": "backend"
+    },
+    {
+      "name": "PostgreSQL",
+      "type": "backend"
+    },
+    {
+      "name": "Tailwind CSS",
+      "type": "frontend"
+    },
+    {
+      "name": "React Native",
+      "type": "frontend"
+    },
+    {
+      "name": "Flutter",
+      "type": "frontend"
+    },
+    {
+      "name": "C++",
+      "type": "others"
+    },
+    {
+      "name": "Three.js",
+      "type": "3d"
+    },
+    {
+      "name": "Blender",
+      "type": "3d"
+    },
+    {
+      "name": "Figma",
+      "type": "design"
+    },
+    {
+      "name": "Git",
+      "type": "others"
+    },
+    {
+      "name": "Adobe Photoshop",
+      "type": "editing"
+    },
+    {
+      "name": "Adobe Illustrator",
+      "type": "design"
+    }
+  ],
+  "home": [
+    "React",
+    "Dart",
+    "TypeScript",
+    "Node.js",
+    "Python",
+    "MongoDB",
+    "PostgreSQL",
+    "Tailwind CSS",
+    "React Native",
+    "Flutter",
+    "C++",
+    "Blender",
+    "Figma",
+    "Git"
+  ],
+  "about": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "Python",
+    "MongoDB",
+    "PostgreSQL",
+    "Tailwind CSS",
+    "React Native",
+    "Flutter",
+    "Three.js",
+    "Blender",
+    "Figma",
+    "Git",
+    "Adobe Photoshop",
+    "Adobe Illustrator"
+  ]
+}

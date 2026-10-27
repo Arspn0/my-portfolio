@@ -1,11 +1,11 @@
 import React from 'react'
 import { Download } from 'lucide-react'
-import siteData from '../data/siteData.json'
+import primerData from '../data/primerData.json'
 
-// URL CV berasal dari tabel site_settings di Supabase (kunci cv_url), lewat `npm run content`.
+// URL CV berasal dari tabel primer di Supabase (kolom cv_url), lewat `npm run content`.
 // Browser mengabaikan atribut `download` untuk file dari domain lain, jadi unduhan dipaksa
 // lewat parameter ?download=<nama-file> milik Supabase Storage.
-const { cvUrl, cvFilename } = siteData.settings ?? {}
+const { cvUrl, cvFilename } = primerData
 
 function CvButton() {
   if (cvUrl) {

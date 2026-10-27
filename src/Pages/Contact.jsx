@@ -3,14 +3,14 @@ import { Send, Check, ChevronDown } from 'lucide-react'
 import { socialMediaLinks } from '../data/SocialMediaData'
 import { useTheme } from '../context/ThemeContext'
 import { brandStyle } from '../data/BrandColors'
+import primerData from '../data/primerData.json'
 import SectionHead from '../components/SectionHead'
-import siteData from '../data/siteData.json'
 
 const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY
 const ENDPOINT = '/.netlify/functions/contact'
 const EMPTY_FORM = { fullName: '', email: '', subject: 'General Inquiry', message: '' }
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-const profilePicture = siteData.settings?.profileImageUrl
+const profilePicture = primerData.profilePictureUrl
 
 const subjectOptions = [
   'General Inquiry',

@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useParams, useLocation, Link } from 'react-router-dom'
-import { ArrowLeft, ExternalLink, Code, ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react'
+import {
+  ArrowLeft, ExternalLink, Code, ChevronLeft, ChevronRight, X, Maximize2,
+  Play, Pause, Volume2, VolumeX, ZoomIn, ZoomOut,
+} from 'lucide-react'
 import projectsData from '../data/projectsData.json'
 import SectionHead from '../components/Sectionhead'
 
@@ -84,11 +87,125 @@ function Lazy({ className = '', drag = false, label = 'Load', suspended = false,
   )
 }
 
+// Bilah kontrol di tepi bawah media interaktif, bergaya sama dengan tombol lightbox
+function MediaBar({ children }) {
+  return (
+    <div className="absolute inset-x-0 bottom-0 z-10 flex items-center gap-2 border-t border-white/20 bg-black/70 p-1.5 font-mono text-[10px] uppercase tracking-[0.1em] text-white">
+      {children}
+    </div>
+  )
+}
+
+const mmss = (t) => {
+  const s = Number.isFinite(t) ? Math.floor(t) : 0
+  return `${pad(Math.floor(s / 60))}:${pad(s % 60)}`
+}
+
+// layar penuh lewat elemen pembungkus (agar kontrol tetap tampil); iOS hanya mendukung layar penuh milik video
+function toggleFullscreen(box, video) {
+  if (document.fullscreenElement) {
+    document.exitFullscreen?.()
+  } else if (box?.requestFullscreen) {
+    box.requestFullscreen().catch(() => {})
+  } else {
+    video?.webkitEnterFullscreen?.()
+  }
+}
+
+// Pemutar video dengan kontrol sendiri (kontrol bawaan browser tidak bisa diubah gayanya)
+function VideoPlayer({ src, label }) {
+  const box = useRef(null)
+  const vid = useRef(null)
+  const [playing, setPlaying] = useState(false)
+  const [time, setTime] = useState(0)
+  const [dur, setDur] = useState(0)
+  const [muted, setMuted] = useState(false)
+  const [failed, setFailed] = useState(false)
+
+  const toggle = () => {
+    const v = vid.current
+    if (!v) return
+    if (v.paused) v.play().catch(() => {})
+    else v.pause()
+  }
+
+  return (
+    <div ref={box} className="absolute inset-0 bg-black text-white">
+      <video
+        ref={vid}
+        src={src}
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={label}
+        onClick={toggle}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
+        onLoadedMetadata={(e) => setDur(e.currentTarget.duration)}
+        onVolumeChange={(e) => setMuted(e.currentTarget.muted)}
+        onError={() => setFailed(true)}
+        className="h-full w-full cursor-pointer object-contain"
+      />
+      {failed && (
+        <div className="label pointer-events-none absolute inset-0 grid place-items-center">Video failed to load</div>
+      )}
+      {!failed && !playing && (
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label="Play"
+          className="group absolute inset-0 grid place-items-center focus-visible:outline-none"
+        >
+          <span className="inline-flex items-center gap-2 border border-white/35 bg-black/55 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-white transition-colors group-hover:border-white group-hover:bg-white group-hover:text-black group-focus-visible:ring-1 group-focus-visible:ring-white">
+            <Play size={12} /> Play
+          </span>
+        </button>
+      )}
+      <MediaBar>
+        <LbButton onClick={toggle} label={playing ? 'Pause' : 'Play'} size="sm">
+          {playing ? <Pause size={12} /> : <Play size={12} />}
+        </LbButton>
+        <span className="tabular-nums text-white/80">
+          {mmss(time)} / {mmss(dur)}
+        </span>
+        <input
+          type="range"
+          aria-label="Seek"
+          min={0}
+          max={dur || 0}
+          step={0.1}
+          value={Math.min(time, dur || 0)}
+          onChange={(e) => {
+            const v = vid.current
+            if (v) v.currentTime = Number(e.target.value)
+          }}
+          className="h-1 min-w-0 flex-1 cursor-pointer accent-white"
+        />
+        <LbButton
+          onClick={() => {
+            const v = vid.current
+            if (v) v.muted = !v.muted
+          }}
+          label={muted ? 'Unmute' : 'Mute'}
+          size="sm"
+        >
+          {muted ? <VolumeX size={12} /> : <Volume2 size={12} />}
+        </LbButton>
+        <LbButton onClick={() => toggleFullscreen(box.current, vid.current)} label="Fullscreen" size="sm">
+          <Maximize2 size={12} />
+        </LbButton>
+      </MediaBar>
+    </div>
+  )
+}
+
 // Tampilan 3D interaktif. Pustaka dimuat hanya saat dibutuhkan (code splitting).
 // Perlu: npm i @google/model-viewer
 function ModelViewer({ src, title }) {
   const ref = useRef(null)
   const [state, setState] = useState('loading') // loading | ready | failed
+  const [rotate, setRotate] = useState(true)
 
   useEffect(() => {
     const el = ref.current
@@ -104,6 +221,20 @@ function ModelViewer({ src, title }) {
     }
   }, [])
 
+  const toggleRotate = () => {
+    const el = ref.current
+    if (!el) return
+    el.autoRotate = !rotate
+    setRotate(!rotate)
+  }
+  const reset = () => {
+    const el = ref.current
+    if (!el) return
+    el.cameraOrbit = '0deg 75deg 105%'
+    el.cameraTarget = 'auto auto auto'
+    el.fieldOfView = 'auto'
+  }
+
   return (
     <>
       <model-viewer
@@ -112,14 +243,31 @@ function ModelViewer({ src, title }) {
         alt={`${title} 3D model`}
         camera-controls="true"
         auto-rotate="true"
-        shadow-intensity="1"
+        interaction-prompt="none"
         touch-action="pan-y"
-        style={{ width: '100%', height: '100%', display: 'block', '--poster-color': 'transparent' }}
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'block',
+          '--poster-color': 'transparent',
+          '--progress-bar-color': 'currentColor',
+          '--progress-bar-height': '2px',
+        }}
       />
       {state !== 'ready' && (
         <div className="label pointer-events-none absolute inset-0 grid place-items-center">
           {state === 'failed' ? '3D model failed to load' : 'Loading 3D model…'}
         </div>
+      )}
+      {state === 'ready' && (
+        <MediaBar>
+          <LbButton onClick={toggleRotate} label="Toggle auto-rotate" size="sm" className={rotate ? 'border-white' : ''}>
+            Auto-rotate {rotate ? 'on' : 'off'}
+          </LbButton>
+          <LbButton onClick={reset} label="Reset view" size="sm">
+            Reset view
+          </LbButton>
+        </MediaBar>
       )}
     </>
   )
@@ -127,12 +275,14 @@ function ModelViewer({ src, title }) {
 
 // Panorama 360 derajat (gambar equirectangular, rasio 2:1).
 // Perlu: npm i @photo-sphere-viewer/core
+// Toolbar bawaan dimatikan (gayanya hanya bisa diubah lewat SCSS saat build); diganti kontrol sendiri.
 function PanoramaViewer({ src }) {
+  const box = useRef(null)
   const ref = useRef(null)
+  const viewer = useRef(null)
   const [failed, setFailed] = useState(false)
 
   useEffect(() => {
-    let viewer
     let cancelled = false
     Promise.all([
       import('@photo-sphere-viewer/core'),
@@ -140,31 +290,49 @@ function PanoramaViewer({ src }) {
     ])
       .then(([mod]) => {
         if (cancelled || !ref.current) return
-        viewer = new mod.Viewer({
+        viewer.current = new mod.Viewer({
           container: ref.current,
           panorama: src,
-          navbar: ['zoom', 'fullscreen'],
+          navbar: false,
           touchmoveTwoFingers: false,
           mousewheelCtrlKey: false,
         })
-        viewer.addEventListener('panorama-error', () => setFailed(true))
+        viewer.current.addEventListener('panorama-error', () => setFailed(true))
       })
       .catch(() => setFailed(true))
     return () => {
       cancelled = true
-      viewer?.destroy()
+      viewer.current?.destroy()
+      viewer.current = null
     }
   }, [src])
 
+  const zoomBy = (d) => {
+    const v = viewer.current
+    if (v) v.zoom(Math.max(0, Math.min(100, v.getZoomLevel() + d)))
+  }
+
   return (
-    <>
+    <div ref={box} className="absolute inset-0 bg-black">
       <div ref={ref} className="absolute inset-0" />
       {failed && (
         <div className="label pointer-events-none absolute inset-0 grid place-items-center">
           360° view failed to load
         </div>
       )}
-    </>
+      <MediaBar>
+        <LbButton onClick={() => zoomBy(-15)} label="Zoom out" size="sm">
+          <ZoomOut size={12} />
+        </LbButton>
+        <LbButton onClick={() => zoomBy(15)} label="Zoom in" size="sm">
+          <ZoomIn size={12} />
+        </LbButton>
+        <span className="flex-1" />
+        <LbButton onClick={() => toggleFullscreen(box.current)} label="Fullscreen" size="sm">
+          <Maximize2 size={12} />
+        </LbButton>
+      </MediaBar>
+    </div>
   )
 }
 
@@ -469,7 +637,7 @@ function MediaItem({ item, index, title, full, suspended, onOpen }) {
   let body
   if (item.kind === 'model' || item.kind === 'panorama') {
     body = (
-      <Lazy drag label={item.kind === 'model' ? 'Click to load the 3D model' : 'Click to load the 360° panorama'} suspended={suspended} className="h-[360px] sm:h-[520px]">
+      <Lazy drag label={item.kind === 'model' ? 'Click to Load the 3D model' : 'Click to Load the 360° view'} suspended={suspended} className="h-[360px] sm:h-[520px]">
         {item.kind === 'model' ? (
           <ModelViewer key={item.url} src={item.url} title={title} />
         ) : (
@@ -480,15 +648,7 @@ function MediaItem({ item, index, title, full, suspended, onOpen }) {
   } else if (item.kind === 'video') {
     body = (
       <Lazy label="Click to Load the video" suspended={suspended} className="aspect-video bg-black">
-        <video
-          src={item.url}
-          controls
-          loop
-          playsInline
-          preload="metadata"
-          aria-label={alt}
-          className="h-full w-full object-contain"
-        />
+        <VideoPlayer key={item.url} src={item.url} label={alt} />
       </Lazy>
     )
   } else if (item.kind === 'loop') {

@@ -245,12 +245,23 @@ async function loadTools() {
   }
 }
 
+async function loadSocial() {
+  const rows = await query('social_links', 'select=*&order=sort_order.asc,platform.asc')
+  // hanya tautan yang aman dipakai sebagai href (bukan javascript: dan sejenisnya)
+  const socials = rows
+    .filter((r) => r.platform?.trim() && /^(https?:|mailto:)/i.test(r.url?.trim() ?? ''))
+    .map((r) => ({ label: r.platform.trim(), href: r.url.trim() }))
+  if (!socials.length) throw new Error('tabel social_links kosong')
+  return { data: { socials }, summary: `${socials.length} tautan sosial` }
+}
+
 const DATASETS = [
   { name: 'Speciality', out: 'src/data/specialityData.json', load: loadSpeciality },
   { name: 'Tools', out: 'src/data/toolsData.json', load: loadTools },
   { name: 'Experience', out: 'src/data/experienceData.json', load: loadExperience },
   { name: 'Primer', out: 'src/data/primerData.json', load: loadPrimer },
   { name: 'Projects', out: 'src/data/projectsData.json', load: loadProjects },
+  { name: 'Social', out: 'src/data/socialData.json', load: loadSocial },
 ]
 
 async function sync({ name, out, load }) {

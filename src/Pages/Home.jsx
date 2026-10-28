@@ -1,7 +1,7 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { socialMediaLinks } from '../data/SocialMediaData'
+import { socialMediaLinks } from '../data/SocialMediaData' 
 import { brandStyle } from '../data/BrandColors'
 import SectionHead from '../components/SectionHead'
 import projectsData from '../data/projectsData.json'

@@ -6,12 +6,13 @@
       "position": "Admin",
       "year": "Jun 2021 - Sep 2021",
       "duration": "3 Months",
-      "description": "Leading development team in building scalable web applications. Implemented microservices architecture and CI/CD pipelines.",
+      "description": "- Processed and entered over 200 customer records daily into the company database while maintaining a high level of data accuracy.\r\n\r\n- Verified and validated customer information in accordance with company standard operating procedures (SOPs) to ensure data accuracy and consistency.\r\n- Organized, maintained, and systematically archived administrative documents to support efficient document retrieval and record management.\r\n- Conducted preliminary interviews with prospective customers to collect, verify, and ensure the completeness of customer information.",
       "technologies": [
-        "React",
-        "Node.js",
-        "Docker",
-        "AWS"
+        "Data Entry & Data Processing",
+        "Data Verification & Validation",
+        "Database Management",
+        "Administrative & Document Management",
+        "Document Filing & Archiving"
       ],
       "startDate": "2021-06-01",
       "endDate": "2021-09-01"
@@ -20,17 +21,23 @@
       "id": 2,
       "company": "Clover Gaming Indonesia",
       "position": "Frontliner & Technicial",
-      "year": "Oct 2025 - Dec 2025",
-      "duration": "2 Months",
-      "description": "Developed multiple client projects including e-commerce platforms and corporate websites. Collaborated with designers and product managers.",
+      "year": "Oct 2025 - Jan 2026",
+      "duration": "3 Months",
+      "description": "- Provided personalized customer service and product recommendations for gaming peripherals, including keyboards, mice, headsets, and speakers, to support customers in selecting products that matched their needs.\r\n- Assisted customers throughout the PC-building process, from hardware specification consultations and component assembly to performance testing and maintenance.\r\n- Conducted monthly physical inventory counts (stock opname) to verify stock availability and maintain inventory accuracy.\r\n- Performed cleaning, routine maintenance, and basic servicing of PCs, laptops, and keyboards to help maintain device performance and cleanliness.\r\n- Utilized Accurate accounting software to manage incoming and outgoing inventory, generate sales reports, monitor stock levels, and process purchase requests.\r\n- Used ClickUp to document, track, and monitor daily store operations, supporting task coordination and operational accountability.",
       "technologies": [
-        "Next.js",
-        "TypeScript",
-        "MongoDB",
-        "Tailwind"
+        "Accurate",
+        "Stock Opname",
+        "Clickup Task",
+        "Computer Hardware Maintenance",
+        "Troubleshooting",
+        "PC Assembly & Hardware Configuration",
+        "Gaming Peripheral Consultation",
+        "Product Knowledge",
+        "Inventory Management",
+        "Sales Reporting"
       ],
       "startDate": "2025-10-01",
-      "endDate": "2025-12-01"
+      "endDate": "2026-01-01"
     }
   ]
 }

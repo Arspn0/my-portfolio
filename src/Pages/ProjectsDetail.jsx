@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useParams, useLocation, Link } from 'react-router-dom'
-import { ArrowLeft, ExternalLink, Code, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Code, ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react'
 import projectsData from '../data/projectsData.json'
-import SectionHead from '../components/SectionHead'
+import SectionHead from '../components/Sectionhead'
 
 const pad = (n) => String(n).padStart(2, '0')
 
@@ -62,36 +63,22 @@ function BulletList({ items }) {
 
 // Komponen berat (model 3D, panorama, video) baru dipasang saat hampir terlihat di layar,
 // supaya file besar tidak diunduh oleh pengunjung yang tidak menggulir sampai ke sana.
-function Lazy({ className = '', drag = false, children }) {
-  const ref = useRef(null)
-  const [near, setNear] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el || near) return
-    if (!('IntersectionObserver' in window)) {
-      setNear(true)
-      return
-    }
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setNear(true)
-          io.disconnect()
-        }
-      },
-      { rootMargin: '300px' }
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [near])
-
+function Lazy({ className = '', drag = false, label = 'Load', suspended = false, children }) {
+  // berat (WebGL, video, panorama): baru dimuat saat diklik, supaya halaman tidak macet saat dibuka
+  const [on, setOn] = useState(false)
   return (
-    <div ref={ref} className={`relative border hair ${className}`} data-cursor={drag ? 'drag!' : undefined}>
-      {near ? (
+    <div className={`relative border hair ${className}`} data-cursor={on && drag ? 'drag!' : undefined}>
+      {on && !suspended ? (
         children
       ) : (
-        <div className="label absolute inset-0 grid place-items-center">Loading…</div>
+        <button
+          type="button"
+          onClick={() => setOn(true)}
+          disabled={suspended}
+          className="label absolute inset-0 grid place-items-center transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
+        >
+          <span className="border hair px-3 py-1.5">[ {label} ]</span>
+        </button>
       )}
     </div>
   )
@@ -201,26 +188,298 @@ function fullWidthFlags(items) {
   return flags
 }
 
-const HINT = { model: 'drag to rotate', panorama: 'drag to look around' }
-
-function MediaItem({ item, index, title, full }) {
-  const alt = `${title} - ${item.label || `media ${index + 1}`}`
-  let body
-  if (item.kind === 'model') {
-    body = (
-      <Lazy drag className="h-[360px] sm:h-[520px]">
-        <ModelViewer key={item.url} src={item.url} title={title} />
-      </Lazy>
+// Pengganti GIF: video pendek tanpa suara yang berputar terus. Jauh lebih kecil dan ringan didekode daripada GIF,
+// dan hanya diputar saat terlihat di layar.
+function LoopVideo({ src, label }) {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el || !('IntersectionObserver' in window)) return
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) el.play().catch(() => {})
+        else el.pause()
+      },
+      { threshold: 0.25 }
     )
-  } else if (item.kind === 'panorama') {
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <video
+      ref={ref}
+      src={src}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      aria-label={label}
+      className="aspect-video w-full border hair object-cover"
+    />
+  )
+}
+
+const HINT = { model: 'drag to rotate', panorama: 'drag to look around' }
+const INTERACTIVE = new Set(['model', 'panorama', 'video'])
+// GIF tidak bisa dijeda dan model/panorama/video terus menggambar, jadi semuanya dilepas dari halaman
+// selama lightbox terbuka (hanya satu yang berjalan, yaitu yang ada di lightbox)
+const HEAVY = new Set(['model', 'panorama', 'video', 'gif'])
+
+const FOCUSABLE = 'button:not([disabled]), a[href], video[controls], [tabindex]:not([tabindex="-1"])'
+
+// Tombol bergaya blueprint: garis tipis, label mono, dan tanda sudut beraksen yang melebar saat disorot
+function LbButton({ onClick, label, className = '', size = 'md', innerRef, children }) {
+  const sizes = size === 'sm' ? 'h-7 min-w-7' : 'h-8 min-w-8 sm:h-9 sm:min-w-9'
+  const pos = /\babsolute\b/.test(className) ? '' : 'relative' // jangan bentrok dengan absolute dari pemanggil
+  return (
+    <button
+      ref={innerRef}
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      className={`group ${pos} inline-flex items-center justify-center gap-2 border border-white/35 bg-black/55 px-2 font-mono text-[10px] uppercase tracking-[0.1em] text-white backdrop-blur-sm transition-colors duration-150 [transition-timing-function:steps(3,end)] hover:border-white hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white ${sizes} ${className}`}
+    >
+      <span
+        aria-hidden="true"
+        className="accent pointer-events-none absolute -left-px -top-px h-1.5 w-1.5 border-l border-t border-current transition-all duration-150 group-hover:h-2.5 group-hover:w-2.5"
+      />
+      <span
+        aria-hidden="true"
+        className="accent pointer-events-none absolute -bottom-px -right-px h-1.5 w-1.5 border-b border-r border-current transition-all duration-150 group-hover:h-2.5 group-hover:w-2.5"
+      />
+      {children}
+    </button>
+  )
+}
+
+function LightboxImage({ src, alt }) {
+  const [state, setState] = useState('loading') // loading | ready | failed
+  if (state === 'failed') {
+    return (
+      <div className="grid h-[40vh] w-[min(80vw,600px)] place-items-center border border-white/20 font-mono text-xs uppercase tracking-[0.08em] text-white/70">
+        Image failed to load
+      </div>
+    )
+  }
+  return (
+    <div className="relative min-h-[160px] min-w-[160px]">
+      <img
+        src={src}
+        alt={alt}
+        onLoad={() => setState('ready')}
+        onError={() => setState('failed')}
+        className={`block max-h-[70vh] max-w-[92vw] object-contain transition-opacity duration-200 motion-reduce:transition-none ${
+          state === 'ready' ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+      {state === 'loading' && (
+        <div className="absolute inset-0 grid place-items-center font-mono text-xs uppercase tracking-[0.08em] text-white/70">
+          Loading…
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Isi lightbox: hanya foto dan GIF, ukuran asli (tidak dipotong)
+function LightboxMedia({ item, title }) {
+  return <LightboxImage src={item.url} alt={`${title} - ${item.label || 'media'}`} />
+}
+
+// Jendela yang menimpa halaman (lightbox/modal): latar blur, panah sebelumnya/berikutnya, keterangan di tengah.
+// Ditutup dengan tombol Close, klik area kosong, atau tombol Esc. Panah kiri/kanan di keyboard juga berfungsi.
+function Lightbox({ items, index, title, onIndex, onClose }) {
+  const total = items.length
+  const item = items[index]
+  const dialogRef = useRef(null)
+  const closeRef = useRef(null)
+  const downOnBackdrop = useRef(false)
+  const touchX = useRef(null)
+  const [shown, setShown] = useState(false)
+
+  const go = useCallback((d) => onIndex((index + d + total) % total), [index, total, onIndex])
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setShown(true))
+    return () => cancelAnimationFrame(id)
+  }, [])
+
+  // kunci gulir halaman di belakang, pindahkan fokus ke tombol tutup, lalu kembalikan saat ditutup
+  useEffect(() => {
+    const body = document.body
+    const prevOverflow = body.style.overflow
+    const prevPadding = body.style.paddingRight
+    const scrollbar = window.innerWidth - document.documentElement.clientWidth
+    body.style.overflow = 'hidden'
+    if (scrollbar > 0) body.style.paddingRight = `${scrollbar}px`
+    const previouslyFocused = document.activeElement
+    closeRef.current?.focus()
+    return () => {
+      body.style.overflow = prevOverflow
+      body.style.paddingRight = prevPadding
+      previouslyFocused?.focus?.()
+    }
+  }, [])
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        onClose()
+        return
+      }
+      if (e.key === 'Tab') {
+        // fokus tetap berputar di dalam lightbox
+        const els = [...(dialogRef.current?.querySelectorAll(FOCUSABLE) ?? [])]
+        if (!els.length) return
+        const first = els[0]
+        const last = els[els.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+        return
+      }
+      if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && total > 1) {
+        // panah dibiarkan untuk model 3D, panorama, dan video yang sedang difokuskan
+        if (e.target?.closest?.('[data-interactive]')) return
+        e.preventDefault()
+        go(e.key === 'ArrowLeft' ? -1 : 1)
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [go, onClose, total])
+
+  // gambar di sebelahnya dimuat lebih dulu agar perpindahan terasa cepat
+  useEffect(() => {
+    ;[-1, 1].forEach((d) => {
+      const near = items[(index + d + total) % total]
+      if (near?.kind === 'image') new Image().src = near.url
+    })
+  }, [index, items, total])
+
+  const swipeable = true
+  const onTouchStart = (e) => {
+    touchX.current = e.touches[0].clientX
+  }
+  const onTouchEnd = (e) => {
+    if (touchX.current == null) return
+    const dx = e.changedTouches[0].clientX - touchX.current
+    touchX.current = null
+    if (Math.abs(dx) > 50 && total > 1) go(dx > 0 ? -1 : 1)
+  }
+
+  const caption = (
+    <p
+      aria-live="polite"
+      className="pointer-events-none min-w-0 flex-1 text-center font-mono text-[11px] uppercase tracking-[0.08em] text-white/85 sm:flex-none"
+    >
+      <span className="mr-2 text-white/50">
+        {pad(index + 1)} / {pad(total)}
+      </span>
+      {item.label}
+      {HINT[item.kind] ? ` · ${HINT[item.kind]}` : ''}
+    </p>
+  )
+
+  return createPortal(
+    <div
+      ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${title} gallery`}
+      // menutup hanya jika tekan dan lepas sama-sama di area kosong (bukan saat menyeret model 3D lalu melepas di luar)
+      onPointerDown={(e) => {
+        downOnBackdrop.current = e.target === e.currentTarget
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget && downOnBackdrop.current) onClose()
+      }}
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4 backdrop-blur-md transition-opacity duration-200 motion-reduce:transition-none sm:p-8 ${
+        shown ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
+      <LbButton
+        innerRef={closeRef}
+        onClick={onClose}
+        label="Close"
+        className="absolute right-3 top-3 z-20 sm:right-6 sm:top-6"
+      >
+        <X size={14} />
+        <span className="hidden sm:inline">Close</span>
+      </LbButton>
+
+      {/* panah di sisi media (layar lebar) */}
+      {total > 1 && (
+        <>
+          <LbButton
+            onClick={() => go(-1)}
+            label="Previous"
+            className="absolute left-6 top-1/2 z-20 hidden -translate-y-1/2 sm:inline-flex"
+          >
+            <ChevronLeft size={16} />
+          </LbButton>
+          <LbButton
+            onClick={() => go(1)}
+            label="Next"
+            className="absolute right-6 top-1/2 z-20 hidden -translate-y-1/2 sm:inline-flex"
+          >
+            <ChevronRight size={16} />
+          </LbButton>
+        </>
+      )}
+
+      <div className="pointer-events-none flex max-h-full max-w-full flex-col items-center gap-3 sm:gap-4">
+        <div
+          className="pointer-events-auto"
+          onTouchStart={swipeable ? onTouchStart : undefined}
+          onTouchEnd={swipeable ? onTouchEnd : undefined}
+        >
+          <LightboxMedia key={item.url} item={item} title={title} />
+        </div>
+
+        {/* di layar kecil panah ada di bawah media, mengapit keterangan, supaya tidak menutupi gambar */}
+        <div className="flex w-[92vw] max-w-md items-center justify-between gap-3 sm:w-auto sm:max-w-none">
+          {total > 1 && (
+            <LbButton onClick={() => go(-1)} label="Previous" className="pointer-events-auto shrink-0 sm:hidden">
+              <ChevronLeft size={16} />
+            </LbButton>
+          )}
+          {caption}
+          {total > 1 && (
+            <LbButton onClick={() => go(1)} label="Next" className="pointer-events-auto shrink-0 sm:hidden">
+              <ChevronRight size={16} />
+            </LbButton>
+          )}
+        </div>
+      </div>
+    </div>,
+    document.body
+  )
+}
+
+function MediaItem({ item, index, title, full, suspended, onOpen }) {
+  const alt = `${title} - ${item.label || `media ${index + 1}`}`
+  // selama lightbox terbuka, yang berat diganti kotak kosong seukuran aslinya (tata letak tidak bergeser)
+  const paused = suspended && (item.kind === 'gif' || item.kind === 'loop')
+  let body
+  if (item.kind === 'model' || item.kind === 'panorama') {
     body = (
-      <Lazy drag className="h-[360px] sm:h-[520px]">
-        <PanoramaViewer key={item.url} src={item.url} />
+      <Lazy drag label={item.kind === 'model' ? 'Click to load the 3D model' : 'Click to load the 360° panorama'} suspended={suspended} className="h-[360px] sm:h-[520px]">
+        {item.kind === 'model' ? (
+          <ModelViewer key={item.url} src={item.url} title={title} />
+        ) : (
+          <PanoramaViewer key={item.url} src={item.url} />
+        )}
       </Lazy>
     )
   } else if (item.kind === 'video') {
     body = (
-      <Lazy className="aspect-video bg-black">
+      <Lazy label="Click to Load the video" suspended={suspended} className="aspect-video bg-black">
         <video
           src={item.url}
           controls
@@ -232,13 +491,38 @@ function MediaItem({ item, index, title, full }) {
         />
       </Lazy>
     )
+  } else if (item.kind === 'loop') {
+    // video loop pengganti GIF: diputar di halaman, tidak masuk lightbox
+    body = paused ? (
+      <div className="border hair aspect-video w-full" />
+    ) : (
+      <LoopVideo src={item.url} label={alt} />
+    )
   } else {
-    body = <SafeImg src={item.url} alt={alt} />
+    // foto dan GIF: seluruh gambar bisa diklik untuk dibuka penuh
+    body = (
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label={`View ${item.label || 'image'} full size`}
+        className="group relative block w-full text-left"
+      >
+        {paused ? <div className="border hair aspect-video w-full" /> : <SafeImg src={item.url} alt={alt} />}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute right-2 top-2 grid h-7 w-7 place-items-center border border-white/35 bg-black/55 text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+        >
+          <Maximize2 size={13} />
+        </span>
+      </button>
+    )
   }
 
   return (
     <figure className={full ? 'md:col-span-2' : ''}>
-      {body}
+      <div className="relative">
+        {body}
+      </div>
       <figcaption className="label mt-2 flex gap-3">
         <span>{pad(index + 1)}</span>
         <span>
@@ -252,12 +536,31 @@ function MediaItem({ item, index, title, full }) {
 
 function MediaGallery({ items, title }) {
   const flags = fullWidthFlags(items)
+  const [openIndex, setOpenIndex] = useState(null)
+  const close = useCallback(() => setOpenIndex(null), [])
+  // lightbox hanya untuk foto dan GIF; model, panorama, dan video dipakai langsung di halaman
+  const viewable = items.filter((m) => m.kind === 'image' || m.kind === 'gif')
+  const open = (item) => setOpenIndex(viewable.indexOf(item))
+
   return (
-    <div className="grid gap-x-4 gap-y-6 md:grid-cols-2">
-      {items.map((item, i) => (
-        <MediaItem key={`${item.url}-${i}`} item={item} index={i} title={title} full={flags[i]} />
-      ))}
-    </div>
+    <>
+      <div className="grid gap-x-4 gap-y-6 md:grid-cols-2">
+        {items.map((item, i) => (
+          <MediaItem
+            key={`${item.url}-${i}`}
+            item={item}
+            index={i}
+            title={title}
+            full={flags[i]}
+            suspended={openIndex !== null}
+            onOpen={() => open(item)}
+          />
+        ))}
+      </div>
+      {openIndex !== null && viewable[openIndex] && (
+        <Lightbox items={viewable} index={openIndex} title={title} onIndex={setOpenIndex} onClose={close} />
+      )}
+    </>
   )
 }
 
@@ -386,7 +689,7 @@ function ProjectsDetail() {
         {/* MEDIA: foto, GIF, video, model 3D, dan panorama, sesuai urutan di database */}
         {media.length > 0 && (
           <Row label={isDesign ? 'Gallery' : 'Screenshots'}>
-            <MediaGallery items={media} title={project.title} />
+            <MediaGallery key={project.slug} items={media} title={project.title} />
           </Row>
         )}
 

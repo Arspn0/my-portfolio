@@ -1,7 +1,11 @@
+import { Github, Linkedin, Instagram, Mail, Link as LinkIcon } from 'lucide-react'
+
+// Catatan: lucide-react v1 menghapus ikon brand (Github, Linkedin, Instagram). Tetap di versi 0.x
+// (mis. "lucide-react": "~0.4xx" di package.json) selama ikon brand dipakai dari sini.
 const BRANDS = [
-  { match: ['github'], light: '#6E7781', dark: '#8B949E' },
-  { match: ['linkedin'], light: '#0A66C2', dark: '#4C9AE6' },
-  { match: ['instagram'], light: '#E4405F', dark: '#F0627C' },
+  { match: ['github'], icon: Github, light: '#6E7781', dark: '#8B949E' },
+  { match: ['linkedin'], icon: Linkedin, light: '#0A66C2', dark: '#4C9AE6' },
+  { match: ['instagram'], icon: Instagram, light: '#E4405F', dark: '#F0627C' },
   { match: ['twitter', 'x.com'], light: '#0F1419', dark: '#E7E9EA' },
   { match: ['facebook', 'fb.com'], light: '#1877F2', dark: '#4C9AFF' },
   { match: ['youtube', 'youtu.be'], light: '#E00000', dark: '#FF4D4D' },
@@ -16,11 +20,20 @@ const BRANDS = [
   { match: ['spotify'], light: '#1DB954', dark: '#1ED760' },
   { match: ['reddit'], light: '#FF4500', dark: '#FF6A33' },
   { match: ['medium'], light: '#101010', dark: '#F2F2F2' },
-  { match: ['mailto', 'email', 'gmail'], light: '#EA4335', dark: '#F26B5E' },
+  { match: ['mailto', 'email', 'gmail'], icon: Mail, light: '#EA4335', dark: '#F26B5E' },
 ]
 
-export function brandStyle(social) {
+const findBrand = (social) => {
   const hay = `${social?.label ?? ''} ${social?.href ?? social?.link ?? ''}`.toLowerCase()
-  const brand = BRANDS.find((b) => b.match.some((m) => hay.includes(m)))
+  return BRANDS.find((b) => b.match.some((m) => hay.includes(m)))
+}
+
+export function brandStyle(social) {
+  const brand = findBrand(social)
   return brand ? { '--brand': brand.light, '--brand-dark': brand.dark } : undefined
+}
+
+// ikon dari tulisan platform/url; platform yang belum punya ikon memakai ikon tautan umum
+export function iconFor(social) {
+  return findBrand(social)?.icon ?? LinkIcon
 }
